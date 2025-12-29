@@ -1,0 +1,280 @@
+/* ===========================
+   Agent Login Theme (Solid White)
+=========================== */
+
+/* ===== Background ===== */
+/* ===== Background ===== */
+/* Base Layout for Login Page */
+.agent-login-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* Horizontally Left Align */
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  padding-left: 12%;
+  /* Slightly more offset */
+  padding-right: 0;
+
+  /* Default Positioning */
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+/* ===== Role-Based Backgrounds ===== */
+.bg-user {
+  background-image: url('/assets/images/Login\ page\ selection\(BG\).jpg');
+}
+
+.bg-owner {
+  background-image: url('/assets/images/premium_photo-1684175656320-5c3f701c082c\ \(appartemnt\).avif');
+}
+
+.bg-admin {
+  background-image: url('/assets/images/Securemessaging.jpg');
+  /* Professional/Tech BG */
+}
+
+/* On mobile, center it back */
+@media (max-width: 900px) {
+  .agent-login-page {
+    padding-left: 0;
+    align-items: center;
+    /* Center on mobile/tablet */
+    padding: 20px;
+  }
+}
+
+/* ===== Solid White Card (NO TRANSPARENCY) ===== */
+.glass-wrapper {
+  width: 100%;
+  max-width: 480px;
+  /* Wider card as per SS */
+  padding: 50px;
+  /* Spacious padding */
+
+  background-color: #ffffff;
+  /* PURE SOLID WHITE */
+  border-radius: 20px;
+
+  /* Clean shadow, no border needed usually for this look, or very subtle */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f1f1;
+  /* Very subtle border */
+
+  text-align: left;
+  color: #333;
+
+  /* Ensuring NO Glass effect remains */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ===== Header ===== */
+.login-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.login-header h2 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #000000 !important;
+  /* Force Black */
+  margin-bottom: 6px;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  font-size: 0.92rem;
+  color: #000000 !important;
+  /* Force Black */
+  font-weight: 400;
+}
+
+/* ===== Inputs (Label above input) ===== */
+.input-group-custom {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+  align-items: flex-start;
+  /* Explicitly left-align children */
+  text-align: left;
+  /* Explicitly left-align text */
+}
+
+.input-group-custom label {
+  font-size: 0.875rem;
+  /* 14px */
+  font-weight: 500;
+  /* Medium, not Bold */
+  color: #374151;
+  /* Gray-700 */
+  margin-bottom: 8px;
+  display: block;
+  text-align: left;
+  /* Safety */
+  width: 100%;
+}
+
+.custom-input {
+  width: 100%;
+  height: 46px;
+  /* Slightly more compact */
+  padding: 0 14px;
+
+  border: 1px solid #d1d5db;
+  /* Gray-300 */
+  border-radius: 6px;
+  background-color: #fff;
+
+  font-size: 0.95rem;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.custom-input:focus {
+  border-color: #1f2937;
+  /* Gray-800 */
+  box-shadow: 0 0 0 2px rgba(31, 41, 55, 0.1);
+}
+
+.custom-input::placeholder {
+  color: #9ca3af;
+  /* Gray-400 */
+}
+
+/* ===== Forgot Password ===== */
+.forgot-password {
+  text-align: right;
+  margin-top: -6px;
+  margin-bottom: 24px;
+}
+
+.forgot-password a {
+  font-size: 0.85rem;
+  color: #1f2937;
+  /* Gray-800 */
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.forgot-password a:hover {
+  color: #000;
+}
+
+/* ===== Button ===== */
+.btn-dark-pill {
+  width: 100%;
+  height: 48px;
+
+  background-color: #374151;
+  /* Gray-700 to match dark pill */
+  color: #ffffff;
+
+  border: none;
+  border-radius: 6px;
+
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-dark-pill:hover {
+  background-color: #111827;
+}
+
+/* ===== Register Link (Outside Card) ===== */
+.register-link {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: #6b7280;
+  /* Gray-500 text for question */
+  width: 100%;
+  max-width: 480px;
+}
+
+.register-link a {
+  color: #111827;
+  /* Dark black for action link */
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+/* ===== Error Alert ===== */
+.alert-error {
+  background-color: #fee2e2;
+  color: #c62828;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Toast Styles preserved if needed */
+.toast-notification {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #22c55e;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1050;
+  animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-weight: 500;
+  white-space: nowrap;
+  justify-content: center;
+  width: fit-content !important;
+  max-width: 90vw !important;
+}
+
+@keyframes slideDown {
+  from {
+    top: -60px;
+    opacity: 0;
+  }
+
+  to {
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+/* ===== Password Toggle Button ===== */
+.password-toggle-btn {
+  position: absolute;
+  right: 20px !important;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #6b7280;
+}
