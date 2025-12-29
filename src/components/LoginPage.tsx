@@ -4,7 +4,7 @@ import '../styles/login.css';
 
 interface LoginPageProps {
   role?: 'admin' | 'user' | 'property-owner';
-  onLoginSuccess?: (email: string, role: 'admin' | 'user') => void;
+  onLoginSuccess?: (email: string, password: string) => void;
   onNavigateToSignup?: () => void;
   onNavigateToForgotPassword?: () => void;
   onBack?: () => void;
@@ -41,7 +41,7 @@ export function LoginPage({ role = 'user', onLoginSuccess, onNavigateToSignup, o
       return;
     }
 
-    onLoginSuccess?.(email, 'user');
+    onLoginSuccess?.(email, password);
   };
 
   return (
