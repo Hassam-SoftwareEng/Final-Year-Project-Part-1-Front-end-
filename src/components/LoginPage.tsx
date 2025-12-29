@@ -122,7 +122,7 @@ export function LoginPage({ role = 'user', onLoginSuccess, onNavigateToSignup, o
           </div>
 
           <button type="submit" className="btn-dark-pill">
-            Sign in
+            Log In
           </button>
         </form>
 

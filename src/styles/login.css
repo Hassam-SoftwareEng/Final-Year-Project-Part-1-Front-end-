@@ -11,11 +11,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  /* Horizontally Left Align */
+  align-items: center;
+  /* Center on all screens */
   font-family: 'Segoe UI', system-ui, sans-serif;
-  padding-left: 12%;
-  /* Slightly more offset */
+  padding-left: 0;
   padding-right: 0;
 
   /* Default Positioning */
@@ -27,15 +26,15 @@
 
 /* ===== Role-Based Backgrounds ===== */
 .bg-user {
-  background-image: url('/assets/images/Login\ page\ selection\(BG\).jpg');
+  background-image: url('/assets/images/Securemessaging.jpg');
 }
 
 .bg-owner {
-  background-image: url('/assets/images/premium_photo-1684175656320-5c3f701c082c\ \(appartemnt\).avif');
+  background-image: url('/assets/images/photo-1515263487990-61b07816b324 (flat).avif');
 }
 
 .bg-admin {
-  background-image: url('/assets/images/Securemessaging.jpg');
+  background-image: url('/assets/images/istockphoto-914788014-612x612 (Login Optiion Page).webp');
   /* Professional/Tech BG */
 }
 

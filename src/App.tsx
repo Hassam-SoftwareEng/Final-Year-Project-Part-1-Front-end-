@@ -152,8 +152,9 @@ export default function App() {
 
       {currentPage === "signup" && (
         <SignupPage
-          onNavigateToLogin={() => setCurrentPage("login-selection")}
+          onNavigateToLogin={() => setCurrentPage("login")}
           onSignupSuccess={handleSignupSuccess}
+          onBack={() => setCurrentPage("login")}
         />
       )}
 

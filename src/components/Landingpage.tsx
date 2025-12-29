@@ -32,14 +32,6 @@ export function LandingPage({
           <span>RoomEase</span>
         </div>
 
-        <div className="nav-actions">
-          <button className="nav-btn nav-btn-login" onClick={onNavigateToLogin}>
-            Login
-          </button>
-          <button className="nav-btn nav-btn-signup" onClick={onNavigateToSignup}>
-            Sign Up
-          </button>
-        </div>
       </nav>
 
       <main>
@@ -52,7 +44,13 @@ export function LandingPage({
               Swipe to Connect with your compatible roomie.
             </p>
             <div className="hero-cta-group" data-aos="fade-up" data-aos-delay="200">
-              {/* CTA Buttons would go here if needed */}
+              <button
+                className="nav-btn nav-btn-signup"
+                onClick={onNavigateToLogin}
+                style={{ padding: '0.8rem 2rem', fontSize: '1.1rem' }}
+              >
+                Get Started
+              </button>
             </div>
           </div>
         </section>

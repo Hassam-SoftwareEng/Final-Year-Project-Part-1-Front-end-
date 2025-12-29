@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowLeft, CheckCircle } from 'lucide-react';
-import '../styles/ForgotPasswordPage.css';
+import '../styles/LoginSelectionPage.css';
+import '../styles/login.css';
 
 interface Props {
   onSubmitEmail: (email: string) => void;
@@ -18,43 +19,52 @@ export function ForgotPasswordPage({ onSubmitEmail, onNavigateToLogin }: Props) 
   };
 
   return (
-    <div className="login-bg-container">
-      <div className="glass-wrapper">
+    <div className="login-selection-bg">
+      <div className="glass-wrapper" style={{ maxWidth: '480px' }}>
         <form onSubmit={handleSubmit}>
-          <h2>Forgot Password</h2>
 
           {!isSubmitted ? (
             <>
-              <p>Enter your email address and we'll send you a link to reset your password.</p>
+              <div className="login-header">
+                <h2>Forgot Password</h2>
+                <p className="subtitle" style={{ color: '#000' }}>Enter your email address and we'll send you a link to reset your password.</p>
+              </div>
 
-              <div className="input-field">
+              <div className="input-group-custom">
+                <label htmlFor="email" style={{ color: '#374151' }}>Enter your email</label>
                 <input
+                  id="email"
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder=" "
+                  placeholder="name@example.com"
+                  className="custom-input"
+                  style={{ color: '#000' }}
                 />
-                <label>Enter your email</label>
               </div>
 
-              <button type="submit" className="btn-glass">
+              <button type="submit" className="btn-option" style={{ marginTop: '20px' }}>
                 Send Reset Link
               </button>
             </>
           ) : (
-            <div style={{ textAlign: 'center', margin: '20px 0' }}>
+            <div style={{ textAlign: 'center', margin: '20px 0', color: '#000' }}>
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
                 <CheckCircle size={48} className="text-success" color="#2ecc71" />
               </div>
-              <h3 style={{ margin: '10px 0', fontSize: '1.2rem', fontWeight: 'bold' }}>Check your email</h3>
-              <p>We've sent a password reset link to <strong>{email}</strong></p>
+              <h3 style={{ margin: '10px 0', fontSize: '1.2rem', fontWeight: 'bold', color: '#000' }}>Check your email</h3>
+              <p style={{ color: '#333' }}>We've sent a password reset link to <strong>{email}</strong></p>
             </div>
           )}
 
-          <div className="register">
-            <a href="#" onClick={(e) => { e.preventDefault(); onNavigateToLogin(); }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-              <ArrowLeft size={16} /> Back to Login
+          <div className="register-link">
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); onNavigateToLogin(); }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px', textDecoration: 'none', color: '#333' }}
+            >
+              <ArrowLeft size={16} /> <span style={{ textDecoration: 'underline' }}>Back to Login</span>
             </a>
           </div>
         </form>

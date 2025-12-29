@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { Eye, EyeOff, Check, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Check, Loader2, ArrowLeft } from 'lucide-react';
 import '../styles/login.css';
 import '../styles/signup.css';
 
 interface SignupPageProps {
   onNavigateToLogin?: () => void;
+  onBack?: () => void;
   onSignupSuccess?: (signupData: { email: string; fullName: string; password: string }) => void;
 }
 
-export function SignupPage({ onNavigateToLogin, onSignupSuccess }: SignupPageProps) {
+export function SignupPage({ onNavigateToLogin, onSignupSuccess, onBack }: SignupPageProps) {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -54,7 +55,7 @@ export function SignupPage({ onNavigateToLogin, onSignupSuccess }: SignupPagePro
   };
 
   return (
-    <div className="agent-login-page">
+    <div className="agent-login-page bg-user">
       {/* Toast Notification */}
       {showSuccessMessage && (
         <div className="toast-notification" style={{ top: '20px', background: 'rgba(46, 204, 113, 0.9)', backdropFilter: 'blur(5px)', color: 'white' }}>
@@ -64,6 +65,25 @@ export function SignupPage({ onNavigateToLogin, onSignupSuccess }: SignupPagePro
       )}
 
       <div className="glass-wrapper">
+        {/* Back Button */}
+        {onBack && (
+          <button
+            onClick={onBack}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              marginBottom: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              color: '#333',
+              padding: 0
+            }}
+          >
+            <ArrowLeft size={20} />
+            <span style={{ marginLeft: '8px', fontSize: '0.9rem', fontWeight: 600 }}>Back</span>
+          </button>
+        )}
         <div className="login-header">
           <h2>Create Account</h2>
           <p className="subtitle">Please fill in your details</p>
@@ -164,7 +184,7 @@ export function SignupPage({ onNavigateToLogin, onSignupSuccess }: SignupPagePro
 
         <div className="register-link">
           <span>Already have an account? </span>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigateToLogin?.(); }}>Sign in</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigateToLogin?.(); }}>Login</a>
         </div>
       </div>
     </div>
