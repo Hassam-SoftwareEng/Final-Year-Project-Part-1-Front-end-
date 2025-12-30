@@ -8,9 +8,11 @@ interface DashboardPageProps {
   onLogout: () => void;
   onNavigateToAnalytics: () => void;
   onNavigateToMatches: () => void;
+  onNavigateToMessages: () => void;
+  onNavigateToCreateProfile: () => void;
 }
 
-export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, onNavigateToMatches }: DashboardPageProps) {
+export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, onNavigateToMatches, onNavigateToMessages, onNavigateToCreateProfile }: DashboardPageProps) {
   return (
     <div className="dashboard-container">
       {/* Top Navbar */}
@@ -26,7 +28,11 @@ export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, o
           <a href="#" className="nav-link">
             Home
           </a>
-          <a href="#" className="nav-link">
+          <a
+            href="#"
+            className="nav-link"
+            onClick={(e) => { e.preventDefault(); onNavigateToCreateProfile(); }}
+          >
             Create Profile
           </a>
           <a href="#" className="nav-link" onClick={onNavigateToMatches}>
@@ -38,7 +44,7 @@ export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, o
           <a href="#" className="nav-link">
             Listing
           </a>
-          <a href="#" className="nav-link">
+          <a href="#" className="nav-link" onClick={onNavigateToMessages}>
             Message
           </a>
           <a href="#" className="nav-link">
@@ -133,7 +139,7 @@ export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, o
         <div className="section shadow border-0">
           <div className="section-header">
             <h2 className="section-title">Recent Matches</h2>
-            <button className="view-all-btn">View All</button>
+            <button className="view-all-btn" onClick={onNavigateToMatches}>View All</button>
           </div>
 
           <div className="table-container">

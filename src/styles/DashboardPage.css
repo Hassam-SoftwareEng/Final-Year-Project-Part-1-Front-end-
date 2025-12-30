@@ -93,8 +93,8 @@
   align-items: center;
   justify-content: center;
   padding: 10px 24px;
-  background-color: #008C9E;
-  /* Teal to match image reference */
+  background-color: #374151;
+  /* Gray to match Login Selection */
   color: white;
   border: none;
   border-radius: 6px;
@@ -107,9 +107,9 @@
 }
 
 .logout-btn:hover {
-  background-color: #00707E;
+  background-color: #111827;
   transform: translateY(-1px);
-  box-shadow: 0 4px 6px rgba(0, 140, 158, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* User profile removed from nav, simplified */
@@ -434,8 +434,8 @@
 }
 
 .view-all-btn {
-  background-color: #008C9E;
-  /* Teal to match Logout button */
+  background-color: #374151;
+  /* Gray to match Login Selection */
   color: white;
   border: none;
   border-radius: 8px;
@@ -447,7 +447,7 @@
 }
 
 .view-all-btn:hover {
-  background-color: #00707E;
+  background-color: #111827;
 }
 
 /* Table Styles */
@@ -521,7 +521,7 @@
 /* Search Button styled like Login Button */
 .search-btn {
   padding: 8px 24px;
-  background-color: #008C9E;
+  background-color: #374151;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -532,7 +532,7 @@
 }
 
 .search-btn:hover {
-  background-color: #00707E;
+  background-color: #111827;
 }
 
 /* Classes Grid */

@@ -1,16 +1,25 @@
 import React from "react";
 import "../styles/AnalyticsReportPage.css";
 
+interface User {
+    fullName: string;
+    email: string;
+}
+
 interface AnalyticsReportPageProps {
-    user: { fullName: string; email: string };
+    user: User;
     onLogout: () => void;
     onNavigateToDashboard: () => void;
+    onNavigateToMessages: () => void;
+    onNavigateToCreateProfile: () => void;
 }
 
 export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
     user,
     onLogout,
     onNavigateToDashboard,
+    onNavigateToMessages,
+    onNavigateToCreateProfile,
 }) => {
     return (
         <div className="analytics-container">
@@ -26,7 +35,11 @@ export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
                     <a href="#" className="nav-link" onClick={onNavigateToDashboard}>
                         Home
                     </a>
-                    <a href="#" className="nav-link">
+                    <a
+                        href="#"
+                        className="nav-link"
+                        onClick={(e) => { e.preventDefault(); onNavigateToCreateProfile(); }}
+                    >
                         Create Profile
                     </a>
                     <a href="#" className="nav-link">
@@ -38,7 +51,7 @@ export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
                     <a href="#" className="nav-link">
                         Listing
                     </a>
-                    <a href="#" className="nav-link">
+                    <a href="#" className="nav-link" onClick={onNavigateToMessages}>
                         Message
                     </a>
                     <a href="#" className="nav-link">

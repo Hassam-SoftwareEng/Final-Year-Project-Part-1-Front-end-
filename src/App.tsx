@@ -8,17 +8,21 @@ import { SignupPage } from "./components/SignupPage";
 import { ForgotPasswordPage } from "./components/ForgotPasswordPage";
 import { ResetPasswordPage } from "./components/ResetPasswordPage";
 import { MatchesPages } from "./components/MatchesPages";
+import { MessagePage } from "./components/MessagePage";
+import { CreateProfilePage } from "./components/CreateProfilePage";
 
 type Page =
   | "landing"
   | "login-selection"
   | "login"
   | "signup"
+  | "create-profile"
   | "forgot-password"
   | "reset-password"
   | "dashboard"
   | "analytics-report"
-  | "matches";
+  | "matches"
+  | "messages";
 
 
 
@@ -173,12 +177,26 @@ export default function App() {
         />
       )}
 
+
       {currentPage === "dashboard" && user && (
         <DashboardPage
           user={user}
           onLogout={handleLogout}
           onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
           onNavigateToMatches={() => setCurrentPage("matches")}
+          onNavigateToMessages={() => setCurrentPage("messages")}
+          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+        />
+      )}
+
+      {currentPage === "create-profile" && user && (
+        <CreateProfilePage
+          user={user}
+          onLogout={handleLogout}
+          onNavigateToDashboard={() => setCurrentPage("dashboard")}
+          onNavigateToMatches={() => setCurrentPage("matches")}
+          onNavigateToMessages={() => setCurrentPage("messages")}
+          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
         />
       )}
 
@@ -187,6 +205,8 @@ export default function App() {
           user={user}
           onLogout={handleLogout}
           onNavigateToDashboard={() => setCurrentPage("dashboard")}
+          onNavigateToMessages={() => setCurrentPage("messages")}
+          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
         />
       )}
 
@@ -195,6 +215,19 @@ export default function App() {
           user={user}
           onLogout={handleLogout}
           onNavigateToDashboard={() => setCurrentPage("dashboard")}
+          onNavigateToMessages={() => setCurrentPage("messages")}
+          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+        />
+      )}
+
+      {currentPage === "messages" && user && (
+        <MessagePage
+          user={user}
+          onLogout={handleLogout}
+          onNavigateToDashboard={() => setCurrentPage("dashboard")}
+          onNavigateToMatches={() => setCurrentPage("matches")}
+          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
+          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
         />
       )}
     </>

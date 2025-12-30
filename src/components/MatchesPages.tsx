@@ -1,17 +1,27 @@
+
 import React from "react";
 import "../styles/MatchesPages.css";
 
 
+interface User {
+    fullName: string;
+    email: string;
+}
+
 interface MatchesPagesProps {
-    user: { fullName: string; email: string };
+    user: User;
     onLogout: () => void;
     onNavigateToDashboard: () => void;
+    onNavigateToMessages: () => void;
+    onNavigateToCreateProfile: () => void;
 }
 
 export const MatchesPages: React.FC<MatchesPagesProps> = ({
     user,
     onLogout,
     onNavigateToDashboard,
+    onNavigateToMessages,
+    onNavigateToCreateProfile,
 }) => {
     return (
         <div className="matches-page-container">
@@ -27,7 +37,11 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
                     <button className="nav-link" onClick={onNavigateToDashboard} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                         Home
                     </button>
-                    <a href="#" className="nav-link">
+                    <a
+                        href="#"
+                        className="nav-link"
+                        onClick={(e) => { e.preventDefault(); onNavigateToCreateProfile(); }}
+                    >
                         Create Profile
                     </a>
                     <a href="#" className="nav-link">
@@ -39,7 +53,7 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
                     <a href="#" className="nav-link">
                         Listing
                     </a>
-                    <a href="#" className="nav-link">
+                    <a href="#" className="nav-link" onClick={onNavigateToMessages}>
                         Message
                     </a>
                     <a href="#" className="nav-link">
@@ -91,7 +105,7 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
                             <button className="action-btn profile-btn">
                                 <span className="icon">👤</span> Profile
                             </button>
-                            <button className="action-btn message-btn">
+                            <button className="action-btn message-btn" onClick={onNavigateToMessages}>
                                 <span className="icon">💬</span> Message
                             </button>
                         </div>
@@ -124,7 +138,7 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
                             <button className="action-btn profile-btn">
                                 <span className="icon">👤</span> Profile
                             </button>
-                            <button className="action-btn message-btn">
+                            <button className="action-btn message-btn" onClick={onNavigateToMessages}>
                                 <span className="icon">💬</span> Message
                             </button>
                         </div>
@@ -157,7 +171,7 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
                             <button className="action-btn profile-btn">
                                 <span className="icon">👤</span> Profile
                             </button>
-                            <button className="action-btn message-btn">
+                            <button className="action-btn message-btn" onClick={onNavigateToMessages}>
                                 <span className="icon">💬</span> Message
                             </button>
                         </div>

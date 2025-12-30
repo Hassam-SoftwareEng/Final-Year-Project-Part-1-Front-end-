@@ -71,7 +71,7 @@
     align-items: center;
     justify-content: center;
     padding: 10px 24px;
-    background-color: #008C9E;
+    background-color: #374151;
     color: white;
     border: none;
     border-radius: 6px;
@@ -83,9 +83,9 @@
 }
 
 .analytics-navbar .logout-btn:hover {
-    background-color: #00707E;
+    background-color: #111827;
     transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(0, 140, 158, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Main Content Wrapper Override */

@@ -1,0 +1,405 @@
+/* MessagePage.css */
+
+.message-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 100vw;
+    background-color: #f9fafb;
+    color: #1f2937;
+    overflow: hidden;
+}
+
+.mp-content-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: 100%;
+    /* Explicit height constraint */
+}
+
+/* Sidebar styling */
+.mp-sidebar {
+    width: 350px;
+    background-color: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+}
+
+.mp-sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.mp-search-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.mp-search-input {
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    color: #1f2937;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.mp-search-input:focus {
+    border-color: #d1d5db;
+    background-color: #fff;
+}
+
+.mp-tabs {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: #6b7280;
+    cursor: pointer;
+    padding-bottom: 0.5rem;
+}
+
+.mp-tab {
+    padding-bottom: 0.3rem;
+    transition: color 0.2s, border-bottom 0.2s;
+}
+
+.mp-tab.active {
+    color: #1f2937;
+    border-bottom: 2px solid #1f2937;
+    font-weight: 600;
+}
+
+.mp-contact-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+.mp-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.mp-contact-item:hover,
+.mp-contact-item.selected {
+    background-color: #f3f4f6;
+}
+
+.mp-avatar-container {
+    position: relative;
+}
+
+.mp-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #e5e7eb;
+}
+
+.mp-status-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #31a24c;
+    border: 2px solid #ffffff;
+}
+
+.mp-status-indicator.offline {
+    background-color: #9ca3af;
+}
+
+.mp-contact-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.mp-contact-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+}
+
+.mp-contact-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #111827;
+}
+
+.mp-last-msg-time {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.mp-last-msg-preview {
+    font-size: 0.85rem;
+    color: #6b7280;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Chat Area Styling */
+.mp-chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    /* Fix: Contrains flex child to enable scrolling */
+}
+
+.mp-chat-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.mp-header-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.mp-header-actions {
+    display: flex;
+    gap: 1rem;
+    color: #6b7280;
+    font-size: 1.2rem;
+}
+
+.mp-header-icon {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.mp-header-icon:hover {
+    color: #111827;
+}
+
+/* New Message List Layout */
+.mp-messages-list {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    /* Increased gap for row handling */
+    background-color: #f9fafb;
+}
+
+.mp-message-row {
+    display: flex;
+    gap: 1rem;
+    max-width: 80%;
+}
+
+.mp-message-row.received {
+    align-self: flex-start;
+}
+
+.mp-message-row.sent {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+    /* Avatar on right for sent */
+}
+
+.mp-msg-avatar-small {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #e5e7eb;
+}
+
+.mp-msg-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Meta Row: Name and Time above bubble */
+/* Timestamp Footer inside bubble */
+.mp-msg-time-footer {
+    display: block;
+    font-size: 0.7rem;
+    color: #9ca3af;
+    text-align: right;
+    margin-top: 4px;
+    line-height: 1;
+}
+
+.mp-message-row.sent .mp-msg-time-footer {
+    color: rgba(255, 255, 255, 0.85);
+    /* Light white for blue background */
+}
+
+/* Bubbles */
+.mp-msg-bubble {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.mp-message-row.received .mp-msg-bubble {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    color: #1f2937;
+    border-radius: 0 12px 12px 12px;
+    /* Point to left */
+}
+
+.mp-message-row.sent .mp-msg-bubble {
+    background-color: #2f80ed;
+    color: #fff;
+    border: 1px solid #2f80ed;
+    border-radius: 12px 0 12px 12px;
+    /* Point to right - Top Right corner square? */
+    /* Screenshot has top-right rounded? Let's check. 
+       Actually standard UI often has the 'tail' corner distinctive. 
+       Let's use rounded for all except the tail.
+       Sent (Right): Top-Right square? Or Bottom-Right?
+       Let's stick to standard modern rounded.
+    */
+    border-radius: 12px 12px 2px 12px;
+    /* Bottom Right sharp */
+}
+
+.mp-message-row.received .mp-msg-bubble {
+    border-radius: 12px 12px 12px 2px;
+    /* Bottom Left sharp */
+}
+
+
+/* Input Area */
+.mp-input-area {
+    padding: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #ffffff;
+}
+
+.mp-input-wrapper {
+    flex: 1;
+    background-color: #f3f4f6;
+    border-radius: 24px;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.mp-input-wrapper:focus-within {
+    border-color: #d1d5db;
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+}
+
+.mp-chat-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #1f2937;
+    outline: none;
+    font-size: 0.95rem;
+}
+
+.mp-input-icon {
+    color: #6b7280;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+}
+
+.mp-input-icon:hover {
+    color: #374151;
+}
+
+/* Scrollbar styling */
+.mp-contact-list::-webkit-scrollbar,
+.mp-messages-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mp-contact-list::-webkit-scrollbar-thumb,
+.mp-messages-list::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 3px;
+}
+
+.mp-contact-list::-webkit-scrollbar-track,
+.mp-messages-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* 
+   FORCE OVERRIDE for Navbar Consistency 
+*/
+.message-page .dashboard-navbar .logout-btn:hover {
+    background-color: #111827 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+.message-page .dashboard-navbar .nav-link:hover {
+    color: #008C9E !important;
+}
+
+/* Custom Send Button to match Logout Button */
+.mp-send-btn-custom {
+    background-color: #374151;
+    /* Gray Theme */
+    color: white;
+    font-size: 1.1rem;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mp-send-btn-custom:hover {
+    background-color: #111827;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.mp-send-btn-custom:active {
+    transform: translateY(0);
+}
+
+.mp-send-btn-custom:active {
+    transform: translateY(0);
+}
