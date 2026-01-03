@@ -23,30 +23,31 @@
     font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
-/* ===== White Card (Copied for Independence) ===== */
+/* ===== Dark Card ===== */
 .glass-wrapper {
     width: 100%;
-    max-width: 480px;
-    padding: 50px;
+    max-width: 420px;
+    padding: 40px;
 
-    background-color: #ffffff !important;
-    /* Solid White */
+    background-color: #0f172a !important;
+    /* Dark Blue/Black */
     border-radius: 20px;
 
     /* Clean shadow */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    border: 1px solid #f1f1f1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #1e293b;
 
     text-align: left;
-    color: #333;
+    color: #ffffff !important;
+    /* White text */
 
     /* No glass effect */
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     opacity: 1 !important;
 
-    /* Entrance Animation - Synced with Landing Page AOS (1000ms) */
-    animation: fadeInUp 1s ease-out;
+    /* Entrance Animation */
+    animation: fadeInUp 0.8s ease-out;
 }
 
 @keyframes fadeInUp {
@@ -61,25 +62,45 @@
     }
 }
 
-/* ===== Header ===== */
-.login-header {
-    text-align: center;
-    margin-bottom: 40px;
+/* ===== Back Button ===== */
+.back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    color: #ffffff !important;
+    padding: 0;
+    transition: color 0.2s;
 }
+
+.back-button:hover {
+    color: #fbbf24 !important;
+    /* Yellow hover */
+}
+
+/* ... skipped ... */
 
 .login-header h2 {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    color: #000000;
-    /* Force Black */
-    margin-bottom: 6px;
+    color: #ffffff !important;
+    /* White */
+    margin-bottom: 8px;
     letter-spacing: -0.025em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
+/* ... skipped ... */
+
 .subtitle {
-    font-size: 0.92rem;
-    color: #000000;
-    /* Force Black */
+    font-size: 0.95rem;
+    color: #ffffff !important;
+    /* White - User Request */
     font-weight: 400;
 }
 
@@ -89,11 +110,12 @@
     height: 50px;
 
     background-color: #374151;
-    /* Gray-700 to match Login Button */
+    /* Gray-700 - Match Dashboard */
     color: #ffffff;
+    /* White text */
 
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
 
     font-size: 1rem;
     font-weight: 600;
@@ -107,7 +129,7 @@
 
 .btn-option:hover {
     background-color: #111827;
-    /* Darker Gray Hover */
+    /* Darker Gray on hover */
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }

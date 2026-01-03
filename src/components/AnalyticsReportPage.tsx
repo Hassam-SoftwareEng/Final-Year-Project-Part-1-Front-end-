@@ -12,6 +12,8 @@ interface AnalyticsReportPageProps {
     onNavigateToDashboard: () => void;
     onNavigateToMessages: () => void;
     onNavigateToCreateProfile: () => void;
+    onNavigateToSetting: () => void;
+    onNavigateToRedFlagAlert: () => void;
 }
 
 export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
@@ -20,6 +22,8 @@ export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
     onNavigateToDashboard,
     onNavigateToMessages,
     onNavigateToCreateProfile,
+    onNavigateToSetting,
+    onNavigateToRedFlagAlert
 }) => {
     return (
         <div className="analytics-container">
@@ -54,13 +58,13 @@ export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
                     <a href="#" className="nav-link" onClick={onNavigateToMessages}>
                         Message
                     </a>
-                    <a href="#" className="nav-link">
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}>
                         Red Flag Alert
                     </a>
                 </div>
 
                 <div className="nav-right">
-                    <a href="#" className="nav-link" style={{ marginRight: '20px' }}>
+                    <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
                         Setting
                     </a>
                     <button className="logout-btn" onClick={onLogout}>

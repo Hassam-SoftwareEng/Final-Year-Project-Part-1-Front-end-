@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/CreateProfilePage.css";
-import "../styles/DashboardPage.css"; // Reuse navbar styles
+// import "../styles/DashboardPage.css"; // Reuse navbar styles REMOVED
 
 interface User {
     email: string;
@@ -13,6 +13,8 @@ interface CreateProfilePageProps {
     onNavigateToMatches: () => void;
     onNavigateToMessages: () => void;
     onNavigateToAnalytics: () => void;
+    onNavigateToSetting: () => void;
+    onNavigateToRedFlagAlert: () => void;
     onLogout: () => void;
 }
 
@@ -22,6 +24,8 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
     onNavigateToMatches,
     onNavigateToMessages,
     onNavigateToAnalytics,
+    onNavigateToSetting,
+    onNavigateToRedFlagAlert,
     onLogout
 }) => {
     // Form State from Figma Code
@@ -71,7 +75,7 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
     return (
         <div className="dashboard-container create-profile-page">
             {/* Navbar */}
-            <nav className="dashboard-navbar">
+            <nav className="create-profile-navbar">
                 <div className="nav-left">
                     <div className="logo-section">
                         <span className="logo-text">RoomEase</span>
@@ -88,7 +92,7 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
                     </a>
                     <a
                         href="#"
-                        className="nav-link active"
+                        className="nav-link"
                         onClick={(e) => e.preventDefault()}
                     >
                         Create Profile
@@ -116,14 +120,14 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
                     <a
                         href="#"
                         className="nav-link"
-                        onClick={(e) => { e.preventDefault(); onNavigateToAnalytics(); }}
+                        onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}
                     >
                         Red Flag Alert
                     </a>
                 </div>
 
                 <div className="nav-right">
-                    <a href="#" className="nav-link" style={{ marginRight: '20px' }}>
+                    <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
                         Setting
                     </a>
                     <button className="logout-btn" onClick={onLogout}>
@@ -295,7 +299,7 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
                                 className="range-slider"
                             />
                             <div className="budget-display">
-                                ${formData.budgetRange * 10} - ${(formData.budgetRange * 10) + 500}
+                                PKR {formData.budgetRange * 10} - PKR {(formData.budgetRange * 10) + 500}
                             </div>
                         </div>
                     </section>

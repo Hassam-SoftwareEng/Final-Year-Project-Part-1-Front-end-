@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/MessagePage.css";
-import "../styles/DashboardPage.css"; // Import standard navbar styles
+// import "../styles/DashboardPage.css"; // Import standard navbar styles REMOVED
 
 interface User {
     email: string;
@@ -13,6 +13,8 @@ interface MessagePageProps {
     onNavigateToMatches: () => void;
     onNavigateToAnalytics: () => void;
     onNavigateToCreateProfile: () => void;
+    onNavigateToSetting: () => void;
+    onNavigateToRedFlagAlert: () => void;
     onLogout: () => void;
 }
 
@@ -112,7 +114,7 @@ const MOCK_MESSAGES: Record<string, Message[]> = {
     "3": [],
 };
 
-export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDashboard, onNavigateToMatches, onNavigateToAnalytics, onLogout, onNavigateToCreateProfile }) => {
+export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDashboard, onNavigateToMatches, onNavigateToAnalytics, onLogout, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert }) => {
     const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
     const [inputText, setInputText] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
@@ -145,7 +147,7 @@ export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDash
     return (
         <div className="dashboard-container message-page">
             {/* Top Navbar - Matches DashboardPage exactly */}
-            <nav className="dashboard-navbar">
+            <nav className="message-navbar">
                 <div className="nav-left">
                     <div className="logo-section">
                         <span className="logo-text">RoomEase</span>
@@ -188,13 +190,13 @@ export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDash
                     >
                         Message
                     </a>
-                    <a href="#" className="nav-link">
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}>
                         Red Flag Alert
                     </a>
                 </div>
 
                 <div className="nav-right">
-                    <a href="#" className="nav-link" style={{ marginRight: '20px' }}>
+                    <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
                         Setting
                     </a>
                     <button className="logout-btn" onClick={onLogout}>

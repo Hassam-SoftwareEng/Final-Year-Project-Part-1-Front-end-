@@ -59,14 +59,30 @@ input::-ms-clear {
   max-width: 90vw !important;
 }
 
-@keyframes slideDown {
-  from {
-    top: -60px;
-    opacity: 0;
-  }
+to {
+  top: 30px;
+  opacity: 1;
+}
 
-  to {
-    top: 30px;
-    opacity: 1;
-  }
+
+/* ===== Terms & Privacy ===== */
+.terms-label {
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #ffffff !important;
+  /* White - User Request */
+}
+
+.terms-link {
+  text-decoration: underline;
+  color: #fbbf24 !important;
+  /* Yellow Link */
+  margin: 0 4px;
+  cursor: pointer;
+}
+
+.terms-link:hover {
+  color: #f59e0b !important;
 }

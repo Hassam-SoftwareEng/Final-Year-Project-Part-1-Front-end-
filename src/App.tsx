@@ -10,6 +10,9 @@ import { ResetPasswordPage } from "./components/ResetPasswordPage";
 import { MatchesPages } from "./components/MatchesPages";
 import { MessagePage } from "./components/MessagePage";
 import { CreateProfilePage } from "./components/CreateProfilePage";
+import { Setting } from "./components/Setting";
+import { VerificationPage } from "./components/VerificationPage";
+import { RedFlagAlert } from "./components/RedFlagAlert";
 
 type Page =
   | "landing"
@@ -22,7 +25,10 @@ type Page =
   | "dashboard"
   | "analytics-report"
   | "matches"
-  | "messages";
+  | "messages"
+  | "setting"
+  | "verification"
+  | "red-flag-alert";
 
 
 
@@ -186,6 +192,8 @@ export default function App() {
           onNavigateToMatches={() => setCurrentPage("matches")}
           onNavigateToMessages={() => setCurrentPage("messages")}
           onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+          onNavigateToSetting={() => setCurrentPage("setting")}
+          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
         />
       )}
 
@@ -197,6 +205,8 @@ export default function App() {
           onNavigateToMatches={() => setCurrentPage("matches")}
           onNavigateToMessages={() => setCurrentPage("messages")}
           onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
+          onNavigateToSetting={() => setCurrentPage("setting")}
+          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
         />
       )}
 
@@ -207,6 +217,8 @@ export default function App() {
           onNavigateToDashboard={() => setCurrentPage("dashboard")}
           onNavigateToMessages={() => setCurrentPage("messages")}
           onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+          onNavigateToSetting={() => setCurrentPage("setting")}
+          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
         />
       )}
 
@@ -217,6 +229,8 @@ export default function App() {
           onNavigateToDashboard={() => setCurrentPage("dashboard")}
           onNavigateToMessages={() => setCurrentPage("messages")}
           onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+          onNavigateToSetting={() => setCurrentPage("setting")}
+          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
         />
       )}
 
@@ -228,6 +242,49 @@ export default function App() {
           onNavigateToMatches={() => setCurrentPage("matches")}
           onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
           onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+          onNavigateToSetting={() => setCurrentPage("setting")}
+          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
+        />
+      )}
+
+      {currentPage === "setting" && user && (
+        <Setting
+          user={user}
+          onLogout={handleLogout}
+          onNavigateToDashboard={() => setCurrentPage("dashboard")}
+          onNavigateToMatches={() => setCurrentPage("matches")}
+          onNavigateToMessages={() => setCurrentPage("messages")}
+          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
+          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+          onNavigateToVerification={() => setCurrentPage("verification")}
+          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
+        />
+      )}
+
+      {currentPage === "verification" && user && (
+        <VerificationPage
+          user={user}
+          onLogout={handleLogout}
+          onNavigateToDashboard={() => setCurrentPage("dashboard")}
+          onNavigateToMatches={() => setCurrentPage("matches")}
+          onNavigateToMessages={() => setCurrentPage("messages")}
+          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
+          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+          onNavigateToSetting={() => setCurrentPage("setting")}
+          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
+        />
+      )}
+
+      {currentPage === "red-flag-alert" && user && (
+        <RedFlagAlert
+          user={user}
+          onLogout={handleLogout}
+          onNavigateToDashboard={() => setCurrentPage("dashboard")}
+          onNavigateToMatches={() => setCurrentPage("matches")}
+          onNavigateToMessages={() => setCurrentPage("messages")}
+          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
+          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+          onNavigateToSetting={() => setCurrentPage("setting")}
         />
       )}
     </>

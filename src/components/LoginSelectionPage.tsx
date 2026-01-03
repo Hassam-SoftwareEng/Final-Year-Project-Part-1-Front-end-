@@ -14,19 +14,10 @@ export function LoginSelectionPage({ onBack, onSelectRole }: LoginSelectionPageP
                 {/* Back Button */}
                 <button
                     onClick={onBack}
-                    style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        marginBottom: '20px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        color: '#333',
-                        padding: 0
-                    }}
+                    className="back-button"
                 >
                     <ArrowLeft size={20} />
-                    <span style={{ marginLeft: '8px', fontSize: '0.9rem', fontWeight: 600 }}>Back</span>
+                    <span>Back</span>
                 </button>
 
                 <div className="login-header">

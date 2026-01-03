@@ -69,19 +69,10 @@ export function SignupPage({ onNavigateToLogin, onSignupSuccess, onBack }: Signu
         {onBack && (
           <button
             onClick={onBack}
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              marginBottom: '20px',
-              display: 'flex',
-              alignItems: 'center',
-              color: '#333',
-              padding: 0
-            }}
+            className="back-button"
           >
             <ArrowLeft size={20} />
-            <span style={{ marginLeft: '8px', fontSize: '0.9rem', fontWeight: 600 }}>Back</span>
+            <span>Back</span>
           </button>
         )}
         <div className="login-header">
@@ -164,15 +155,15 @@ export function SignupPage({ onNavigateToLogin, onSignupSuccess, onBack }: Signu
           </div>
 
           <div className="forget" style={{ margin: '15px 0', justifyContent: 'flex-start' }}>
-            <label htmlFor="termsCheck" style={{ fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', color: '#64748b' }}>
+            <label htmlFor="termsCheck" className="terms-label">
               <input
                 type="checkbox"
                 id="termsCheck"
                 checked={acceptTerms}
                 onChange={() => setAcceptTerms(!acceptTerms)}
-                style={{ marginRight: '8px', accentColor: '#334155' }}
+                style={{ marginRight: '8px', accentColor: '#fbbf24' }}
               />
-              <span>I agree to the <a href="#" style={{ textDecoration: 'underline', color: '#334155' }}>Terms</a> & <a href="#" style={{ textDecoration: 'underline', color: '#334155' }}>Privacy</a></span>
+              <span>I agree to the <a href="#" className="terms-link">Terms</a> & <a href="#" className="terms-link">Privacy</a></span>
             </label>
           </div>
 

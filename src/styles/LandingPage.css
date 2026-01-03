@@ -218,7 +218,7 @@ body {
 
 /* --- Key Features Section --- */
 .key-features-section {
-  padding: 5rem 2rem;
+  padding: 5rem 0.5rem;
   background-color: var(--bg-white);
   text-align: center;
 }
@@ -233,8 +233,8 @@ body {
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
-  max-width: 1200px;
+  gap: 6rem;
+  max-width: 100%;
   margin: 0 auto;
 }
 

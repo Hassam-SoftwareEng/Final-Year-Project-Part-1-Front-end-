@@ -110,29 +110,21 @@ export function LandingPage({
 
         {/* How to Get Started Section */}
         <section className="key-features-section bg-white" style={{ paddingTop: '0' }}>
-          <div className="container" data-aos="fade-up">
-            <div className="text-center mb-5">
-              <h2 className="fw-bold display-5">How to Get Started?</h2>
+          <div className="text-center mb-5" data-aos="fade-up">
+            <h2 className="fw-bold display-5">How to Get Started?</h2>
+          </div>
+          <div className="features-grid">
+            <div className="match-card h-100 p-4 text-white text-center rounded-4" data-aos="fade-up" data-aos-delay="100" style={{ backgroundColor: '#008C9E' }}>
+              <h3 className="h4 fw-bold mb-3">Create a Profile</h3>
+              <p className="mb-0 opacity-75">Start by building your personalized profile. Share your lifestyle, interests, and living preferences.</p>
             </div>
-            <div className="row gy-4">
-              <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                <div className="match-card h-100 p-4 text-white text-center rounded-4" style={{ backgroundColor: '#008C9E' }}>
-                  <h3 className="h4 fw-bold mb-3">Create a Profile</h3>
-                  <p className="mb-0 opacity-75">Start by building your personalized profile. Share your lifestyle, interests, and living preferences.</p>
-                </div>
-              </div>
-              <div className="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                <div className="match-card h-100 p-4 text-white text-center rounded-4" style={{ backgroundColor: '#008C9E' }}>
-                  <h3 className="h4 fw-bold mb-3">Set your preferences</h3>
-                  <p className="mb-0 opacity-75">Customize your search with specific preferences like budget, location, and living habits.</p>
-                </div>
-              </div>
-              <div className="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                <div className="match-card h-100 p-4 text-white text-center rounded-4" style={{ backgroundColor: '#008C9E' }}>
-                  <h3 className="h4 fw-bold mb-3">Swipe and Match</h3>
-                  <p className="mb-0 opacity-75">Browse through potential roommates with ease! Swipe through profiles and connect.</p>
-                </div>
-              </div>
+            <div className="match-card h-100 p-4 text-white text-center rounded-4" data-aos="fade-up" data-aos-delay="200" style={{ backgroundColor: '#008C9E' }}>
+              <h3 className="h4 fw-bold mb-3">Set your preferences</h3>
+              <p className="mb-0 opacity-75">Customize your search with specific preferences like budget, location, and living habits.</p>
+            </div>
+            <div className="match-card h-100 p-4 text-white text-center rounded-4" data-aos="fade-up" data-aos-delay="300" style={{ backgroundColor: '#008C9E' }}>
+              <h3 className="h4 fw-bold mb-3">Swipe and Match</h3>
+              <p className="mb-0 opacity-75">Browse through potential roommates with ease! Swipe through profiles and connect.</p>
             </div>
           </div>
         </section>

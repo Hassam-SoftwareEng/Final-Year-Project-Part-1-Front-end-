@@ -32,9 +32,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 1rem;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 .photo-placeholder {
@@ -82,7 +82,7 @@
 
 /* Form Sections */
 .form-section {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .section-heading {
@@ -91,16 +91,16 @@
     font-weight: 600;
     margin: 0 0 1.5rem 0;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #4fd1c5;
+    border-bottom: none;
     text-align: center;
 }
 
 /* Input Groups */
 .profile-input-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.8rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.25rem;
 }
 
 .input-label {
@@ -108,7 +108,7 @@
     color: #4a5568;
     font-size: 0.95rem;
     font-weight: 500;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .form-input,
@@ -216,9 +216,9 @@
 .button-group {
     display: flex;
     gap: 1rem;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #e2e8f0;
+    margin-top: 1.5rem;
+    padding-top: 0;
+    border-top: none;
 }
 
 .btn {
@@ -256,7 +256,45 @@
 }
 
 /* Navbar Styles Override for Create Profile Page */
-.nav-link {
+/* Navbar Styles Independent */
+.create-profile-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 32px;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 70px;
+    box-sizing: border-box;
+}
+
+.create-profile-navbar .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.create-profile-navbar .logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #008C9E;
+}
+
+.create-profile-navbar .nav-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 32px;
+}
+
+.create-profile-navbar .nav-link {
     text-decoration: none;
     color: #6b7280;
     font-weight: 500;
@@ -268,15 +306,53 @@
     white-space: nowrap;
 }
 
-.nav-link:hover {
+.create-profile-navbar .nav-link:hover {
     color: #008C9E;
 }
 
-.nav-link.active {
+.create-profile-navbar .nav-link.active {
     color: #008C9E;
     font-weight: 600;
+    border: none !important;
     border-bottom: none !important;
-    padding-bottom: 0 !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background: none !important;
+}
+
+.create-profile-navbar .nav-link.active::after,
+.create-profile-navbar .nav-link.active::before {
+    display: none !important;
+    content: none !important;
+    border: none !important;
+}
+
+.create-profile-navbar .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.create-profile-navbar .logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    background-color: #374151;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.create-profile-navbar .logout-btn:hover {
+    background-color: #111827;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Mobile Responsive */
