@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
-import '../styles/login.css';
+import '../../styles/PublicPagesCss/login.css';
 
 interface LoginPageProps {
   role?: 'admin' | 'user' | 'property-owner';

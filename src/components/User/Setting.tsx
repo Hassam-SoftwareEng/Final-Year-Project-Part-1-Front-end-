@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/SettingPage.css';
+import '../../styles/User/SettingPage.css';
 
 interface User {
     email: string;
@@ -24,7 +24,6 @@ export const Setting: React.FC<SettingProps> = ({
     onNavigateToDashboard,
     onNavigateToMatches,
     onNavigateToMessages,
-    onNavigateToAnalytics,
     onNavigateToCreateProfile,
     onNavigateToVerification,
     onNavigateToRedFlagAlert

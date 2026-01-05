@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Home } from "lucide-react";
 import AOS from 'aos';
-import '../styles/LandingPage.css';
+import '../../styles/PublicPagesCss/LandingPage.css';
 
 interface LandingPageProps {
   onNavigateToLogin: () => void;

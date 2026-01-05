@@ -1,26 +1,32 @@
 import { useState } from "react";
-import { LandingPage } from "./components/Landingpage";
-import DashboardPage from "./components/DashboardPage";
-import { AnalyticsReportPage } from "./components/AnalyticsReportPage";
-import { LoginPage } from "./components/LoginPage";
-import { LoginSelectionPage } from "./components/LoginSelectionPage";
-import { SignupPage } from "./components/SignupPage";
-import { ForgotPasswordPage } from "./components/ForgotPasswordPage";
-import { ResetPasswordPage } from "./components/ResetPasswordPage";
-import { MatchesPages } from "./components/MatchesPages";
-import { MessagePage } from "./components/MessagePage";
-import { CreateProfilePage } from "./components/CreateProfilePage";
-import { Setting } from "./components/Setting";
-import { VerificationPage } from "./components/VerificationPage";
-import { RedFlagAlert } from "./components/RedFlagAlert";
+import { LandingPage } from "./components/PublicPages/Landingpage";
+import DashboardPage from "./components/User/DashboardPage";
+import { AnalyticsReportPage } from "./components/User/AnalyticsReportPage";
+import { ResetPasswordPage } from "./components/PublicPages/ResetPasswordPage";
+import { LoginSelectionPage } from "./components/PublicPages/LoginSelectionPage";
+import { MatchesPages } from "./components/User/MatchesPages";
+import { MessagePage } from "./components/User/MessagePage";
+import { CreateProfilePage } from "./components/User/CreateProfilePage";
+import { Setting } from "./components/User/Setting";
+import { VerificationPage } from "./components/User/VerificationPage";
+import { RedFlagAlert } from "./components/User/RedFlagAlert";
+import { AdminDashboard } from "./components/AdminPannel/AdminDashboard";
+import { ListingManage } from "./components/AdminPannel/ListingManage";
+import { VerificationPage as AdminVerificationPage } from "./components/AdminPannel/VerificationPage";
+import { AnalyticsPage } from "./components/AdminPannel/AnalyticsPage";
+import { AdminLoginPage } from "./components/AdminPannel/AdminLoginPage";
+import { AdminSignupPage } from "./components/AdminPannel/AdminSignupPage";
+import { AdminForgotPasswordPage } from "./components/AdminPannel/AdminForgotPasswordPage";
+import { UserLoginPage } from "./components/User/UserLoginPage";
+import { UserSignupPage } from "./components/User/UserSignupPage";
+import { UserForgotPasswordPage } from "./components/User/UserForgotPasswordPage";
+
 
 type Page =
   | "landing"
   | "login-selection"
-  | "login"
-  | "signup"
+  | "login-selection"
   | "create-profile"
-  | "forgot-password"
   | "reset-password"
   | "dashboard"
   | "analytics-report"
@@ -28,7 +34,20 @@ type Page =
   | "messages"
   | "setting"
   | "verification"
-  | "red-flag-alert";
+  | "red-flag-alert"
+  | "admin-dashboard"
+  | "listing-manage"
+  | "verification-manage"
+  | "admin-dashboard"
+  | "listing-manage"
+  | "verification-manage"
+  | "admin-analytics"
+  | "admin-login"
+  | "admin-signup"
+  | "admin-forgot-password"
+  | "user-login"
+  | "user-signup"
+  | "user-forgot-password";
 
 
 
@@ -45,6 +64,8 @@ interface Account {
   fullName: string;
   password: string;
 }
+
+console.log("APP VERSION CHECK: v2 - LISTING ROUTE ENABLED");
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>("landing");
@@ -68,7 +89,12 @@ export default function App() {
     }
 
     setUser({ email: account.email, fullName: account.fullName });
-    setCurrentPage("dashboard");
+
+    if (selectedRole === 'admin') {
+      setCurrentPage("admin-dashboard");
+    } else {
+      setCurrentPage("dashboard");
+    }
   };
 
   /* =========================
@@ -129,49 +155,101 @@ export default function App() {
     setCurrentPage("landing");
   };
 
+  /* =========================
+     ADMIN AUTH HANDLERS
+  ========================== */
+  const handleAdminLogin = (email: string, password: string) => {
+    const account = accounts.find(
+      (acc) => acc.email === email && acc.password === password
+    );
+
+    if (!account) {
+      alert("Invalid email or password");
+      return;
+    }
+
+    setUser({ email: account.email, fullName: account.fullName });
+    setCurrentPage("admin-dashboard");
+  };
+
+  const handleAdminSignup = (data: Account) => {
+    setAccounts((prev) => [...prev, data]);
+    alert("Admin account created successfully! Please login.");
+    setCurrentPage("admin-login");
+  };
+
   return (
     <>
       {currentPage === "landing" && (
         <LandingPage
           onNavigateToLogin={() => setCurrentPage("login-selection")}
-          onNavigateToSignup={() => setCurrentPage("signup")}
         />
       )}
 
       {currentPage === "login-selection" && (
         <LoginSelectionPage
           onBack={() => setCurrentPage("landing")}
-          onSelectRole={(role) => {
+          onSelectRole={(role: 'admin' | 'user' | 'property-owner') => {
             setSelectedRole(role);
-            setCurrentPage("login");
+            if (role === 'admin') {
+              setCurrentPage("admin-login");
+            } else if (role === 'user') {
+              setCurrentPage("user-login");
+            } else {
+              // Default fallback
+              setCurrentPage("login-selection");
+            }
           }}
         />
       )}
 
-      {currentPage === "login" && (
-        <LoginPage
-          role={selectedRole}
-          onBack={() => setCurrentPage("login-selection")}
-          onNavigateToSignup={() => setCurrentPage("signup")}
-          onNavigateToForgotPassword={() =>
-            setCurrentPage("forgot-password")
-          }
+      {/* ADMIN AUTH ROUTES */}
+      {currentPage === "admin-login" && (
+        <AdminLoginPage
+          onLoginSuccess={handleAdminLogin}
+          onNavigateToSignup={() => setCurrentPage("admin-signup")}
+          onNavigateToForgotPassword={() => setCurrentPage("admin-forgot-password")}
+          onBack={() => setCurrentPage("landing")}
+        />
+      )}
+
+      {currentPage === "admin-signup" && (
+        <AdminSignupPage
+          onNavigateToLogin={() => setCurrentPage("admin-login")}
+          onSignupSuccess={handleAdminSignup}
+          onBack={() => setCurrentPage("admin-login")}
+        />
+      )}
+
+      {currentPage === "admin-forgot-password" && (
+        <AdminForgotPasswordPage
+          onSubmitEmail={(email) => console.log("Admin forgot password:", email)}
+          onNavigateToLogin={() => setCurrentPage("admin-login")}
+        />
+      )}
+
+      {/* USER AUTH ROUTES */}
+      {currentPage === "user-login" && (
+        <UserLoginPage
           onLoginSuccess={handleLoginSuccess}
+          onNavigateToSignup={() => setCurrentPage("user-signup")}
+          onNavigateToForgotPassword={() => setCurrentPage("user-forgot-password")}
+          onBack={() => setCurrentPage("login-selection")}
         />
       )}
 
-      {currentPage === "signup" && (
-        <SignupPage
-          onNavigateToLogin={() => setCurrentPage("login")}
+      {currentPage === "user-signup" && (
+        <UserSignupPage
+          onNavigateToLogin={() => setCurrentPage("user-login")}
           onSignupSuccess={handleSignupSuccess}
-          onBack={() => setCurrentPage("login")}
+          onBack={() => setCurrentPage("user-login")}
         />
       )}
 
-      {currentPage === "forgot-password" && (
-        <ForgotPasswordPage
+      {currentPage === "user-forgot-password" && (
+        <UserForgotPasswordPage
           onSubmitEmail={handleForgotPassword}
-          onNavigateToLogin={() => setCurrentPage("login")}
+          onNavigateToLogin={() => setCurrentPage("user-login")}
         />
       )}
 
@@ -179,7 +257,7 @@ export default function App() {
         <ResetPasswordPage
           email={resetEmail}
           onResetPassword={handleResetPassword}
-          onNavigateToLogin={() => setCurrentPage("login")}
+          onNavigateToLogin={() => setCurrentPage("login-selection")}
         />
       )}
 
@@ -204,7 +282,6 @@ export default function App() {
           onNavigateToDashboard={() => setCurrentPage("dashboard")}
           onNavigateToMatches={() => setCurrentPage("matches")}
           onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
           onNavigateToSetting={() => setCurrentPage("setting")}
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
         />
@@ -285,6 +362,58 @@ export default function App() {
           onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
           onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
           onNavigateToSetting={() => setCurrentPage("setting")}
+        />
+      )}
+
+      {currentPage === "admin-dashboard" && user && (
+        <AdminDashboard
+          user={user}
+          onNavigateToUser={() => setCurrentPage("admin-dashboard")}
+          onNavigateToListing={() => {
+            // Force refresh
+            setCurrentPage("listing-manage");
+          }}
+          onNavigateToVerification={() => setCurrentPage("verification-manage")}
+          onNavigateToAnalytics={() => setCurrentPage("admin-analytics")}
+          onNavigateToProfile={() => alert("Profile Coming Soon")}
+          onNavigateToSetting={() => alert("Settings Coming Soon")}
+          onLogout={handleLogout}
+        />
+      )}
+
+      {currentPage === "listing-manage" && user && (
+        <ListingManage
+          onNavigateToUser={() => setCurrentPage("admin-dashboard")}
+          onNavigateToListing={() => setCurrentPage("listing-manage")}
+          onNavigateToVerification={() => setCurrentPage("verification-manage")}
+          onNavigateToAnalytics={() => setCurrentPage("admin-analytics")}
+          onNavigateToProfile={() => alert("Profile Coming Soon")}
+          onNavigateToSetting={() => alert("Settings Coming Soon")}
+          onLogout={handleLogout}
+        />
+      )}
+
+      {currentPage === "verification-manage" && user && (
+        <AdminVerificationPage
+          onNavigateToUser={() => setCurrentPage("admin-dashboard")}
+          onNavigateToListing={() => setCurrentPage("listing-manage")}
+          onNavigateToVerification={() => setCurrentPage("verification-manage")}
+          onNavigateToAnalytics={() => setCurrentPage("admin-analytics")}
+          onNavigateToProfile={() => alert("Profile Coming Soon")}
+          onNavigateToSetting={() => alert("Settings Coming Soon")}
+          onLogout={handleLogout}
+        />
+      )}
+
+      {currentPage === "admin-analytics" && user && (
+        <AnalyticsPage
+          onNavigateToUser={() => setCurrentPage("admin-dashboard")}
+          onNavigateToListing={() => setCurrentPage("listing-manage")}
+          onNavigateToVerification={() => setCurrentPage("verification-manage")}
+          onNavigateToAnalytics={() => setCurrentPage("admin-analytics")}
+          onNavigateToProfile={() => alert("Profile Coming Soon")}
+          onNavigateToSetting={() => alert("Settings Coming Soon")}
+          onLogout={handleLogout}
         />
       )}
     </>

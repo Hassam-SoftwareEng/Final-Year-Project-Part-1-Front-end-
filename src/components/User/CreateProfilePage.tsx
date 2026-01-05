@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/CreateProfilePage.css";
+import "../../styles/User/CreateProfilePage.css";
 // import "../styles/DashboardPage.css"; // Reuse navbar styles REMOVED
 
 interface User {
@@ -12,7 +12,6 @@ interface CreateProfilePageProps {
     onNavigateToDashboard: () => void;
     onNavigateToMatches: () => void;
     onNavigateToMessages: () => void;
-    onNavigateToAnalytics: () => void;
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
     onLogout: () => void;
@@ -23,7 +22,6 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
     onNavigateToDashboard,
     onNavigateToMatches,
     onNavigateToMessages,
-    onNavigateToAnalytics,
     onNavigateToSetting,
     onNavigateToRedFlagAlert,
     onLogout

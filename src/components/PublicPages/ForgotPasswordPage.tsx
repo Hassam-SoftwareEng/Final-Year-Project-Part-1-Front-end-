@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowLeft, CheckCircle } from 'lucide-react';
-import '../styles/LoginSelectionPage.css';
-import '../styles/login.css';
+import '../../styles/PublicPagesCss/LoginSelectionPage.css';
+import '../../styles/PublicPagesCss/login.css';
 
 interface Props {
   onSubmitEmail: (email: string) => void;

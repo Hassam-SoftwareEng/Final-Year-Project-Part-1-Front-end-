@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/RedFlagAlert.css';
+import '../../styles/User/RedFlagAlert.css';
 
 interface User {
     email: string;

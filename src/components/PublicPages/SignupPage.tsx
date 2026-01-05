@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Eye, EyeOff, Check, Loader2, ArrowLeft } from 'lucide-react';
-import '../styles/login.css';
-import '../styles/signup.css';
+import '../../styles/PublicPagesCss/login.css';
+import '../../styles/PublicPagesCss/signup.css';
 
 interface SignupPageProps {
   onNavigateToLogin?: () => void;

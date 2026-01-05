@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/VerificationPage.css';
+import '../../styles/User/VerificationPage.css';
 
 interface User {
     email: string;

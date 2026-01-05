@@ -1,4 +1,4 @@
-import '../styles/DashboardPage.css';
+import '../../styles/User/DashboardPage.css';
 
 interface DashboardPageProps {
   user: {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
-import '../styles/ResetPasswordPage.css';
+import '../../styles/PublicPagesCss/ResetPasswordPage.css';
 
 interface Props {
   email: string;

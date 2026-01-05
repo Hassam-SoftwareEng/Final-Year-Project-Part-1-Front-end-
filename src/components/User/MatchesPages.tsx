@@ -1,6 +1,6 @@
 
 import React from "react";
-import "../styles/MatchesPages.css";
+import "../../styles/User/MatchesPages.css";
 
 
 interface User {
@@ -19,7 +19,6 @@ interface MatchesPagesProps {
 }
 
 export const MatchesPages: React.FC<MatchesPagesProps> = ({
-    user,
     onLogout,
     onNavigateToDashboard,
     onNavigateToMessages,

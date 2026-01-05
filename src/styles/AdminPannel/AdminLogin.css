@@ -1,0 +1,318 @@
+/* ===========================
+   Admin Login Theme (Clone of login.css)
+=========================== */
+
+/* ===== Background ===== */
+/* Base Layout for Login Page */
+.agent-login-page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    padding: 0;
+
+    /* Default Positioning */
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+/* ===== Role-Based Backgrounds ===== */
+.bg-user {
+    background-image: url('/assets/images/Securemessaging.jpg');
+}
+
+.bg-owner {
+    background-image: url('/assets/images/photo-1515263487990-61b07816b324 (flat).avif');
+}
+
+.bg-admin {
+    background-image: url('/assets/images/istockphoto-914788014-612x612 (Login Optiion Page).webp');
+}
+
+/* On mobile, center it back */
+@media (max-width: 900px) {
+    .agent-login-page {
+        padding: 20px;
+        align-items: center;
+    }
+}
+
+/* ===== Dark Card ===== */
+.glass-wrapper {
+    width: 100%;
+    max-width: 420px;
+    /* Match Selection Page Width */
+    padding: 40px;
+
+    background-color: #0f172a !important;
+    /* Dark Blue/Black */
+    border-radius: 20px;
+
+    /* Clean shadow */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #1e293b;
+
+    text-align: left;
+    color: #ffffff;
+    /* White text */
+
+    /* No glass effect */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* ===== Header ===== */
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff !important;
+    /* White */
+    margin-bottom: 8px;
+    letter-spacing: -0.025em;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: #9ca3af !important;
+    /* Gray-400 */
+    font-weight: 400;
+}
+
+/* ===== Back Button ===== */
+.back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    color: #ffffff !important;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.back-button:hover {
+    color: #fbbf24 !important;
+    /* Yellow hover */
+}
+
+.back-button span {
+    margin-left: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* ===== Inputs (Label above input) ===== */
+.input-group-custom {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.input-group-custom label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #d1d5db;
+    /* Gray-300 */
+    margin-bottom: 8px;
+    display: block;
+    width: 100%;
+}
+
+.custom-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+
+    border: 1px solid #374151;
+    /* Gray-700 */
+    border-radius: 8px;
+    background-color: #1f2937;
+    /* Gray-800 */
+
+    font-size: 0.95rem;
+    color: #ffffff;
+    /* White text */
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.custom-input:focus {
+    border-color: #fbbf24;
+    /* Yellow Focus */
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+}
+
+.custom-input::placeholder {
+    color: #6b7280;
+    /* Gray-500 */
+}
+
+/* Force Autofill Background to Dark */
+.custom-input:-webkit-autofill,
+.custom-input:-webkit-autofill:hover,
+.custom-input:-webkit-autofill:focus,
+.custom-input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #1f2937 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #ffffff !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ===== Forgot Password ===== */
+.forgot-password {
+    text-align: right;
+    margin-top: -4px;
+    margin-bottom: 24px;
+}
+
+.forgot-password a {
+    font-size: 0.85rem;
+    color: #fbbf24;
+    /* Yellow Link */
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.forgot-password a:hover {
+    color: #f59e0b;
+    text-decoration: underline;
+}
+
+/* ===== Button ===== */
+.btn-dark-pill {
+    width: 100%;
+    height: 50px;
+
+    background-color: #374151;
+    /* Gray-700 - Dashboard Color */
+    color: #ffffff;
+    /* White Text */
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-dark-pill:hover {
+    background-color: #111827;
+    /* Darker Gray */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Register Link (Outside Card) ===== */
+.register-link {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 0.9rem;
+    color: #9ca3af;
+    /* Gray-400 */
+    width: 100%;
+}
+
+.register-link a {
+    color: #fbbf24;
+    /* Yellow */
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Error Alert ===== */
+.alert-error {
+    background-color: #450a0a;
+    /* Dark Red */
+    color: #fca5a5;
+    /* Light Red Text */
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+    border: 1px solid #7f1d1d;
+}
+
+/* Toast Styles preserved */
+.toast-notification {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #22c55e;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1050;
+    animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: 500;
+    white-space: nowrap;
+    justify-content: center;
+    width: fit-content !important;
+    max-width: 90vw !important;
+}
+
+@keyframes slideDown {
+    from {
+        top: -60px;
+        opacity: 0;
+    }
+
+    to {
+        top: 30px;
+        opacity: 1;
+    }
+}
+
+/* ===== Password Toggle Button ===== */
+.password-toggle-btn {
+    position: absolute;
+    right: 16px !important;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: #9ca3af;
+    /* Gray-400 */
+    transition: color 0.2s;
+}
+
+.password-toggle-btn:hover {
+    color: #ffffff;
+}

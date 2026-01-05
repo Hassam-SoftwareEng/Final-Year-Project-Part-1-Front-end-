@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/AnalyticsReportPage.css";
+import "../../styles/User/AnalyticsReportPage.css";
 
 interface User {
     fullName: string;
@@ -17,7 +17,6 @@ interface AnalyticsReportPageProps {
 }
 
 export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
-    user,
     onLogout,
     onNavigateToDashboard,
     onNavigateToMessages,

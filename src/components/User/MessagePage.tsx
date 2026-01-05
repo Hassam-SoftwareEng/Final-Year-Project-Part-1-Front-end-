@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/MessagePage.css";
+import "../../styles/User/MessagePage.css";
 // import "../styles/DashboardPage.css"; // Import standard navbar styles REMOVED
 
 interface User {
@@ -114,7 +114,7 @@ const MOCK_MESSAGES: Record<string, Message[]> = {
     "3": [],
 };
 
-export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDashboard, onNavigateToMatches, onNavigateToAnalytics, onLogout, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert }) => {
+export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDashboard, onNavigateToMatches, onLogout, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert }) => {
     const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
     const [inputText, setInputText] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);

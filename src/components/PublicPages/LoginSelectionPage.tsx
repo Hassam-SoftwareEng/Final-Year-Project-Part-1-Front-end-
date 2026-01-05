@@ -1,5 +1,5 @@
 import { ArrowLeft } from 'lucide-react';
-import '../styles/LoginSelectionPage.css';
+import '../../styles/PublicPagesCss/LoginSelectionPage.css';
 
 interface LoginSelectionPageProps {
     onBack: () => void;
