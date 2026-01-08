@@ -12,9 +12,10 @@ interface DashboardPageProps {
   onNavigateToCreateProfile: () => void;
   onNavigateToSetting: () => void;
   onNavigateToRedFlagAlert: () => void;
+  onNavigateToMap: () => void;
 }
 
-export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, onNavigateToMatches, onNavigateToMessages, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert }: DashboardPageProps) {
+export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, onNavigateToMatches, onNavigateToMessages, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert, onNavigateToMap }: DashboardPageProps) {
   return (
     <div className="dashboard-container">
       {/* Top Navbar */}
@@ -40,7 +41,7 @@ export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, o
           <a href="#" className="nav-link" onClick={onNavigateToMatches}>
             Match
           </a>
-          <a href="#" className="nav-link">
+          <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToMap(); }}>
             Map
           </a>
           <a href="#" className="nav-link">

@@ -39,7 +39,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToVerification(); }}>
                         Verification
                     </a>
-                    <a href="#" className="nav-link active" onClick={(e) => { e.preventDefault(); onNavigateToAnalytics(); }}>
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToAnalytics(); }}>
                         Analytics
                     </a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToProfile(); }}>

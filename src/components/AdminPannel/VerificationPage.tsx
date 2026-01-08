@@ -73,7 +73,7 @@ export const VerificationPage: React.FC<VerificationPageProps> = ({
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToListing(); }}>
                         Listing
                     </a>
-                    <a href="#" className="nav-link active" onClick={(e) => { e.preventDefault(); onNavigateToVerification(); }}>
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToVerification(); }}>
                         Verification
                     </a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToAnalytics(); }}>

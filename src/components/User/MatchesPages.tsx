@@ -16,6 +16,7 @@ interface MatchesPagesProps {
     onNavigateToCreateProfile: () => void;
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
+    onNavigateToMap: () => void;
 }
 
 export const MatchesPages: React.FC<MatchesPagesProps> = ({
@@ -24,7 +25,8 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
     onNavigateToMessages,
     onNavigateToCreateProfile,
     onNavigateToSetting,
-    onNavigateToRedFlagAlert
+    onNavigateToRedFlagAlert,
+    onNavigateToMap
 }) => {
     return (
         <div className="matches-page-container">
@@ -47,15 +49,20 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
                     >
                         Create Profile
                     </a>
-                    <a href="#" className="nav-link">
+                    <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>
                         Match
                     </a>
-                    <a href="#" className="nav-link">
+                    <a
+                        href="#"
+                        className="nav-link"
+                        onClick={(e) => { e.preventDefault(); onNavigateToMap(); }}
+                    >
                         Map
                     </a>
                     <a href="#" className="nav-link">
                         Listing
                     </a>
+
                     <a href="#" className="nav-link" onClick={onNavigateToMessages}>
                         Message
                     </a>
@@ -72,7 +79,7 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
                         Logout
                     </button>
                 </div>
-            </nav>
+            </nav >
 
             <main className="matches-content">
                 <div className="matches-page-header">
@@ -182,6 +189,6 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
 
                 </div>
             </main>
-        </div>
+        </div >
     );
 };

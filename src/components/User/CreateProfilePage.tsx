@@ -14,6 +14,7 @@ interface CreateProfilePageProps {
     onNavigateToMessages: () => void;
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
+    onNavigateToMap: () => void;
     onLogout: () => void;
 }
 
@@ -24,6 +25,7 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
     onNavigateToMessages,
     onNavigateToSetting,
     onNavigateToRedFlagAlert,
+    onNavigateToMap,
     onLogout
 }) => {
     // Form State from Figma Code
@@ -68,8 +70,6 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
         onNavigateToDashboard();
     };
 
-
-
     return (
         <div className="dashboard-container create-profile-page">
             {/* Navbar */}
@@ -102,7 +102,11 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
                     >
                         Match
                     </a>
-                    <a href="#" className="nav-link">
+                    <a
+                        href="#"
+                        className="nav-link"
+                        onClick={(e) => { e.preventDefault(); onNavigateToMap(); }}
+                    >
                         Map
                     </a>
                     <a href="#" className="nav-link">

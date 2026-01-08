@@ -15,6 +15,7 @@ interface MessagePageProps {
     onNavigateToCreateProfile: () => void;
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
+    onNavigateToMap: () => void;
     onLogout: () => void;
 }
 
@@ -114,7 +115,7 @@ const MOCK_MESSAGES: Record<string, Message[]> = {
     "3": [],
 };
 
-export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDashboard, onNavigateToMatches, onLogout, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert }) => {
+export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDashboard, onNavigateToMatches, onLogout, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert, onNavigateToMap }) => {
     const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
     const [inputText, setInputText] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
@@ -176,7 +177,11 @@ export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDash
                     >
                         Match
                     </a>
-                    <a href="#" className="nav-link">
+                    <a
+                        href="#"
+                        className="nav-link"
+                        onClick={(e) => { e.preventDefault(); onNavigateToMap(); }}
+                    >
                         Map
                     </a>
                     <a href="#" className="nav-link">

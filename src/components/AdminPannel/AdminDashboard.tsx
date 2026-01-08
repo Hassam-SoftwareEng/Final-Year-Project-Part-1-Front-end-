@@ -87,7 +87,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </div>
 
                 <div className="nav-center">
-                    <a href="#" className="nav-link active" onClick={(e) => { e.preventDefault(); onNavigateToUser(); }}>
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToUser(); }}>
                         User
                     </a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); console.log('Listing clicked'); onNavigateToListing(); }}>

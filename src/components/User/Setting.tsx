@@ -16,6 +16,7 @@ interface SettingProps {
     onNavigateToCreateProfile: () => void;
     onNavigateToVerification: () => void;
     onNavigateToRedFlagAlert: () => void;
+    onNavigateToMap: () => void;
 }
 
 export const Setting: React.FC<SettingProps> = ({
@@ -26,7 +27,8 @@ export const Setting: React.FC<SettingProps> = ({
     onNavigateToMessages,
     onNavigateToCreateProfile,
     onNavigateToVerification,
-    onNavigateToRedFlagAlert
+    onNavigateToRedFlagAlert,
+    onNavigateToMap
 }) => {
     const [name, setName] = useState(user.fullName);
     const [email, setEmail] = useState(user.email);
@@ -72,7 +74,7 @@ export const Setting: React.FC<SettingProps> = ({
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToDashboard(); }}>Home</a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToCreateProfile(); }}>Create Profile</a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToMatches(); }}>Match</a>
-                    <a href="#" className="nav-link">Map</a>
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToMap(); }}>Map</a>
                     <a href="#" className="nav-link">Listing</a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToMessages(); }}>Message</a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}>Red Flag Alert</a>

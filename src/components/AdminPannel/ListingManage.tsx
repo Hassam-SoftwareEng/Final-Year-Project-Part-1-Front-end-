@@ -76,7 +76,7 @@ export const ListingManage: React.FC<ListingManageProps> = ({
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToUser(); }}>
                         User
                     </a>
-                    <a href="#" className="nav-link active" onClick={(e) => { e.preventDefault(); onNavigateToListing(); }}>
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToListing(); }}>
                         Listing
                     </a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToVerification(); }}>

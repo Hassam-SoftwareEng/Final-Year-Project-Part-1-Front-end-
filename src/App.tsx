@@ -20,11 +20,14 @@ import { AdminForgotPasswordPage } from "./components/AdminPannel/AdminForgotPas
 import { UserLoginPage } from "./components/User/UserLoginPage";
 import { UserSignupPage } from "./components/User/UserSignupPage";
 import { UserForgotPasswordPage } from "./components/User/UserForgotPasswordPage";
+import { PropertyOwnerLoginPage } from "./components/PropertyOwner/PropertyOwnerLoginPage";
+import { PropertyOwnerSignupPage } from "./components/PropertyOwner/PropertyOwnerSignupPage";
+import { PropertyOwnerForgotPasswordPage } from "./components/PropertyOwner/PropertyOwnerForgotPasswordPage";
+import { MapPage } from "./components/User/MapPage";
 
 
 type Page =
   | "landing"
-  | "login-selection"
   | "login-selection"
   | "create-profile"
   | "reset-password"
@@ -32,6 +35,7 @@ type Page =
   | "analytics-report"
   | "matches"
   | "messages"
+  | "map"
   | "setting"
   | "verification"
   | "red-flag-alert"
@@ -47,7 +51,10 @@ type Page =
   | "admin-forgot-password"
   | "user-login"
   | "user-signup"
-  | "user-forgot-password";
+  | "user-forgot-password"
+  | "property-owner-login"
+  | "property-owner-signup"
+  | "property-owner-forgot-password";
 
 
 
@@ -178,6 +185,30 @@ export default function App() {
     setCurrentPage("admin-login");
   };
 
+  /* =========================
+     PROPERTY OWNER AUTH HANDLERS
+  ========================== */
+  const handleOwnerLogin = (email: string, password: string) => {
+    const account = accounts.find(
+      (acc) => acc.email === email && acc.password === password
+    );
+
+    if (!account) {
+      alert("Invalid email or password");
+      return;
+    }
+
+    setUser({ email: account.email, fullName: account.fullName });
+    // Redirect to Dashboard for now (shared with User), or create new OwnerDashboard later
+    setCurrentPage("dashboard");
+  };
+
+  const handleOwnerSignup = (data: Account) => {
+    setAccounts((prev) => [...prev, data]);
+    alert("Property Owner account created successfully! Please login.");
+    setCurrentPage("property-owner-login");
+  };
+
   return (
     <>
       {currentPage === "landing" && (
@@ -195,6 +226,8 @@ export default function App() {
               setCurrentPage("admin-login");
             } else if (role === 'user') {
               setCurrentPage("user-login");
+            } else if (role === 'property-owner') {
+              setCurrentPage("property-owner-login");
             } else {
               // Default fallback
               setCurrentPage("login-selection");
@@ -253,6 +286,31 @@ export default function App() {
         />
       )}
 
+      {/* PROPERTY OWNER AUTH ROUTES */}
+      {currentPage === "property-owner-login" && (
+        <PropertyOwnerLoginPage
+          onLoginSuccess={handleOwnerLogin}
+          onNavigateToSignup={() => setCurrentPage("property-owner-signup")}
+          onNavigateToForgotPassword={() => setCurrentPage("property-owner-forgot-password")}
+          onBack={() => setCurrentPage("login-selection")}
+        />
+      )}
+
+      {currentPage === "property-owner-signup" && (
+        <PropertyOwnerSignupPage
+          onNavigateToLogin={() => setCurrentPage("property-owner-login")}
+          onSignupSuccess={handleOwnerSignup}
+          onBack={() => setCurrentPage("property-owner-login")}
+        />
+      )}
+
+      {currentPage === "property-owner-forgot-password" && (
+        <PropertyOwnerForgotPasswordPage
+          onSubmitEmail={(email) => console.log("Owner forgot password:", email)}
+          onNavigateToLogin={() => setCurrentPage("property-owner-login")}
+        />
+      )}
+
       {currentPage === "reset-password" && resetEmail && (
         <ResetPasswordPage
           email={resetEmail}
@@ -272,6 +330,7 @@ export default function App() {
           onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
           onNavigateToSetting={() => setCurrentPage("setting")}
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
+          onNavigateToMap={() => setCurrentPage("map")}
         />
       )}
 
@@ -284,6 +343,7 @@ export default function App() {
           onNavigateToMessages={() => setCurrentPage("messages")}
           onNavigateToSetting={() => setCurrentPage("setting")}
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
+          onNavigateToMap={() => setCurrentPage("map")}
         />
       )}
 
@@ -308,6 +368,7 @@ export default function App() {
           onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
           onNavigateToSetting={() => setCurrentPage("setting")}
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
+          onNavigateToMap={() => setCurrentPage("map")}
         />
       )}
 
@@ -321,6 +382,7 @@ export default function App() {
           onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
           onNavigateToSetting={() => setCurrentPage("setting")}
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
+          onNavigateToMap={() => setCurrentPage("map")}
         />
       )}
 
@@ -335,6 +397,7 @@ export default function App() {
           onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
           onNavigateToVerification={() => setCurrentPage("verification")}
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
+          onNavigateToMap={() => setCurrentPage("map")}
         />
       )}
 
@@ -362,6 +425,19 @@ export default function App() {
           onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
           onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
           onNavigateToSetting={() => setCurrentPage("setting")}
+          onNavigateToMap={() => setCurrentPage("map")}
+        />
+      )}
+
+      {currentPage === "map" && user && (
+        <MapPage
+          onLogout={handleLogout}
+          onNavigateToDashboard={() => setCurrentPage("dashboard")}
+          onNavigateToMatches={() => setCurrentPage("matches")}
+          onNavigateToMessages={() => setCurrentPage("messages")}
+          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+          onNavigateToSetting={() => setCurrentPage("setting")}
+          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
         />
       )}
 

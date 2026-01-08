@@ -15,6 +15,7 @@ interface RedFlagAlertProps {
     onNavigateToAnalytics: () => void;
     onNavigateToCreateProfile: () => void;
     onNavigateToSetting: () => void;
+    onNavigateToMap: () => void;
 }
 
 export const RedFlagAlert: React.FC<RedFlagAlertProps> = ({
@@ -23,7 +24,8 @@ export const RedFlagAlert: React.FC<RedFlagAlertProps> = ({
     onNavigateToMatches,
     onNavigateToMessages,
     onNavigateToCreateProfile,
-    onNavigateToSetting
+    onNavigateToSetting,
+    onNavigateToMap
 }) => {
 
     const [alerts] = useState([
@@ -46,7 +48,7 @@ export const RedFlagAlert: React.FC<RedFlagAlertProps> = ({
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToDashboard(); }}>Home</a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToCreateProfile(); }}>Create Profile</a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToMatches(); }}>Match</a>
-                    <a href="#" className="nav-link">Map</a>
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToMap(); }}>Map</a>
                     <a href="#" className="nav-link">Listing</a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToMessages(); }}>Message</a>
                     <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>Red Flag Alert</a>
