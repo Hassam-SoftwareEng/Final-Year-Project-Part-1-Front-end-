@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Bell } from 'lucide-react';
 import "../../styles/User/CreateProfilePage.css";
 // import "../styles/DashboardPage.css"; // Reuse navbar styles REMOVED
 
@@ -16,6 +17,7 @@ interface CreateProfilePageProps {
     onNavigateToRedFlagAlert: () => void;
     onNavigateToMap: () => void;
     onNavigateToListing: () => void;
+    onNavigateToNotification?: () => void;
     onLogout: () => void;
 }
 
@@ -28,6 +30,7 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
     onNavigateToRedFlagAlert,
     onNavigateToMap,
     onNavigateToListing,
+    onNavigateToNotification,
     onLogout
 }) => {
     // Form State from Figma Code
@@ -134,6 +137,15 @@ export const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
                     <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
                         Setting
                     </a>
+                    {onNavigateToNotification && (
+                        <button
+                            className="nav-link"
+                            style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                            onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+                        >
+                            <Bell size={20} />
+                        </button>
+                    )}
                     <button className="logout-btn" onClick={onLogout}>
                         Logout
                     </button>

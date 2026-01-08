@@ -1,4 +1,5 @@
 import '../../styles/User/DashboardPage.css';
+import { Bell } from 'lucide-react';
 
 interface DashboardPageProps {
   user: {
@@ -14,9 +15,10 @@ interface DashboardPageProps {
   onNavigateToRedFlagAlert: () => void;
   onNavigateToMap: () => void;
   onNavigateToListing: () => void;
+  onNavigateToNotification?: () => void;
 }
 
-export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, onNavigateToMatches, onNavigateToMessages, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert, onNavigateToMap, onNavigateToListing }: DashboardPageProps) {
+export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, onNavigateToMatches, onNavigateToMessages, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert, onNavigateToMap, onNavigateToListing, onNavigateToNotification }: DashboardPageProps) {
   return (
     <div className="dashboard-container">
       {/* Top Navbar */}
@@ -60,6 +62,15 @@ export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, o
           <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
             Setting
           </a>
+          {onNavigateToNotification && (
+            <button
+              className="nav-link"
+              style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+              onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+            >
+              <Bell size={20} />
+            </button>
+          )}
           {/* Logout Button */}
           <button className="logout-btn" onClick={onLogout}>
             Logout

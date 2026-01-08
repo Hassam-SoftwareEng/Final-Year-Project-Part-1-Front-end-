@@ -25,6 +25,7 @@ import { PropertyOwnerSignupPage } from "./components/PropertyOwner/PropertyOwne
 import { PropertyOwnerForgotPasswordPage } from "./components/PropertyOwner/PropertyOwnerForgotPasswordPage";
 import { MapPage } from "./components/User/MapPage";
 import { ListingPage } from "./components/User/ListingPage";
+import { NotificationPage } from "./components/User/NotificationPage";
 
 
 type Page =
@@ -57,7 +58,8 @@ type Page =
   | "user-forgot-password"
   | "property-owner-login"
   | "property-owner-signup"
-  | "property-owner-forgot-password";
+  | "property-owner-forgot-password"
+  | "notification";
 
 
 
@@ -335,6 +337,7 @@ export default function App() {
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
           onNavigateToMap={() => setCurrentPage("map")}
           onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
         />
       )}
 
@@ -349,6 +352,7 @@ export default function App() {
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
           onNavigateToMap={() => setCurrentPage("map")}
           onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
         />
       )}
 
@@ -362,6 +366,7 @@ export default function App() {
           onNavigateToSetting={() => setCurrentPage("setting")}
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
           onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
         />
       )}
 
@@ -376,6 +381,7 @@ export default function App() {
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
           onNavigateToMap={() => setCurrentPage("map")}
           onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
         />
       )}
 
@@ -391,6 +397,7 @@ export default function App() {
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
           onNavigateToMap={() => setCurrentPage("map")}
           onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
         />
       )}
 
@@ -407,6 +414,7 @@ export default function App() {
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
           onNavigateToMap={() => setCurrentPage("map")}
           onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
         />
       )}
 
@@ -422,6 +430,7 @@ export default function App() {
           onNavigateToSetting={() => setCurrentPage("setting")}
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
           onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
         />
       )}
 
@@ -437,6 +446,7 @@ export default function App() {
           onNavigateToSetting={() => setCurrentPage("setting")}
           onNavigateToMap={() => setCurrentPage("map")}
           onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
         />
       )}
 
@@ -450,6 +460,7 @@ export default function App() {
           onNavigateToSetting={() => setCurrentPage("setting")}
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
           onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
         />
       )}
 
@@ -464,6 +475,22 @@ export default function App() {
           onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
           onNavigateToMap={() => setCurrentPage("map")}
           onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
+        />
+      )}
+
+      {currentPage === "notification" && user && (
+        <NotificationPage
+          onLogout={handleLogout}
+          onNavigateToDashboard={() => setCurrentPage("dashboard")}
+          onNavigateToMatches={() => setCurrentPage("matches")}
+          onNavigateToMessages={() => setCurrentPage("messages")}
+          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
+          onNavigateToSetting={() => setCurrentPage("setting")}
+          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
+          onNavigateToMap={() => setCurrentPage("map")}
+          onNavigateToListing={() => setCurrentPage("listing")}
+          onNavigateToNotification={() => setCurrentPage("notification")}
         />
       )}
 

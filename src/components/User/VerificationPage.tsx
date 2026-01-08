@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Bell } from 'lucide-react';
 import '../../styles/User/VerificationPage.css';
 
 interface User {
@@ -17,6 +18,7 @@ interface VerificationPageProps {
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
     onNavigateToListing: () => void;
+    onNavigateToNotification?: () => void;
 }
 
 export const VerificationPage: React.FC<VerificationPageProps> = ({
@@ -27,7 +29,8 @@ export const VerificationPage: React.FC<VerificationPageProps> = ({
     onNavigateToCreateProfile,
     onNavigateToSetting,
     onNavigateToRedFlagAlert,
-    onNavigateToListing
+    onNavigateToListing,
+    onNavigateToNotification
 }) => {
     const [idDocument, setIdDocument] = useState<File | null>(null);
     const [addressProof, setAddressProof] = useState<File | null>(null);
@@ -67,12 +70,21 @@ export const VerificationPage: React.FC<VerificationPageProps> = ({
 
                 <div className="nav-right">
                     <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>Setting</a>
+                    {onNavigateToNotification && (
+                        <button
+                            className="nav-link"
+                            style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                            onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+                        >
+                            <Bell size={20} />
+                        </button>
+                    )}
                     <button className="logout-btn" onClick={onLogout}>Logout</button>
                 </div>
-            </nav>
+            </nav >
 
             {/* Main Content */}
-            <main className="verification-content">
+            < main className="verification-content" >
                 <header className="verification-header">
                     <h1 className="verification-title">Verification & Safety</h1>
                     <p className="verification-subtitle">Upload documents to verify your profile and build trust</p>
@@ -118,7 +130,7 @@ export const VerificationPage: React.FC<VerificationPageProps> = ({
                         </div>
                     </form>
                 </section>
-            </main>
-        </div>
+            </main >
+        </div >
     );
 };

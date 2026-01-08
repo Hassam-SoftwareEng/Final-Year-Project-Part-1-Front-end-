@@ -1,6 +1,6 @@
 .listing-page-container {
     min-height: 100vh;
-    background-color: #fff0f5;
+    background-color: #f5f5f7;
     /* LavenderBlush or similar light pink from screenshot */
     display: flex;
     flex-direction: column;
@@ -50,7 +50,7 @@
 /* Filter Section */
 .filter-section {
     padding: 10px 10px;
-    background-color: #fff0f5;
+    background-color: #f5f5f7;
     /* Match page bg */
 }
 

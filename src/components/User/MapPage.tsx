@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Navigation, Plus, Minus, MapPin, Share2, Edit2, Map as MapIcon, Star, Globe, Phone, Smartphone, Tag, RotateCcw, X, ChevronRight } from 'lucide-react';
+import { Search, Navigation, Plus, Minus, MapPin, Share2, Edit2, Map as MapIcon, Star, Globe, Phone, Smartphone, Tag, RotateCcw, X, ChevronRight, Bell } from 'lucide-react';
 import '../../styles/User/MapPage.css';
 
 interface MapPageProps {
@@ -11,6 +11,7 @@ interface MapPageProps {
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
     onNavigateToListing: () => void;
+    onNavigateToNotification?: () => void;
 }
 
 export const MapPage: React.FC<MapPageProps> = ({
@@ -21,7 +22,8 @@ export const MapPage: React.FC<MapPageProps> = ({
     onNavigateToCreateProfile,
     onNavigateToSetting,
     onNavigateToRedFlagAlert,
-    onNavigateToListing
+    onNavigateToListing,
+    onNavigateToNotification
 }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedPlace, setSelectedPlace] = useState(''); // Stores the confirmed search result
@@ -94,6 +96,15 @@ export const MapPage: React.FC<MapPageProps> = ({
                     <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
                         Setting
                     </a>
+                    {onNavigateToNotification && (
+                        <button
+                            className="nav-link"
+                            style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                            onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+                        >
+                            <Bell size={20} />
+                        </button>
+                    )}
                     <button className="logout-btn" onClick={onLogout}>
                         Logout
                     </button>

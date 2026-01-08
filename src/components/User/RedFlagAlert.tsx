@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Bell } from 'lucide-react';
 import '../../styles/User/RedFlagAlert.css';
 
 interface User {
@@ -17,6 +18,7 @@ interface RedFlagAlertProps {
     onNavigateToSetting: () => void;
     onNavigateToMap: () => void;
     onNavigateToListing: () => void;
+    onNavigateToNotification?: () => void;
 }
 
 export const RedFlagAlert: React.FC<RedFlagAlertProps> = ({
@@ -27,7 +29,8 @@ export const RedFlagAlert: React.FC<RedFlagAlertProps> = ({
     onNavigateToCreateProfile,
     onNavigateToSetting,
     onNavigateToMap,
-    onNavigateToListing
+    onNavigateToListing,
+    onNavigateToNotification
 }) => {
 
     const [alerts] = useState([
@@ -58,6 +61,15 @@ export const RedFlagAlert: React.FC<RedFlagAlertProps> = ({
 
                 <div className="nav-right">
                     <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>Setting</a>
+                    {onNavigateToNotification && (
+                        <button
+                            className="nav-link"
+                            style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                            onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+                        >
+                            <Bell size={20} />
+                        </button>
+                    )}
                     <button className="logout-btn" onClick={onLogout}>Logout</button>
                 </div>
             </nav>

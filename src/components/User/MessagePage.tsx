@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Bell } from 'lucide-react';
 import "../../styles/User/MessagePage.css";
 // import "../styles/DashboardPage.css"; // Import standard navbar styles REMOVED
 
@@ -17,6 +18,7 @@ interface MessagePageProps {
     onNavigateToRedFlagAlert: () => void;
     onNavigateToMap: () => void;
     onNavigateToListing: () => void;
+    onNavigateToNotification?: () => void;
     onLogout: () => void;
 }
 
@@ -116,7 +118,7 @@ const MOCK_MESSAGES: Record<string, Message[]> = {
     "3": [],
 };
 
-export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDashboard, onNavigateToMatches, onLogout, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert, onNavigateToMap, onNavigateToListing }) => {
+export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDashboard, onNavigateToMatches, onLogout, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert, onNavigateToMap, onNavigateToListing, onNavigateToNotification }) => {
     const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
     const [inputText, setInputText] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
@@ -205,6 +207,15 @@ export const MessagePage: React.FC<MessagePageProps> = ({ user, onNavigateToDash
                     <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
                         Setting
                     </a>
+                    {onNavigateToNotification && (
+                        <button
+                            className="nav-link"
+                            style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                            onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+                        >
+                            <Bell size={20} />
+                        </button>
+                    )}
                     <button className="logout-btn" onClick={onLogout}>
                         Logout
                     </button>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Bell } from 'lucide-react';
 
 import '../../styles/User/ListingPage.css';
 
@@ -14,6 +15,7 @@ interface ListingPageProps {
     onNavigateToRedFlagAlert: () => void;
     onNavigateToMap: () => void;
     onNavigateToListing: () => void; // Include self for consistency
+    onNavigateToNotification?: () => void; // Optional to prevent breaking changes if not passed immediately
 }
 
 interface PropertyListing {
@@ -37,7 +39,8 @@ export const ListingPage: React.FC<ListingPageProps> = ({
     onNavigateToSetting,
     onNavigateToRedFlagAlert,
     onNavigateToMap,
-    onNavigateToListing
+    onNavigateToListing,
+    onNavigateToNotification
 }) => {
     // Mock Data based on Screenshot + Local Context
     const [listings] = useState<PropertyListing[]>([
@@ -46,8 +49,8 @@ export const ListingPage: React.FC<ListingPageProps> = ({
             title: '1BHK Shraddha Avenue',
             price: 36000,
             priceUnit: 'per month',
-            location: 'Goregaon West, Mumbai',
-            type: 'Co-Living',
+            location: 'F-10 Markaz, Islamabad',
+            type: 'Apartment',
             image: '/assets/images/premium_photo-1684175656320-5c3f701c082c (appartemnt).avif' // Reusing available asset
         },
         {
@@ -55,8 +58,8 @@ export const ListingPage: React.FC<ListingPageProps> = ({
             title: '3Sharing bedroom attach bathroom Mohid Heights',
             price: 14000,
             priceUnit: 'per month per head',
-            location: 'Andheri West, Mumbai',
-            type: 'Co-Living',
+            location: 'G-11 Markaz, Islamabad',
+            type: 'Shared Room',
             image: '/assets/images/placeholder-connect.038828c91304f70020e5.jpg' // Reusing available asset
         },
         {
@@ -64,8 +67,8 @@ export const ListingPage: React.FC<ListingPageProps> = ({
             title: '4Sharing Mohid Heights',
             price: 12000,
             priceUnit: 'per month per head',
-            location: 'Andheri West, Mumbai',
-            type: 'Co-Living',
+            location: 'Blue Area, Islamabad',
+            type: 'Shared Room',
             image: '/assets/images/Securemessaging.jpg' // Reusing available asset
         },
         {
@@ -139,6 +142,15 @@ export const ListingPage: React.FC<ListingPageProps> = ({
                     <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
                         Setting
                     </a>
+                    {onNavigateToNotification && (
+                        <button
+                            className="nav-link"
+                            style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                            onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+                        >
+                            <Bell size={20} />
+                        </button>
+                    )}
                     <button className="logout-btn" onClick={onLogout}>
                         Logout
                     </button>
@@ -164,7 +176,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({
                             <option value="">Property Type</option>
                             <option value="apartment">Apartment</option>
                             <option value="house">House</option>
-                            <option value="co-living">Co-Living</option>
+
                         </select>
 
                         <div className="filter-input-wrapper">
@@ -225,7 +237,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({
                                 <div className="listing-card-body">
                                     <h3 className="listing-card-title">{listing.title}</h3>
                                     <div className="listing-card-price">
-                                        ₹{listing.price} <span className="price-unit">{listing.priceUnit}</span>
+                                        PKR {listing.price} <span className="price-unit">{listing.priceUnit}</span>
                                     </div>
                                     <div className="listing-card-location">
                                         {listing.location}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Bell } from 'lucide-react';
 import "../../styles/User/AnalyticsReportPage.css";
 
 interface User {
@@ -15,6 +16,7 @@ interface AnalyticsReportPageProps {
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
     onNavigateToListing: () => void;
+    onNavigateToNotification?: () => void;
 }
 
 export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
@@ -24,7 +26,8 @@ export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
     onNavigateToCreateProfile,
     onNavigateToSetting,
     onNavigateToRedFlagAlert,
-    onNavigateToListing
+    onNavigateToListing,
+    onNavigateToNotification
 }) => {
     return (
         <div className="analytics-container">
@@ -68,6 +71,15 @@ export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
                     <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
                         Setting
                     </a>
+                    {onNavigateToNotification && (
+                        <button
+                            className="nav-link"
+                            style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                            onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+                        >
+                            <Bell size={20} />
+                        </button>
+                    )}
                     <button className="logout-btn" onClick={onLogout}>
                         Logout
                     </button>

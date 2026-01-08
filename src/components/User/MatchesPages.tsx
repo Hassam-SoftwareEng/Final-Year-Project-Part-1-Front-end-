@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Bell } from 'lucide-react';
 import "../../styles/User/MatchesPages.css";
 
 
@@ -18,6 +19,7 @@ interface MatchesPagesProps {
     onNavigateToRedFlagAlert: () => void;
     onNavigateToMap: () => void;
     onNavigateToListing: () => void;
+    onNavigateToNotification?: () => void;
 }
 
 export const MatchesPages: React.FC<MatchesPagesProps> = ({
@@ -28,7 +30,8 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
     onNavigateToSetting,
     onNavigateToRedFlagAlert,
     onNavigateToMap,
-    onNavigateToListing
+    onNavigateToListing,
+    onNavigateToNotification
 }) => {
     return (
         <div className="matches-page-container">
@@ -77,6 +80,15 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
                     <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
                         Setting
                     </a>
+                    {onNavigateToNotification && (
+                        <button
+                            className="nav-link"
+                            style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                            onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+                        >
+                            <Bell size={20} />
+                        </button>
+                    )}
                     <button className="logout-btn" onClick={onLogout}>
                         Logout
                     </button>

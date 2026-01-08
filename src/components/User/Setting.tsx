@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Bell } from 'lucide-react';
 import '../../styles/User/SettingPage.css';
 
 interface User {
@@ -18,6 +19,7 @@ interface SettingProps {
     onNavigateToRedFlagAlert: () => void;
     onNavigateToMap: () => void;
     onNavigateToListing: () => void;
+    onNavigateToNotification?: () => void;
 }
 
 export const Setting: React.FC<SettingProps> = ({
@@ -30,7 +32,8 @@ export const Setting: React.FC<SettingProps> = ({
     onNavigateToVerification,
     onNavigateToRedFlagAlert,
     onNavigateToMap,
-    onNavigateToListing
+    onNavigateToListing,
+    onNavigateToNotification
 }) => {
     const [name, setName] = useState(user.fullName);
     const [email, setEmail] = useState(user.email);
@@ -86,6 +89,15 @@ export const Setting: React.FC<SettingProps> = ({
                     <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => e.preventDefault()}>
                         Setting
                     </a>
+                    {onNavigateToNotification && (
+                        <button
+                            className="nav-link"
+                            style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                            onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+                        >
+                            <Bell size={20} />
+                        </button>
+                    )}
                     <button className="logout-btn" onClick={onLogout}>Logout</button>
                 </div>
             </nav>
