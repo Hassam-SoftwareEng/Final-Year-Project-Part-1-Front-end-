@@ -13,9 +13,10 @@ interface DashboardPageProps {
   onNavigateToSetting: () => void;
   onNavigateToRedFlagAlert: () => void;
   onNavigateToMap: () => void;
+  onNavigateToListing: () => void;
 }
 
-export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, onNavigateToMatches, onNavigateToMessages, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert, onNavigateToMap }: DashboardPageProps) {
+export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, onNavigateToMatches, onNavigateToMessages, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert, onNavigateToMap, onNavigateToListing }: DashboardPageProps) {
   return (
     <div className="dashboard-container">
       {/* Top Navbar */}
@@ -44,7 +45,7 @@ export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, o
           <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToMap(); }}>
             Map
           </a>
-          <a href="#" className="nav-link">
+          <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToListing(); }}>
             Listing
           </a>
           <a href="#" className="nav-link" onClick={onNavigateToMessages}>
@@ -76,17 +77,7 @@ export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, o
               <p className="header-subtitle">Find Your Suitable Roommate</p>
             </div>
 
-            <div className="header-right">
-              <div className="search-box">
-                <input
-                  type="text"
-                  placeholder="Search listings, users..."
-                  className="search-input"
-                />
-              </div>
-              <button className="search-btn">Search</button>
 
-            </div>
           </header>
 
           {/* Stats Cards */}

@@ -16,6 +16,7 @@ interface VerificationPageProps {
     onNavigateToCreateProfile: () => void;
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
+    onNavigateToListing: () => void;
 }
 
 export const VerificationPage: React.FC<VerificationPageProps> = ({
@@ -25,7 +26,8 @@ export const VerificationPage: React.FC<VerificationPageProps> = ({
     onNavigateToMessages,
     onNavigateToCreateProfile,
     onNavigateToSetting,
-    onNavigateToRedFlagAlert
+    onNavigateToRedFlagAlert,
+    onNavigateToListing
 }) => {
     const [idDocument, setIdDocument] = useState<File | null>(null);
     const [addressProof, setAddressProof] = useState<File | null>(null);
@@ -58,7 +60,7 @@ export const VerificationPage: React.FC<VerificationPageProps> = ({
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToCreateProfile(); }}>Create Profile</a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToMatches(); }}>Match</a>
                     <a href="#" className="nav-link">Map</a>
-                    <a href="#" className="nav-link">Listing</a>
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToListing(); }}>Listing</a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToMessages(); }}>Message</a>
                     <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}>Red Flag Alert</a>
                 </div>

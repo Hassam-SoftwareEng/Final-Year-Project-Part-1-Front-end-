@@ -17,6 +17,7 @@ interface MatchesPagesProps {
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
     onNavigateToMap: () => void;
+    onNavigateToListing: () => void;
 }
 
 export const MatchesPages: React.FC<MatchesPagesProps> = ({
@@ -26,7 +27,8 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
     onNavigateToCreateProfile,
     onNavigateToSetting,
     onNavigateToRedFlagAlert,
-    onNavigateToMap
+    onNavigateToMap,
+    onNavigateToListing
 }) => {
     return (
         <div className="matches-page-container">
@@ -59,7 +61,7 @@ export const MatchesPages: React.FC<MatchesPagesProps> = ({
                     >
                         Map
                     </a>
-                    <a href="#" className="nav-link">
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToListing(); }}>
                         Listing
                     </a>
 

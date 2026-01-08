@@ -10,6 +10,7 @@ interface MapPageProps {
     onNavigateToCreateProfile: () => void;
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
+    onNavigateToListing: () => void;
 }
 
 export const MapPage: React.FC<MapPageProps> = ({
@@ -19,7 +20,8 @@ export const MapPage: React.FC<MapPageProps> = ({
     onNavigateToMessages,
     onNavigateToCreateProfile,
     onNavigateToSetting,
-    onNavigateToRedFlagAlert
+    onNavigateToRedFlagAlert,
+    onNavigateToListing
 }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedPlace, setSelectedPlace] = useState(''); // Stores the confirmed search result
@@ -69,7 +71,7 @@ export const MapPage: React.FC<MapPageProps> = ({
                     <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>
                         Map
                     </a>
-                    <a href="#" className="nav-link">
+                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToListing(); }}>
                         Listing
                     </a>
                     <a

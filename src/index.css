@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .app-container {
   display: flex;
   height: 100vh;
@@ -5,7 +9,9 @@
 }
 
 /* Ensure the whole page uses the same gray background and no default body margin */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   background-color: #f5f5f7;

@@ -1,22 +1,21 @@
 /* Container with Background Image */
 .profile-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #14919B 0%, #0E656D 100%);
-    background-image: linear-gradient(rgba(20, 145, 155, 0.3), rgba(14, 101, 109, 0.6)), url('/assets/images/premium_photo-1684175656320-5c3f701c082c (appartemnt).avif');
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
-    padding: 2rem 1rem;
+    background-color: #fff0f5;
+    padding: 2rem 32px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; Removed to allow top scrolling if height exceeds */
+}
+
+.profile-content-wrapper {
+    width: 100%;
 }
 
 .profile-card {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    max-width: 900px;
     width: 100%;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -25,13 +24,20 @@
 }
 
 /* App Title */
-.app-title {
-    color: #2d3748;
-    text-align: center;
-    margin: 0 0 2.5rem 0;
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: -0.5px;
+/* App Title - Replaced by standardized header */
+.create-profile-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1F2937;
+    margin: 0 0 8px 0;
+    text-shadow: none;
+}
+
+.create-profile-subtitle {
+    font-size: 14px;
+    color: #6B7280;
+    margin: 0 0 8px 0;
+    text-shadow: none;
 }
 
 /* Profile Photo Section */

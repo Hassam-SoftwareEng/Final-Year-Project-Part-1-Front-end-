@@ -2,7 +2,7 @@
 
 .verification-page-container {
     min-height: 100vh;
-    background-color: #f5f5f7;
+    background-color: #fff0f5;
     font-family: system-ui, -apple-system, sans-serif;
     display: flex;
     flex-direction: column;
@@ -114,6 +114,10 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
+.verification-card form {
+    width: 100%;
+}
+
 .form-group {
     margin-bottom: 24px;
 }
@@ -162,9 +166,10 @@
 }
 
 .form-actions {
+    width: 100%;
     margin-top: 32px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 16px;
 }
 
