@@ -79,13 +79,30 @@ interface Account {
 
 console.log("APP VERSION CHECK: v2 - LISTING ROUTE ENABLED");
 
+const Preloader = () => (
+  <div className="swm-loader-holder">
+    <div className="swm-loader-inner">
+      <div className="swm-circular-spin"></div>
+    </div>
+  </div>
+);
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>("landing");
+  const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [resetEmail, setResetEmail] = useState<string | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedRole, setSelectedRole] = useState<'admin' | 'user' | 'property-owner'>('user');
+
+  const handleNavigation = (page: Page) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setCurrentPage(page);
+      setIsLoading(false);
+    }, 1000); // 1 second loading simulation
+  };
 
   /* =========================
      LOGIN
@@ -103,9 +120,9 @@ export default function App() {
     setUser({ email: account.email, fullName: account.fullName });
 
     if (selectedRole === 'admin') {
-      setCurrentPage("admin-dashboard");
+      handleNavigation("admin-dashboard");
     } else {
-      setCurrentPage("dashboard");
+      handleNavigation("dashboard");
     }
   };
 
@@ -122,7 +139,7 @@ export default function App() {
 
     setAccounts((prev) => [...prev, data]);
     alert("Account created successfully! Please login.");
-    setCurrentPage("login-selection");
+    handleNavigation("login-selection");
   };
 
   /* =========================
@@ -137,7 +154,7 @@ export default function App() {
     }
 
     setResetEmail(email);
-    setCurrentPage("reset-password");
+    handleNavigation("reset-password");
   };
 
   /* =========================
@@ -156,7 +173,7 @@ export default function App() {
 
     alert("Password reset successful! Please login.");
     setResetEmail(null);
-    setCurrentPage("login-selection");
+    handleNavigation("login-selection");
   };
 
   /* =========================
@@ -164,7 +181,7 @@ export default function App() {
   ========================== */
   const handleLogout = () => {
     setUser(null);
-    setCurrentPage("landing");
+    handleNavigation("landing");
   };
 
   /* =========================
@@ -181,13 +198,13 @@ export default function App() {
     }
 
     setUser({ email: account.email, fullName: account.fullName });
-    setCurrentPage("admin-dashboard");
+    handleNavigation("admin-dashboard");
   };
 
   const handleAdminSignup = (data: Account) => {
     setAccounts((prev) => [...prev, data]);
     alert("Admin account created successfully! Please login.");
-    setCurrentPage("admin-login");
+    handleNavigation("admin-login");
   };
 
   /* =========================
@@ -205,17 +222,18 @@ export default function App() {
 
     setUser({ email: account.email, fullName: account.fullName });
     // Redirect to Dashboard for now (shared with User), or create new OwnerDashboard later
-    setCurrentPage("dashboard");
+    handleNavigation("dashboard");
   };
 
   const handleOwnerSignup = (data: Account) => {
     setAccounts((prev) => [...prev, data]);
     alert("Property Owner account created successfully! Please login.");
-    setCurrentPage("property-owner-login");
+    handleNavigation("property-owner-login");
   };
 
   return (
     <>
+      {isLoading && <Preloader />}
       {currentPage === "landing" && (
         <LandingPage
           onNavigateToLogin={() => setCurrentPage("login-selection")}
