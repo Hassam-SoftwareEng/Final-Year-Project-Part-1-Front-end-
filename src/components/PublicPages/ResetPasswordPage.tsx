@@ -34,60 +34,66 @@ export function ResetPasswordPage({ email, onResetPassword }: Props) {
   };
 
   return (
-    <div className="login-bg-container">
-      <div className="glass-wrapper">
-        <form onSubmit={handleSubmit}>
+    <div className="animated-login-wrapper">
+      <div className="box">
+        <div className="form">
           <h2>Reset Password</h2>
-          <p style={{ fontSize: '0.9rem', marginBottom: '20px' }}>Set a new password for <strong>{email}</strong></p>
+          <p className="subtitle">Set a new password for <strong>{email}</strong></p>
 
-          {error && <div className="alert alert-danger" style={{ background: 'rgba(220, 53, 69, 0.8)', color: 'white', border: 'none', fontSize: '0.9rem', marginBottom: '15px', padding: '10px', borderRadius: '4px' }}>{error}</div>}
+          <form onSubmit={handleSubmit}>
+            {error && <div className="error-msg">{error}</div>}
 
-          <div className="input-field">
-            <input
-              type={showPassword ? "text" : "password"}
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder=" "
-            />
-            <label>New Password</label>
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="password-toggle-btn"
-            >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            <div className="inputBox">
+              <label>New Password</label>
+              <div className="password-container">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="password-toggle"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+            </div>
+
+            <div className="inputBox">
+              <label>Confirm Password</label>
+              <div className="password-container">
+                <input
+                  type={showConfirm ? "text" : "password"}
+                  required
+                  value={confirm}
+                  onChange={(e) => setConfirm(e.target.value)}
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirm(!showConfirm)}
+                  className="password-toggle"
+                >
+                  {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" className="submit-btn" style={{ marginTop: '20px' }}>
+              Update Password
             </button>
-          </div>
 
-          <div className="input-field">
-            <input
-              type={showConfirm ? "text" : "password"}
-              required
-              value={confirm}
-              onChange={(e) => setConfirm(e.target.value)}
-              placeholder=" "
-            />
-            <label>Confirm Password</label>
-            <button
-              type="button"
-              onClick={() => setShowConfirm(!showConfirm)}
-              className="password-toggle-btn"
-            >
-              {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
-          </div>
-
-          <button type="submit" className="btn-glass">
-            Update Password
-          </button>
-
-          <div className="register">
-            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login-selection'); }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-              <ArrowLeft size={16} /> Back to Login
-            </a>
-          </div>
-        </form>
+            <div className="footer-links">
+              <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login-selection', { replace: true }); }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                <ArrowLeft size={16} /> Back to Login
+              </a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

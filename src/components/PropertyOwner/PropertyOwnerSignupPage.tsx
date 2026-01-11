@@ -155,7 +155,7 @@ export function PropertyOwnerSignupPage({ onSignupSuccess }: PropertyOwnerSignup
 
                         <div className="footer-links">
                             <span>Already have an account? </span>
-                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/property-owner-login'); }}>Login</a>
+                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/property-owner-login', { replace: true }); }}>Login</a>
                         </div>
                     </form>
                 </div>

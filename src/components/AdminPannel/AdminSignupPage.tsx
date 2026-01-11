@@ -155,7 +155,7 @@ export function AdminSignupPage({ onSignupSuccess }: AdminSignupPageProps) {
 
                         <div className="footer-links">
                             <span>Already have an account? </span>
-                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/admin-login'); }}>Login</a>
+                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/admin-login', { replace: true }); }}>Login</a>
                         </div>
                     </form>
                 </div>

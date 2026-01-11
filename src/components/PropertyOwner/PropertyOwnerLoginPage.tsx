@@ -92,7 +92,7 @@ export function PropertyOwnerLoginPage({ onLoginSuccess }: PropertyOwnerLoginPag
                             <span>Are you new?</span>
                             <a href="#" onClick={(e) => {
                                 e.preventDefault();
-                                navigate('/property-owner-signup');
+                                navigate('/property-owner-signup', { replace: true });
                             }}>
                                 Create an Account
                             </a>

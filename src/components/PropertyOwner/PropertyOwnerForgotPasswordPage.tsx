@@ -22,7 +22,7 @@ export function PropertyOwnerForgotPasswordPage({ onSubmitEmail }: Props) {
         <div className="property-owner-login-selection-bg">
             <div className="glass-wrapper" style={{ maxWidth: '480px', position: 'relative' }}>
                 <button
-                    onClick={() => navigate('/property-owner-login')}
+                    onClick={() => navigate('/property-owner-login', { replace: true })}
                     className="absolute-back-btn"
                 >
                     <ArrowLeft size={24} color="#14919B" />

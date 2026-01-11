@@ -22,7 +22,7 @@ export function UserForgotPasswordPage({ onSubmitEmail }: Props) {
         <div className="login-selection-bg">
             <div className="glass-wrapper" style={{ maxWidth: '480px', position: 'relative' }}>
                 <button
-                    onClick={() => navigate('/user-login')}
+                    onClick={() => navigate('/user-login', { replace: true })}
                     className="absolute-back-btn"
                 >
                     <ArrowLeft size={24} color="#14919B" />

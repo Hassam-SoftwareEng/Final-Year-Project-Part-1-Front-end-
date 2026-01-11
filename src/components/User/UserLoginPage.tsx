@@ -86,7 +86,7 @@ export function UserLoginPage({
 
                         <div className="footer-links">
                             <span>Are you new?</span>
-                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/user-signup'); }}>
+                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/user-signup', { replace: true }); }}>
                                 Create an Account
                             </a>
                         </div>

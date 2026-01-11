@@ -92,7 +92,7 @@ export function AdminLoginPage({ onLoginSuccess }: AdminLoginPageProps) {
                             <span>Are you new?</span>
                             <a href="#" onClick={(e) => {
                                 e.preventDefault();
-                                navigate('/admin-signup');
+                                navigate('/admin-signup', { replace: true });
                             }}>
                                 Create an Account
                             </a>
