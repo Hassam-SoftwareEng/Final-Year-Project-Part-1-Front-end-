@@ -1,18 +1,17 @@
-import { useEffect } from 'react';
-import { Home, Users, Shield, Heart, Check, X } from "lucide-react";
+import { useEffect, useState } from 'react';
+import { Home, Check, X, ChevronLeft, ChevronRight } from "lucide-react";
 import AOS from 'aos';
 import '../../styles/PublicPagesCss/LandingPage.css';
 
+import { useNavigate } from 'react-router-dom';
+
 interface LandingPageProps {
-  onNavigateToLogin: () => void;
-  onNavigateToSignup?: () => void;
+  // Add props if needed in future
 }
 
-
-export function LandingPage({
-  onNavigateToLogin,
-  onNavigateToSignup,
-}: LandingPageProps) {
+export function LandingPage({ }: LandingPageProps) {
+  const navigate = useNavigate();
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     AOS.init({
@@ -46,7 +45,7 @@ export function LandingPage({
             <div className="hero-cta-group" data-aos="fade-up" data-aos-delay="200">
               <button
                 className="nav-btn nav-btn-signup"
-                onClick={onNavigateToLogin}
+                onClick={() => navigate('/login-selection')}
                 style={{ padding: '0.8rem 2rem', fontSize: '1.1rem' }}
               >
                 Get Started
@@ -102,27 +101,83 @@ export function LandingPage({
           </div>
         </section>
 
-        {/* How to Get Started (How it Works) */}
-        <section className="key-features-section bg-white" style={{ paddingTop: '5rem' }}>
-          <div className="text-center mb-5" data-aos="fade-up">
-            <h2 className="fw-bold display-5">How it Works</h2>
-          </div>
-          <div className="features-grid">
-            <div className="match-card h-100 p-4 text-dark text-center rounded-4" data-aos="fade-up" data-aos-delay="100" style={{ backgroundColor: '#fff', border: '1px solid #eee' }}>
-              <Users size={48} className="mb-3 text-teal" />
-              <h3 className="h4 fw-bold mb-3">Create a Profile</h3>
-              <p className="mb-0 opacity-75">Start by building your personalized profile. Share your lifestyle, interests, and living preferences.</p>
+        {/* How to Get Started (How it Works) - Carousel Redesign */}
+        <section className="carousel-section" style={{ paddingTop: '5rem', paddingBottom: '0' }}>
+          <div className="how-it-works-carousel">
+
+            {/* Navigation Arrows */}
+            <button className="carousel-nav-btn carousel-prev" onClick={() => setActiveSlide((prev) => (prev === 0 ? 2 : prev - 1))}>
+              <ChevronLeft size={64} strokeWidth={1} />
+            </button>
+            <button className="carousel-nav-btn carousel-next" onClick={() => setActiveSlide((prev) => (prev === 2 ? 0 : prev + 1))}>
+              <ChevronRight size={64} strokeWidth={1} />
+            </button>
+
+            <div className="carousel-slides-container">
+              {/* Slide 1 */}
+              <div className={`carousel-slide ${activeSlide === 0 ? 'active' : ''}`}>
+                <img
+                  src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="Create Profile"
+                  className="carousel-image"
+                />
+                <div className="carousel-overlay-card">
+                  <h3 className="carousel-content-title">Create Your Detailed Profile</h3>
+                  <div className="carousel-accent-line"></div>
+                  <p className="carousel-description">
+                    Start by building your personalized profile. Share your lifestyle, interests, and living preferences to find the perfect match.
+                  </p>
+
+                </div>
+              </div>
+
+              {/* Slide 2 */}
+              <div className={`carousel-slide ${activeSlide === 1 ? 'active' : ''}`}>
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="Set Preferences"
+                  className="carousel-image"
+                />
+                <div className="carousel-overlay-card">
+                  <h3 className="carousel-content-title">Customize your search with specific preferences</h3>
+                  <div className="carousel-accent-line"></div>
+                  <p className="carousel-description">
+                    Filter by budget, location, and living habits. Our algorithm respects your deal-breakers to ensure compatibility.
+                  </p>
+
+                </div>
+              </div>
+
+              {/* Slide 3 */}
+              <div className={`carousel-slide ${activeSlide === 2 ? 'active' : ''}`}>
+                <img
+                  src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="Swipe and Match"
+                  className="carousel-image"
+                />
+                <div className="carousel-overlay-card">
+                  <h3 className="carousel-content-title">Browse through potential roommates with ease</h3>
+                  <div className="carousel-accent-line"></div>
+                  <p className="carousel-description">
+                    Swipe right to connect or left to pass. Chat directly with your matches in a secure environment.
+                  </p>
+
+                </div>
+              </div>
             </div>
-            <div className="match-card h-100 p-4 text-dark text-center rounded-4" data-aos="fade-up" data-aos-delay="200" style={{ backgroundColor: '#fff', border: '1px solid #eee' }}>
-              <Shield size={48} className="mb-3 text-teal" />
-              <h3 className="h4 fw-bold mb-3">Set your preferences</h3>
-              <p className="mb-0 opacity-75">Customize your search with specific preferences like budget, location, and living habits.</p>
+
+            {/* Indicators */}
+            <div className="carousel-indicators">
+              {[0, 1, 2].map((idx) => (
+                <button
+                  key={idx}
+                  className={`carousel-dot ${activeSlide === idx ? 'active' : ''}`}
+                  onClick={() => setActiveSlide(idx)}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
             </div>
-            <div className="match-card h-100 p-4 text-dark text-center rounded-4" data-aos="fade-up" data-aos-delay="300" style={{ backgroundColor: '#fff', border: '1px solid #eee' }}>
-              <Heart size={48} className="mb-3 text-teal" />
-              <h3 className="h4 fw-bold mb-3">Swipe and Match</h3>
-              <p className="mb-0 opacity-75">Browse through potential roommates with ease! Swipe through profiles and connect.</p>
-            </div>
+
           </div>
         </section>
 
@@ -279,7 +334,7 @@ export function LandingPage({
           <div className="cta-banner" data-aos="zoom-in">
             <h2 className="cta-title">Ready to Find Your Roomie?</h2>
             <p className="cta-text">Join thousands of students who have found their perfect match with RoomEase.</p>
-            <button className="btn-white" onClick={onNavigateToSignup || onNavigateToLogin}>
+            <button className="btn-white" onClick={() => navigate('/login-selection')}>
               Join RoomEase Today
             </button>
           </div>

@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/PublicPagesCss/ResetPasswordPage.css';
 
 interface Props {
   email: string;
   onResetPassword: (password: string) => void;
-  onNavigateToLogin?: () => void;
 }
 
-export function ResetPasswordPage({ email, onResetPassword, onNavigateToLogin }: Props) {
+export function ResetPasswordPage({ email, onResetPassword }: Props) {
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -81,13 +82,11 @@ export function ResetPasswordPage({ email, onResetPassword, onNavigateToLogin }:
             Update Password
           </button>
 
-          {onNavigateToLogin && (
-            <div className="register">
-              <a href="#" onClick={(e) => { e.preventDefault(); onNavigateToLogin(); }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-                <ArrowLeft size={16} /> Back to Login
-              </a>
-            </div>
-          )}
+          <div className="register">
+            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login-selection'); }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+              <ArrowLeft size={16} /> Back to Login
+            </a>
+          </div>
         </form>
       </div>
     </div>

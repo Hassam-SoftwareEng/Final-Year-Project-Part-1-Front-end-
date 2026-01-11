@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { ArrowLeft, CheckCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/User/UserForgotPassword.css';
 
 interface Props {
     onSubmitEmail: (email: string) => void;
-    onNavigateToLogin: () => void;
 }
 
-export function UserForgotPasswordPage({ onSubmitEmail, onNavigateToLogin }: Props) {
+export function UserForgotPasswordPage({ onSubmitEmail }: Props) {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -19,13 +20,12 @@ export function UserForgotPasswordPage({ onSubmitEmail, onNavigateToLogin }: Pro
 
     return (
         <div className="login-selection-bg">
-            <div className="glass-wrapper" style={{ maxWidth: '480px' }}>
+            <div className="glass-wrapper" style={{ maxWidth: '480px', position: 'relative' }}>
                 <button
-                    onClick={onNavigateToLogin}
-                    className="back-button"
+                    onClick={() => navigate('/user-login')}
+                    className="absolute-back-btn"
                 >
-                    <ArrowLeft size={20} />
-                    <span>Back</span>
+                    <ArrowLeft size={24} color="#14919B" />
                 </button>
                 <form onSubmit={handleSubmit}>
 

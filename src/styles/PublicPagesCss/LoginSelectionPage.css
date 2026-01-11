@@ -1,52 +1,54 @@
 /* ===========================
-   Login Selection Theme
+   Login Selection Theme - Light Teal
 =========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-teal: #14919B;
+    --primary-dark: #0E656D;
+    --bg-off-white: #f5fcfd;
+    --text-main: #1C2B33;
+    --text-muted: #5A6B75;
+    --border-light: #E0E8EB;
+    --card-shadow: 0 16px 32px rgba(20, 145, 155, 0.15);
+}
 
 /* ===== Background ===== */
 .login-selection-bg {
     min-height: 100vh;
     width: 100%;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* Center the selection card */
-
-    /* Apartment Background */
-    background-image: url('/assets/images/istockphoto-1299730469-612x612\ \(Login\ OPtion\ pic\ 2\).webp');
-    background-size: 100% 100%;
-    /* Stretch to fit without zoom/crop */
-    background-position: center;
-    background-repeat: no-repeat;
-
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-off-white);
+    background-image: none;
+    /* Removed dark image */
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
 }
 
-/* ===== Dark Card ===== */
+/* ===== Card ===== */
 .glass-wrapper {
     width: 100%;
     max-width: 420px;
     padding: 40px;
 
-    background-color: #0f172a !important;
-    /* Dark Blue/Black */
+    background-color: #ffffff !important;
     border-radius: 20px;
 
     /* Clean shadow */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid #1e293b;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-light);
 
     text-align: left;
-    color: #ffffff !important;
-    /* White text */
+    color: var(--text-main) !important;
 
-    /* No glass effect */
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     opacity: 1 !important;
 
-    /* Entrance Animation */
     animation: fadeInUp 0.8s ease-out;
 }
 
@@ -70,23 +72,32 @@
     margin-bottom: 20px;
     display: flex;
     align-items: center;
-    color: #ffffff !important;
+    color: var(--text-muted) !important;
     padding: 0;
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.2s;
 }
 
 .back-button:hover {
-    color: #fbbf24 !important;
-    /* Yellow hover */
+    color: var(--primary-teal) !important;
+    transform: translateX(-5px);
 }
 
-/* ... skipped ... */
+.back-button span {
+    margin-left: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* ===== Header ===== */
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
 .login-header h2 {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #ffffff !important;
-    /* White */
+    color: var(--text-main) !important;
     margin-bottom: 8px;
     letter-spacing: -0.025em;
     display: flex;
@@ -95,12 +106,9 @@
     gap: 10px;
 }
 
-/* ... skipped ... */
-
 .subtitle {
     font-size: 0.95rem;
-    color: #ffffff !important;
-    /* White - User Request */
+    color: var(--text-muted) !important;
     font-weight: 400;
 }
 
@@ -108,11 +116,11 @@
 .btn-option {
     width: 100%;
     height: 50px;
+    margin-bottom: 15px;
+    /* Spacing between buttons */
 
-    background-color: #374151;
-    /* Gray-700 - Match Dashboard */
+    background-color: var(--primary-teal);
     color: #ffffff;
-    /* White text */
 
     border: none;
     border-radius: 12px;
@@ -125,11 +133,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    /* Space between icon and text */
 }
 
 .btn-option:hover {
-    background-color: #111827;
-    /* Darker Gray on hover */
+    background-color: var(--primary-dark);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(20, 145, 155, 0.2);
 }

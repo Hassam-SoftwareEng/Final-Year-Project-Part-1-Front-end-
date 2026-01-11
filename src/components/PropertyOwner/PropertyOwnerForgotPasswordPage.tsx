@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { ArrowLeft, CheckCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/PropertyOwner/PropertyOwnerForgotPassword.css';
 
 interface Props {
     onSubmitEmail: (email: string) => void;
-    onNavigateToLogin: () => void;
 }
 
-export function PropertyOwnerForgotPasswordPage({ onSubmitEmail, onNavigateToLogin }: Props) {
+export function PropertyOwnerForgotPasswordPage({ onSubmitEmail }: Props) {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -19,13 +20,12 @@ export function PropertyOwnerForgotPasswordPage({ onSubmitEmail, onNavigateToLog
 
     return (
         <div className="property-owner-login-selection-bg">
-            <div className="glass-wrapper" style={{ maxWidth: '480px' }}>
+            <div className="glass-wrapper" style={{ maxWidth: '480px', position: 'relative' }}>
                 <button
-                    onClick={onNavigateToLogin}
-                    className="back-button"
+                    onClick={() => navigate('/property-owner-login')}
+                    className="absolute-back-btn"
                 >
-                    <ArrowLeft size={20} />
-                    <span>Back</span>
+                    <ArrowLeft size={24} color="#14919B" />
                 </button>
                 <form onSubmit={handleSubmit}>
 

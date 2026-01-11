@@ -1,54 +1,53 @@
-import { ArrowLeft } from 'lucide-react';
-import '../../styles/PublicPagesCss/LoginSelectionPage.css';
+import { useNavigate } from 'react-router-dom';
+import { User, Shield, Home } from "lucide-react";
+import "../../styles/PublicPagesCss/LoginSelection.css";
 
 interface LoginSelectionPageProps {
-    onBack: () => void;
-    onSelectRole: (role: 'admin' | 'user' | 'property-owner') => void;
+    // Add props if needed
 }
 
-export function LoginSelectionPage({ onBack, onSelectRole }: LoginSelectionPageProps) {
+export const LoginSelectionPage = ({ }: LoginSelectionPageProps) => {
+    const navigate = useNavigate();
     return (
-        <div className="login-selection-bg">
-            <div className="glass-wrapper" style={{ maxWidth: '400px', padding: '40px' }}>
+        <div className="login-selection-wrapper">
+            <h1 className="selection-title">Select Login Type</h1>
 
-                {/* Back Button */}
-                <button
-                    onClick={onBack}
-                    className="back-button"
-                >
-                    <ArrowLeft size={20} />
-                    <span>Back</span>
-                </button>
+            <div className="cards-container">
 
-                <div className="login-header">
-                    <h2>Login Options</h2>
-                    <p className="subtitle">Please select your login type</p>
+                {/* User Card */}
+                <div className="role-card user" onClick={() => navigate('/user-login')}>
+                    <div className="card-content">
+                        <div className="icon-wrapper">
+                            <User size={64} />
+                        </div>
+                        <h3 className="card-role-title">User</h3>
+                        <p className="card-desc">Login to find your perfect room</p>
+                    </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <button
-                        className="btn-option"
-                        onClick={() => onSelectRole('admin')}
-                    >
-                        Admin Login
-                    </button>
+                {/* Admin Card */}
+                <div className="role-card admin" onClick={() => navigate('/admin-login')}>
+                    <div className="card-content">
+                        <div className="icon-wrapper">
+                            <Shield size={64} />
+                        </div>
+                        <h3 className="card-role-title">Admin</h3>
+                        <p className="card-desc">Manage the platform and users</p>
+                    </div>
+                </div>
 
-                    <button
-                        className="btn-option"
-                        onClick={() => onSelectRole('user')}
-                    >
-                        User Login
-                    </button>
-
-                    <button
-                        className="btn-option"
-                        onClick={() => onSelectRole('property-owner')}
-                    >
-                        Property Owner Login
-                    </button>
+                {/* Property Owner Card */}
+                <div className="role-card owner" onClick={() => navigate('/property-owner-login')}>
+                    <div className="card-content">
+                        <div className="icon-wrapper">
+                            <Home size={64} />
+                        </div>
+                        <h3 className="card-role-title">Owner</h3>
+                        <p className="card-desc">List your properties and manage bookings</p>
+                    </div>
                 </div>
 
             </div>
         </div>
     );
-}
+};

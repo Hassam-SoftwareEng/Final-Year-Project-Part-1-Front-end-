@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { LandingPage } from "./components/PublicPages/Landingpage";
 import DashboardPage from "./components/User/DashboardPage";
 import { AnalyticsReportPage } from "./components/User/AnalyticsReportPage";
@@ -27,45 +28,7 @@ import { MapPage } from "./components/User/MapPage";
 import { ListingPage } from "./components/User/ListingPage";
 import { NotificationPage } from "./components/User/NotificationPage";
 
-
-type Page =
-  | "landing"
-  | "login-selection"
-  | "create-profile"
-  | "reset-password"
-  | "dashboard"
-  | "analytics-report"
-  | "matches"
-  | "messages"
-  | "map"
-  | "setting"
-  | "verification"
-  | "verification"
-  | "red-flag-alert"
-  | "listing"
-  | "admin-dashboard"
-  | "listing-manage"
-  | "verification-manage"
-  | "admin-dashboard"
-  | "listing-manage"
-  | "verification-manage"
-  | "admin-analytics"
-  | "admin-login"
-  | "admin-signup"
-  | "admin-forgot-password"
-  | "user-login"
-  | "user-signup"
-  | "user-forgot-password"
-  | "property-owner-login"
-  | "property-owner-signup"
-  | "property-owner-forgot-password"
-  | "notification";
-
-
-
-
-
-
+// Types
 interface User {
   email: string;
   fullName: string;
@@ -77,8 +40,6 @@ interface Account {
   password: string;
 }
 
-console.log("APP VERSION CHECK: v2 - LISTING ROUTE ENABLED");
-
 const Preloader = () => (
   <div className="swm-loader-holder">
     <div className="swm-loader-inner">
@@ -88,18 +49,16 @@ const Preloader = () => (
 );
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<Page>("landing");
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [resetEmail, setResetEmail] = useState<string | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectedRole, setSelectedRole] = useState<'admin' | 'user' | 'property-owner'>('user');
 
-  const handleNavigation = (page: Page) => {
+  const handleNavigation = (path: string) => {
     setIsLoading(true);
     setTimeout(() => {
-      setCurrentPage(page);
+      navigate(path);
       setIsLoading(false);
     }, 1000); // 1 second loading simulation
   };
@@ -118,12 +77,7 @@ export default function App() {
     }
 
     setUser({ email: account.email, fullName: account.fullName });
-
-    if (selectedRole === 'admin') {
-      handleNavigation("admin-dashboard");
-    } else {
-      handleNavigation("dashboard");
-    }
+    handleNavigation("/dashboard");
   };
 
   /* =========================
@@ -139,7 +93,7 @@ export default function App() {
 
     setAccounts((prev) => [...prev, data]);
     alert("Account created successfully! Please login.");
-    handleNavigation("login-selection");
+    handleNavigation("/login-selection");
   };
 
   /* =========================
@@ -154,7 +108,7 @@ export default function App() {
     }
 
     setResetEmail(email);
-    handleNavigation("reset-password");
+    handleNavigation("/reset-password");
   };
 
   /* =========================
@@ -173,7 +127,7 @@ export default function App() {
 
     alert("Password reset successful! Please login.");
     setResetEmail(null);
-    handleNavigation("login-selection");
+    handleNavigation("/login-selection");
   };
 
   /* =========================
@@ -181,7 +135,7 @@ export default function App() {
   ========================== */
   const handleLogout = () => {
     setUser(null);
-    handleNavigation("landing");
+    handleNavigation("/");
   };
 
   /* =========================
@@ -198,13 +152,13 @@ export default function App() {
     }
 
     setUser({ email: account.email, fullName: account.fullName });
-    handleNavigation("admin-dashboard");
+    handleNavigation("/admin-dashboard");
   };
 
   const handleAdminSignup = (data: Account) => {
     setAccounts((prev) => [...prev, data]);
     alert("Admin account created successfully! Please login.");
-    handleNavigation("admin-login");
+    handleNavigation("/admin-login");
   };
 
   /* =========================
@@ -221,348 +175,330 @@ export default function App() {
     }
 
     setUser({ email: account.email, fullName: account.fullName });
-    // Redirect to Dashboard for now (shared with User), or create new OwnerDashboard later
-    handleNavigation("dashboard");
+    handleNavigation("/dashboard");
   };
 
   const handleOwnerSignup = (data: Account) => {
     setAccounts((prev) => [...prev, data]);
     alert("Property Owner account created successfully! Please login.");
-    handleNavigation("property-owner-login");
+    handleNavigation("/property-owner-login");
+  };
+
+  // Protected Route Wrapper
+  const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+    if (!user) {
+      return <Navigate to="/" replace />;
+    }
+    return <>{children}</>;
   };
 
   return (
     <>
       {isLoading && <Preloader />}
-      {currentPage === "landing" && (
-        <LandingPage
-          onNavigateToLogin={() => setCurrentPage("login-selection")}
-        />
-      )}
 
-      {currentPage === "login-selection" && (
-        <LoginSelectionPage
-          onBack={() => setCurrentPage("landing")}
-          onSelectRole={(role: 'admin' | 'user' | 'property-owner') => {
-            setSelectedRole(role);
-            if (role === 'admin') {
-              setCurrentPage("admin-login");
-            } else if (role === 'user') {
-              setCurrentPage("user-login");
-            } else if (role === 'property-owner') {
-              setCurrentPage("property-owner-login");
-            } else {
-              // Default fallback
-              setCurrentPage("login-selection");
-            }
-          }}
-        />
-      )}
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login-selection" element={<LoginSelectionPage />} />
 
-      {/* ADMIN AUTH ROUTES */}
-      {currentPage === "admin-login" && (
-        <AdminLoginPage
-          onLoginSuccess={handleAdminLogin}
-          onNavigateToSignup={() => setCurrentPage("admin-signup")}
-          onNavigateToForgotPassword={() => setCurrentPage("admin-forgot-password")}
-          onBack={() => setCurrentPage("landing")}
-        />
-      )}
+        {/* User Auth */}
+        <Route path="/user-login" element={
+          <UserLoginPage
+            onLoginSuccess={handleLoginSuccess}
+          />
+        } />
+        <Route path="/user-signup" element={
+          <UserSignupPage
+            onSignupSuccess={handleSignupSuccess}
+          />
+        } />
+        <Route path="/user-forgot-password" element={
+          <UserForgotPasswordPage onSubmitEmail={handleForgotPassword} />
+        } />
+        <Route path="/reset-password" element={
+          resetEmail ? (
+            <ResetPasswordPage
+              email={resetEmail}
+              onResetPassword={handleResetPassword}
+            />
+          ) : <Navigate to="/login-selection" />
+        } />
 
-      {currentPage === "admin-signup" && (
-        <AdminSignupPage
-          onNavigateToLogin={() => setCurrentPage("admin-login")}
-          onSignupSuccess={handleAdminSignup}
-          onBack={() => setCurrentPage("admin-login")}
-        />
-      )}
+        {/* Admin Auth */}
+        {/* Admin Auth */}
+        <Route path="/admin-login" element={
+          <AdminLoginPage
+            onLoginSuccess={handleAdminLogin}
+          />
+        } />
+        <Route path="/admin-signup" element={
+          <AdminSignupPage
+            onSignupSuccess={handleAdminSignup}
+          />
+        } />
+        <Route path="/admin-forgot-password" element={
+          <AdminForgotPasswordPage
+            onSubmitEmail={(email) => console.log("Admin forgot password", email)}
+          />
+        } />
 
-      {currentPage === "admin-forgot-password" && (
-        <AdminForgotPasswordPage
-          onSubmitEmail={(email) => console.log("Admin forgot password:", email)}
-          onNavigateToLogin={() => setCurrentPage("admin-login")}
-        />
-      )}
+        {/* Property Owner Auth */}
+        <Route path="/property-owner-login" element={
+          <PropertyOwnerLoginPage
+            onLoginSuccess={handleOwnerLogin}
+          />
+        } />
+        <Route path="/property-owner-signup" element={
+          <PropertyOwnerSignupPage
+            onSignupSuccess={handleOwnerSignup}
+          />
+        } />
+        <Route path="/property-owner-forgot-password" element={
+          <PropertyOwnerForgotPasswordPage
+            onSubmitEmail={(email) => console.log("Owner forgot password", email)}
+          />
+        } />
 
-      {/* USER AUTH ROUTES */}
-      {currentPage === "user-login" && (
-        <UserLoginPage
-          onLoginSuccess={handleLoginSuccess}
-          onNavigateToSignup={() => setCurrentPage("user-signup")}
-          onNavigateToForgotPassword={() => setCurrentPage("user-forgot-password")}
-          onBack={() => setCurrentPage("login-selection")}
-        />
-      )}
+        {/* Protected Dashboard Routes */}
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <DashboardPage
+              user={user!}
+              onLogout={handleLogout}
+              onNavigateToAnalytics={() => navigate('/analytics-report')}
+              onNavigateToMatches={() => navigate('/matches')}
+              onNavigateToMessages={() => navigate('/messages')}
+              onNavigateToCreateProfile={() => navigate('/create-profile')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+              onNavigateToMap={() => navigate('/map')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
 
-      {currentPage === "user-signup" && (
-        <UserSignupPage
-          onNavigateToLogin={() => setCurrentPage("user-login")}
-          onSignupSuccess={handleSignupSuccess}
-          onBack={() => setCurrentPage("user-login")}
-        />
-      )}
+        {/* Protected Sub-pages */}
+        <Route path="/analytics-report" element={
+          <ProtectedRoute>
+            <AnalyticsReportPage
+              user={user!}
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToMessages={() => navigate('/messages')}
+              onNavigateToCreateProfile={() => navigate('/create-profile')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/matches" element={
+          <ProtectedRoute>
+            <MatchesPages
+              user={user!}
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToMessages={() => navigate('/messages')}
+              onNavigateToCreateProfile={() => navigate('/create-profile')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+              onNavigateToMap={() => navigate('/map')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/messages" element={
+          <ProtectedRoute>
+            <MessagePage
+              user={user!}
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToMatches={() => navigate('/matches')}
+              onNavigateToAnalytics={() => navigate('/analytics-report')}
+              onNavigateToCreateProfile={() => navigate('/create-profile')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+              onNavigateToMap={() => navigate('/map')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/create-profile" element={
+          <ProtectedRoute>
+            <CreateProfilePage
+              user={user!}
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToMatches={() => navigate('/matches')}
+              onNavigateToMessages={() => navigate('/messages')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+              onNavigateToMap={() => navigate('/map')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/setting" element={
+          <ProtectedRoute>
+            <Setting
+              user={user!}
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToMatches={() => navigate('/matches')}
+              onNavigateToMessages={() => navigate('/messages')}
+              onNavigateToAnalytics={() => navigate('/analytics-report')}
+              onNavigateToCreateProfile={() => navigate('/create-profile')}
+              onNavigateToVerification={() => navigate('/verification')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+              onNavigateToMap={() => navigate('/map')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/verification" element={
+          <ProtectedRoute>
+            <VerificationPage
+              user={user!}
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToMatches={() => navigate('/matches')}
+              onNavigateToMessages={() => navigate('/messages')}
+              onNavigateToAnalytics={() => navigate('/analytics-report')}
+              onNavigateToCreateProfile={() => navigate('/create-profile')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/red-flag-alert" element={
+          <ProtectedRoute>
+            <RedFlagAlert
+              user={user!}
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToMatches={() => navigate('/matches')}
+              onNavigateToMessages={() => navigate('/messages')}
+              onNavigateToAnalytics={() => navigate('/analytics-report')}
+              onNavigateToCreateProfile={() => navigate('/create-profile')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToMap={() => navigate('/map')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/map" element={
+          <ProtectedRoute>
+            <MapPage
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToMatches={() => navigate('/matches')}
+              onNavigateToMessages={() => navigate('/messages')}
+              onNavigateToCreateProfile={() => navigate('/create-profile')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/listing" element={
+          <ProtectedRoute>
+            <ListingPage
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToMatches={() => navigate('/matches')}
+              onNavigateToMessages={() => navigate('/messages')}
+              onNavigateToCreateProfile={() => navigate('/create-profile')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+              onNavigateToMap={() => navigate('/map')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/notification" element={
+          <ProtectedRoute>
+            <NotificationPage
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToMatches={() => navigate('/matches')}
+              onNavigateToMessages={() => navigate('/messages')}
+              onNavigateToCreateProfile={() => navigate('/create-profile')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+              onNavigateToMap={() => navigate('/map')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
 
-      {currentPage === "user-forgot-password" && (
-        <UserForgotPasswordPage
-          onSubmitEmail={handleForgotPassword}
-          onNavigateToLogin={() => setCurrentPage("user-login")}
-        />
-      )}
+        {/* Admin Protected Routes */}
+        <Route path="/admin-dashboard" element={
+          <ProtectedRoute>
+            <AdminDashboard
+              user={user!}
+              onLogout={handleLogout}
+              onNavigateToUser={() => navigate('/admin-dashboard')}
+              onNavigateToListing={() => navigate('/listing-manage')}
+              onNavigateToVerification={() => navigate('/verification-manage')}
+              onNavigateToAnalytics={() => navigate('/admin-analytics')}
+              onNavigateToProfile={() => alert("Profile Coming Soon")}
+              onNavigateToSetting={() => alert("Settings Coming Soon")}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/listing-manage" element={
+          <ProtectedRoute>
+            <ListingManage
+              onLogout={handleLogout}
+              onNavigateToUser={() => navigate('/admin-dashboard')}
+              onNavigateToListing={() => navigate('/listing-manage')}
+              onNavigateToVerification={() => navigate('/verification-manage')}
+              onNavigateToAnalytics={() => navigate('/admin-analytics')}
+              onNavigateToProfile={() => alert("Profile Coming Soon")}
+              onNavigateToSetting={() => alert("Settings Coming Soon")}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/verification-manage" element={
+          <ProtectedRoute>
+            <AdminVerificationPage
+              onLogout={handleLogout}
+              onNavigateToUser={() => navigate('/admin-dashboard')}
+              onNavigateToListing={() => navigate('/listing-manage')}
+              onNavigateToVerification={() => navigate('/verification-manage')}
+              onNavigateToAnalytics={() => navigate('/admin-analytics')}
+              onNavigateToProfile={() => alert("Profile Coming Soon")}
+              onNavigateToSetting={() => alert("Settings Coming Soon")}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/admin-analytics" element={
+          <ProtectedRoute>
+            <AnalyticsPage
+              onLogout={handleLogout}
+              onNavigateToUser={() => navigate('/admin-dashboard')}
+              onNavigateToListing={() => navigate('/listing-manage')}
+              onNavigateToVerification={() => navigate('/verification-manage')}
+              onNavigateToAnalytics={() => navigate('/admin-analytics')}
+              onNavigateToProfile={() => alert("Profile Coming Soon")}
+              onNavigateToSetting={() => alert("Settings Coming Soon")}
+            />
+          </ProtectedRoute>
+        } />
 
-      {/* PROPERTY OWNER AUTH ROUTES */}
-      {currentPage === "property-owner-login" && (
-        <PropertyOwnerLoginPage
-          onLoginSuccess={handleOwnerLogin}
-          onNavigateToSignup={() => setCurrentPage("property-owner-signup")}
-          onNavigateToForgotPassword={() => setCurrentPage("property-owner-forgot-password")}
-          onBack={() => setCurrentPage("login-selection")}
-        />
-      )}
-
-      {currentPage === "property-owner-signup" && (
-        <PropertyOwnerSignupPage
-          onNavigateToLogin={() => setCurrentPage("property-owner-login")}
-          onSignupSuccess={handleOwnerSignup}
-          onBack={() => setCurrentPage("property-owner-login")}
-        />
-      )}
-
-      {currentPage === "property-owner-forgot-password" && (
-        <PropertyOwnerForgotPasswordPage
-          onSubmitEmail={(email) => console.log("Owner forgot password:", email)}
-          onNavigateToLogin={() => setCurrentPage("property-owner-login")}
-        />
-      )}
-
-      {currentPage === "reset-password" && resetEmail && (
-        <ResetPasswordPage
-          email={resetEmail}
-          onResetPassword={handleResetPassword}
-          onNavigateToLogin={() => setCurrentPage("login-selection")}
-        />
-      )}
-
-
-      {currentPage === "dashboard" && user && (
-        <DashboardPage
-          user={user}
-          onLogout={handleLogout}
-          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
-          onNavigateToMatches={() => setCurrentPage("matches")}
-          onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
-          onNavigateToSetting={() => setCurrentPage("setting")}
-          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
-          onNavigateToMap={() => setCurrentPage("map")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "create-profile" && user && (
-        <CreateProfilePage
-          user={user}
-          onLogout={handleLogout}
-          onNavigateToDashboard={() => setCurrentPage("dashboard")}
-          onNavigateToMatches={() => setCurrentPage("matches")}
-          onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToSetting={() => setCurrentPage("setting")}
-          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
-          onNavigateToMap={() => setCurrentPage("map")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "analytics-report" && user && (
-        <AnalyticsReportPage
-          user={user}
-          onLogout={handleLogout}
-          onNavigateToDashboard={() => setCurrentPage("dashboard")}
-          onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
-          onNavigateToSetting={() => setCurrentPage("setting")}
-          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "matches" && user && (
-        <MatchesPages
-          user={user}
-          onLogout={handleLogout}
-          onNavigateToDashboard={() => setCurrentPage("dashboard")}
-          onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
-          onNavigateToSetting={() => setCurrentPage("setting")}
-          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
-          onNavigateToMap={() => setCurrentPage("map")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "messages" && user && (
-        <MessagePage
-          user={user}
-          onLogout={handleLogout}
-          onNavigateToDashboard={() => setCurrentPage("dashboard")}
-          onNavigateToMatches={() => setCurrentPage("matches")}
-          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
-          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
-          onNavigateToSetting={() => setCurrentPage("setting")}
-          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
-          onNavigateToMap={() => setCurrentPage("map")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "setting" && user && (
-        <Setting
-          user={user}
-          onLogout={handleLogout}
-          onNavigateToDashboard={() => setCurrentPage("dashboard")}
-          onNavigateToMatches={() => setCurrentPage("matches")}
-          onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
-          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
-          onNavigateToVerification={() => setCurrentPage("verification")}
-          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
-          onNavigateToMap={() => setCurrentPage("map")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "verification" && user && (
-        <VerificationPage
-          user={user}
-          onLogout={handleLogout}
-          onNavigateToDashboard={() => setCurrentPage("dashboard")}
-          onNavigateToMatches={() => setCurrentPage("matches")}
-          onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
-          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
-          onNavigateToSetting={() => setCurrentPage("setting")}
-          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "red-flag-alert" && user && (
-        <RedFlagAlert
-          user={user}
-          onLogout={handleLogout}
-          onNavigateToDashboard={() => setCurrentPage("dashboard")}
-          onNavigateToMatches={() => setCurrentPage("matches")}
-          onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToAnalytics={() => setCurrentPage("analytics-report")}
-          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
-          onNavigateToSetting={() => setCurrentPage("setting")}
-          onNavigateToMap={() => setCurrentPage("map")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "map" && user && (
-        <MapPage
-          onLogout={handleLogout}
-          onNavigateToDashboard={() => setCurrentPage("dashboard")}
-          onNavigateToMatches={() => setCurrentPage("matches")}
-          onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
-          onNavigateToSetting={() => setCurrentPage("setting")}
-          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "listing" && user && (
-        <ListingPage
-          onLogout={handleLogout}
-          onNavigateToDashboard={() => setCurrentPage("dashboard")}
-          onNavigateToMatches={() => setCurrentPage("matches")}
-          onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
-          onNavigateToSetting={() => setCurrentPage("setting")}
-          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
-          onNavigateToMap={() => setCurrentPage("map")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "notification" && user && (
-        <NotificationPage
-          onLogout={handleLogout}
-          onNavigateToDashboard={() => setCurrentPage("dashboard")}
-          onNavigateToMatches={() => setCurrentPage("matches")}
-          onNavigateToMessages={() => setCurrentPage("messages")}
-          onNavigateToCreateProfile={() => setCurrentPage("create-profile")}
-          onNavigateToSetting={() => setCurrentPage("setting")}
-          onNavigateToRedFlagAlert={() => setCurrentPage("red-flag-alert")}
-          onNavigateToMap={() => setCurrentPage("map")}
-          onNavigateToListing={() => setCurrentPage("listing")}
-          onNavigateToNotification={() => setCurrentPage("notification")}
-        />
-      )}
-
-      {currentPage === "admin-dashboard" && user && (
-        <AdminDashboard
-          user={user}
-          onNavigateToUser={() => setCurrentPage("admin-dashboard")}
-          onNavigateToListing={() => {
-            // Force refresh
-            setCurrentPage("listing-manage");
-          }}
-          onNavigateToVerification={() => setCurrentPage("verification-manage")}
-          onNavigateToAnalytics={() => setCurrentPage("admin-analytics")}
-          onNavigateToProfile={() => alert("Profile Coming Soon")}
-          onNavigateToSetting={() => alert("Settings Coming Soon")}
-          onLogout={handleLogout}
-        />
-      )}
-
-      {currentPage === "listing-manage" && user && (
-        <ListingManage
-          onNavigateToUser={() => setCurrentPage("admin-dashboard")}
-          onNavigateToListing={() => setCurrentPage("listing-manage")}
-          onNavigateToVerification={() => setCurrentPage("verification-manage")}
-          onNavigateToAnalytics={() => setCurrentPage("admin-analytics")}
-          onNavigateToProfile={() => alert("Profile Coming Soon")}
-          onNavigateToSetting={() => alert("Settings Coming Soon")}
-          onLogout={handleLogout}
-        />
-      )}
-
-      {currentPage === "verification-manage" && user && (
-        <AdminVerificationPage
-          onNavigateToUser={() => setCurrentPage("admin-dashboard")}
-          onNavigateToListing={() => setCurrentPage("listing-manage")}
-          onNavigateToVerification={() => setCurrentPage("verification-manage")}
-          onNavigateToAnalytics={() => setCurrentPage("admin-analytics")}
-          onNavigateToProfile={() => alert("Profile Coming Soon")}
-          onNavigateToSetting={() => alert("Settings Coming Soon")}
-          onLogout={handleLogout}
-        />
-      )}
-
-      {currentPage === "admin-analytics" && user && (
-        <AnalyticsPage
-          onNavigateToUser={() => setCurrentPage("admin-dashboard")}
-          onNavigateToListing={() => setCurrentPage("listing-manage")}
-          onNavigateToVerification={() => setCurrentPage("verification-manage")}
-          onNavigateToAnalytics={() => setCurrentPage("admin-analytics")}
-          onNavigateToProfile={() => alert("Profile Coming Soon")}
-          onNavigateToSetting={() => alert("Settings Coming Soon")}
-          onLogout={handleLogout}
-        />
-      )}
+      </Routes>
     </>
   );
 }

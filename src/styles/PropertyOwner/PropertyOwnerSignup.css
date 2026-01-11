@@ -1,155 +1,162 @@
-/* ===========================
-   Property Owner Signup Theme
-   (Self-contained with Login styles + Signup overrides)
-=========================== */
+/* Property Owner Signup Theme - Matched exactly to User Login */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* ===== Background ===== */
-/* Base Layout */
-.property-owner-login-page {
+:root {
+    --primary-teal: #14919B;
+    --primary-dark: #0E656D;
+    --bg-off-white: #f5fcfd;
+    --text-main: #1C2B33;
+    --text-muted: #5A6B75;
+    --border-light: #E0E8EB;
+    --card-shadow: 0 16px 32px rgba(20, 145, 155, 0.15);
+}
+
+.animated-login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
+    background: var(--bg-off-white);
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    padding: 20px;
+}
+
+/* Main Card Container */
+.box {
+    position: relative;
     width: 100%;
+    max-width: 440px;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-light);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    padding: 0;
-
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: transparent;
+    color: var(--text-main);
 }
 
-/* Owner Background */
-.bg-owner-login {
-    background-image: url('/assets/images/photo-1515263487990-61b07816b324 (flat).avif');
-}
-
-/* On mobile, center it back */
-@media (max-width: 900px) {
-    .property-owner-login-page {
-        padding: 20px;
-        align-items: center;
-    }
-}
-
-/* ===== Dark Card ===== */
-.property-owner-glass-wrapper {
-    width: 100%;
-    max-width: 420px;
-    padding: 40px;
-
-    background-color: #0f172a !important;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid #1e293b;
-
-    text-align: left;
-    color: #ffffff;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-}
-
-/* ===== Header ===== */
-.login-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.login-header h2 {
-    font-size: 1.75rem;
+/* Header */
+.form h2 {
+    color: var(--text-main);
     font-weight: 700;
-    color: #ffffff !important;
+    text-align: center;
     margin-bottom: 8px;
+    font-size: 1.75rem;
     letter-spacing: -0.025em;
 }
 
 .subtitle {
     font-size: 0.95rem;
-    color: #9ca3af !important;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 30px;
     font-weight: 400;
 }
 
-/* ===== Back Button ===== */
-.back-button {
-    background: none;
-    border: none;
-    cursor: pointer;
+/* Inputs - Exact match to Login */
+.inputBox {
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    color: #ffffff !important;
-    padding: 0;
-    transition: color 0.2s;
-}
-
-.back-button:hover {
-    color: #fbbf24 !important;
-}
-
-.back-button span {
-    margin-left: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-/* ===== Inputs ===== */
-.input-group-custom {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    align-items: flex-start;
-    text-align: left;
-}
-
-.input-group-custom label {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #d1d5db;
-    margin-bottom: 8px;
-    display: block;
     width: 100%;
 }
 
-.custom-input {
+.inputBox label {
+    display: block;
+    color: var(--text-main);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.inputBox input {
     width: 100%;
     height: 48px;
     padding: 0 14px;
-    border: 1px solid #374151;
+    background: #F9FAFB;
+    border: 1px solid #D1D5DB;
     border-radius: 8px;
-    background-color: #1f2937;
+    color: var(--text-main);
     font-size: 0.95rem;
-    color: #ffffff;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.custom-input:focus {
-    border-color: #fbbf24;
-    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+.inputBox input:focus {
+    border-color: var(--primary-teal);
+    box-shadow: 0 0 0 3px rgba(20, 145, 155, 0.1);
 }
 
-.custom-input::placeholder {
-    color: #6b7280;
+.inputBox input::placeholder {
+    color: #9CA3AF;
 }
 
-/* Force Autofill Background to Dark */
-.custom-input:-webkit-autofill,
-.custom-input:-webkit-autofill:hover,
-.custom-input:-webkit-autofill:focus,
-.custom-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #1f2937 inset !important;
-    -webkit-text-fill-color: #ffffff !important;
-    caret-color: #ffffff !important;
-    transition: background-color 5000s ease-in-out 0s;
+/* Password Toggle */
+.password-container {
+    position: relative;
+    width: 100%;
 }
 
-/* ===== Button ===== */
-.btn-dark-pill {
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #9CA3AF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: var(--primary-teal);
+}
+
+/* Terms Checkbox */
+.forget {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+}
+
+.terms-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-main);
+    font-size: 0.85rem;
+}
+
+.terms-label input {
+    margin-right: 8px;
+    accent-color: var(--primary-teal) !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+.terms-link {
+    color: var(--primary-teal);
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 4px;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+}
+
+/* Submit Button */
+.submit-btn {
     width: 100%;
     height: 50px;
-    background-color: #374151;
+    background: var(--primary-teal);
     color: #ffffff;
     border: none;
     border-radius: 12px;
@@ -162,91 +169,39 @@
     justify-content: center;
 }
 
-.btn-dark-pill:hover {
-    background-color: #111827;
+.submit-btn:hover {
+    background: var(--primary-dark);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(20, 145, 155, 0.2);
 }
 
-/* ===== Register Link ===== */
-.register-link {
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Footer Links */
+.footer-links {
     text-align: center;
     margin-top: 24px;
     font-size: 0.9rem;
-    color: #9ca3af;
-    width: 100%;
+    color: var(--text-muted);
 }
 
-.register-link a {
-    color: #fbbf24;
+.footer-links a {
+    color: var(--primary-teal);
     font-weight: 600;
     text-decoration: none;
     margin-left: 4px;
     cursor: pointer;
 }
 
-.register-link a:hover {
+.footer-links a:hover {
     text-decoration: underline;
 }
 
-/* ===== Error Alert ===== */
-.alert-error {
-    background-color: #450a0a;
-    color: #fca5a5;
-    padding: 12px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-    text-align: center;
-    border: 1px solid #7f1d1d;
-}
-
-/* ===== Password Toggle Button ===== */
-.password-toggle-btn {
-    position: absolute;
-    right: 16px !important;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    color: #9ca3af;
-    transition: color 0.2s;
-}
-
-.password-toggle-btn:hover {
-    color: #ffffff;
-}
-
-/* ===========================
-   Signup Specific Overrides
-=========================== */
-/* Hide native password styling */
-input::-ms-reveal,
-input::-ms-clear {
-    display: none;
-}
-
-.input-group-custom {
-    align-items: flex-start !important;
-    text-align: left !important;
-}
-
-.input-group-custom label {
-    text-align: left !important;
-    width: 100%;
-}
-
-.password-toggle-btn {
-    right: 20px !important;
-    color: #6b7280;
-}
-
-/* Toast Styles */
+/* Toast */
 .toast-notification {
     position: fixed;
     top: 30px;
@@ -261,12 +216,8 @@ input::-ms-clear {
     align-items: center;
     gap: 12px;
     z-index: 1050;
-    animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: slideDown 0.4s ease-out;
     font-weight: 500;
-    white-space: nowrap;
-    justify-content: center;
-    width: fit-content !important;
-    max-width: 90vw !important;
 }
 
 @keyframes slideDown {
@@ -279,25 +230,4 @@ input::-ms-clear {
         top: 30px;
         opacity: 1;
     }
-}
-
-
-/* ===== Terms & Privacy ===== */
-.terms-label {
-    font-size: 0.85rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    color: #ffffff !important;
-}
-
-.terms-link {
-    text-decoration: underline;
-    color: #fbbf24 !important;
-    margin: 0 4px;
-    cursor: pointer;
-}
-
-.terms-link:hover {
-    color: #f59e0b !important;
 }

@@ -980,3 +980,230 @@ body {
     font-size: 5rem;
   }
 }
+
+/* --- How It Works Carousel (New) --- */
+.carousel-section {
+  padding: 6rem 8rem;
+  /* Large side padding ensures arrows fit */
+  background-color: #f0f0f0;
+  /* Wavy/Wood-like pattern background */
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.735-5.197-2.336-8.111-3.954C71.503 13.844 63.855 10 50 10c-13.855 0-21.503 3.844-25.493 6.046-2.914 1.618-5.601 3.219-8.111 3.954h4.788zM7.975 0h6.225c-.881.332-1.795.689-2.75 1.072C2.189 4.778 7.28 6 17.55 6c10.353 0 16.36 1.347 25.96 4.937l1.768.661c.368.138.731.272 1.088.402h4.788c-2.51-.735-5.197-2.336-8.111-3.954C39.497 3.844 31.849 0 17.094 0h-9.12zM0 0h1.795C2.676.332 3.59.689 4.545 1.072 13.811 4.778 18.902 6 29.172 6c10.353 0 16.36 1.347 25.96 4.937l1.768.661c.368.138.731.272 1.088.402h4.788c-2.51-.735-5.197-2.336-8.111-3.954C49.917 3.844 42.269 0 27.514 0H0z' fill='%23cccccc' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+  position: relative;
+}
+
+/* Ensure container has room for absolute indicators */
+.how-it-works-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  /* Limit width */
+  margin: 0 auto;
+  overflow: visible;
+  /* Allow arrows to sit outside if needed */
+  min-height: auto;
+  /* Let content + padding dictate height */
+  padding-bottom: 100px;
+  /* Reduced gap */
+  /* Space for indicators */
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-slides-container {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  overflow: hidden;
+  border-radius: 4px;
+  /* Slight radius */
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  pointer-events: none;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.carousel-image {
+  width: 65%;
+  /* Image takes up about 2/3rds */
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-overlay-card {
+  position: absolute;
+  right: 0;
+  /* Flush right for symmetry */
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  padding: 4.5rem;
+  /* Larger padding */
+  max-width: 600px;
+  /* Wider card */
+  min-height: 450px;
+  /* Taller card */
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 10;
+}
+
+.carousel-content-title {
+  font-family: 'Georgia', serif;
+  /* More elegant serif */
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #111;
+  line-height: 1.3;
+}
+
+.carousel-accent-line {
+  width: 50px;
+  height: 3px;
+  background-color: #E24A2B;
+  /* Stronger red/orange */
+  margin-bottom: 1.5rem;
+}
+
+.carousel-description {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+
+
+/* Navigation Controls */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  padding: 1rem;
+  color: #333;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-nav-btn:hover {
+  color: #000;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* --- Navigation Controls --- */
+/* Arrows stay fixed distance outside content */
+.carousel-prev {
+  left: -120px;
+}
+
+.carousel-next {
+  right: -120px;
+}
+
+/* Ensure section has enough padding so arrows don't clip offscreen */
+@media (max-width: 1600px) {
+  .how-it-works-carousel {
+    max-width: 90%;
+    /* Shrink content width to leave room */
+    overflow: visible;
+  }
+}
+
+/* Indicators moved to absolute position in .how-it-works-carousel block */
+.carousel-indicators {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  /* Wider gap between pills */
+  width: 100%;
+  margin: 0;
+  padding-bottom: 2rem;
+}
+
+.carousel-dot {
+  width: 60px;
+  /* Long pill */
+  height: 8px;
+  background-color: transparent;
+  border: 1px solid #999;
+  /* Outlined by default */
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.carousel-dot.active {
+  background-color: #333;
+  /* Solid dark active */
+  border-color: #333;
+}
+
+
+
+.carousel-play-btn:hover {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+}
+
+@media (max-width: 900px) {
+  .how-it-works-carousel {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .carousel-image {
+    width: 100%;
+    height: 300px;
+    position: relative;
+  }
+
+  .carousel-overlay-card {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    max-width: 100%;
+    padding: 2rem;
+    box-shadow: none;
+    margin-top: -50px;
+    /* Overlap slightly upwards */
+    background: white;
+  }
+
+  .carousel-nav-btn {
+    display: none;
+    /* Hide arrows on mobile, use dots or swipe */
+  }
+}

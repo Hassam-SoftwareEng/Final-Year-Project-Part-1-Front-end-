@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/User/UserLogin.css';
 
 interface UserLoginPageProps {
     onLoginSuccess?: (email: string, password: string) => void;
-    onNavigateToSignup?: () => void;
-    onNavigateToForgotPassword?: () => void;
-    onBack?: () => void;
 }
 
-export function UserLoginPage({ onLoginSuccess, onNavigateToSignup, onNavigateToForgotPassword, onBack }: UserLoginPageProps) {
+export function UserLoginPage({
+    onLoginSuccess,
+}: UserLoginPageProps) {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -28,86 +30,67 @@ export function UserLoginPage({ onLoginSuccess, onNavigateToSignup, onNavigateTo
     };
 
     return (
-        <div className="agent-login-page bg-user">
-            <div className="glass-wrapper">
+        <div className="animated-login-wrapper">
+            <div className="box">
                 {/* Back Button */}
-                {onBack && (
-                    <button
-                        onClick={onBack}
-                        className="back-button"
-                    >
-                        <ArrowLeft size={20} />
-                        <span>Back</span>
-                    </button>
-                )}
-
-                <div className="login-header">
+                <button onClick={() => navigate('/login-selection')} className="absolute-back-btn">
+                    <ArrowLeft size={24} color="#14919B" />
+                </button>
+                <div className="form">
                     <h2>User Login</h2>
                     <p className="subtitle">Please enter your details</p>
-                </div>
 
-                <form onSubmit={handleSubmit}>
-                    {error && (
-                        <div className="alert-error">
-                            {error}
-                        </div>
-                    )}
+                    <form onSubmit={handleSubmit}>
+                        {error && <div className="error-msg">{error}</div>}
 
-                    <div className="input-group-custom">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            id="email"
-                            type="text"
-                            required
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            placeholder="user@roomease.com"
-                            className="custom-input"
-                        />
-                    </div>
-
-                    <div className="input-group-custom">
-                        <label htmlFor="password">Password</label>
-                        <div style={{ position: 'relative', width: '100%' }}>
+                        <div className="inputBox">
+                            <label>Email</label>
                             <input
-                                id="password"
-                                type={showPassword ? 'text' : 'password'}
+                                type="email"
                                 required
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
-                                placeholder="••••••••••••"
-                                className="custom-input"
-                                style={{ paddingRight: '50px' }}
+                                placeholder="user@roomease.com"
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
                             />
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="password-toggle-btn"
-                            >
-                                {showPassword ? <EyeOff size={18} color="#666" /> : <Eye size={18} color="#666" />}
-                            </button>
                         </div>
-                    </div>
 
-                    <div className="forgot-password">
-                        <a href="#" onClick={(e) => { e.preventDefault(); onNavigateToForgotPassword?.(); }}>
-                            Forgot password?
-                        </a>
-                    </div>
+                        <div className="inputBox">
+                            <label>Password</label>
+                            <div className="password-container">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    required
+                                    placeholder="••••••••"
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                />
+                                <button
+                                    type="button"
+                                    className="password-toggle"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                </button>
+                            </div>
+                        </div>
 
-                    <button type="submit" className="btn-dark-pill">
-                        Log In
-                    </button>
-                </form>
+                        <div className="forgot-password">
+                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/user-forgot-password'); }}>
+                                Forgot password?
+                            </a>
+                        </div>
 
-                <div className="register-link">
-                    <span>Are you new? </span>
-                    <a href="#" onClick={(e) => {
-                        e.preventDefault();
-                        onNavigateToSignup?.();
-                    }}>
-                        Create an Account
-                    </a>
+                        <button type="submit" className="submit-btn">
+                            Log In
+                        </button>
+
+                        <div className="footer-links">
+                            <span>Are you new?</span>
+                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/user-signup'); }}>
+                                Create an Account
+                            </a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
