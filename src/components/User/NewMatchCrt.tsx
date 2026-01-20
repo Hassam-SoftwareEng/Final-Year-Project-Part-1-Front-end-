@@ -1,54 +1,43 @@
-import React, { useState } from 'react';
-import '../../styles/User/NotificationPage.css';
+import React from 'react';
 import { Bell, Home } from 'lucide-react';
+import '../../styles/User/NewMatchCrt.css'; // Import the specific CSS
 
-interface NotificationPageProps {
+interface NewMatchCrtProps {
     onLogout: () => void;
     onNavigateToDashboard: () => void;
+    onNavigateToListing: () => void;
+    onNavigateToNotification?: () => void;
+    onNavigateToMap: () => void;
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
-    onNavigateToMap: () => void;
-    onNavigateToListing: () => void;
-    onNavigateToNotification: () => void;
 }
 
-export const NotificationPage: React.FC<NotificationPageProps> = ({
+export default function NewMatchCrt({
     onLogout,
     onNavigateToDashboard,
-    onNavigateToSetting,
-    onNavigateToRedFlagAlert,
-    onNavigateToMap,
     onNavigateToListing,
-    onNavigateToNotification
-}) => {
-    const [notifications] = useState([
-        {
-            id: 1,
-            title: "New Match Found!",
-            description: "You have a new match with Ali Khan based on your preferences.",
-            time: "2 mins ago",
-            read: false
-        },
-        {
-            id: 2,
-            title: "Message Received",
-            description: "Sarah sent you a message about the apartment listing.",
-            time: "1 hour ago",
-            read: true
-        },
-        {
-            id: 3,
-            title: "Profile Verified",
-            description: "Your profile has been successfully verified by the admin.",
-            time: "1 day ago",
-            read: true
-        }
-    ]);
+
+    onNavigateToNotification,
+    onNavigateToMap,
+    onNavigateToSetting,
+    onNavigateToRedFlagAlert
+}: NewMatchCrtProps) {
+    const [hoveredMatch, setHoveredMatch] = React.useState<string | null>(null);
+
+    const matchesData = [
+        { id: '1', name: 'Ali Khan', role: 'Student', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=400&h=400' },
+        { id: '2', name: 'Bilal Raza', role: 'Professional', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=400&h=400' },
+        { id: '3', name: 'Sarah Ahmed', role: 'Designer', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=400&h=400' },
+        { id: '4', name: 'Zara Shah', role: 'Researcher', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?fit=crop&w=400&h=400' },
+        { id: '5', name: 'Omar Farooq', role: 'Developer', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?fit=crop&w=400&h=400' },
+        { id: '6', name: 'Hina Altaf', role: 'Artist', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=400&h=400' },
+    ];
 
     return (
-        <div className="notification-page-container">
+        <div className="new-match-container">
+            {/* Top Navbar (Bootstrap) - Reused for consistency */}
+            {/* Top Navbar - Standardized */}
             {/* Navbar */}
-            {/* Navbar (Bootstrap Standardized) */}
             <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top px-3">
                 <div className="container-fluid">
                     {/* Logo Section */}
@@ -121,26 +110,43 @@ export const NotificationPage: React.FC<NotificationPageProps> = ({
                 </div>
             </nav>
 
-            {/* Main Content */}
-            <main className="notification-content">
-                <div className="notification-header">
-                    <h1 className="notification-title">Notifications</h1>
-                </div>
+            <main className="new-match-content">
+                <div className="new-match-card">
+                    <div className="new-match-header">
+                        <h2 className="new-match-title">New Matches</h2>
+                        <p className="text-muted">Discover people who match your preferences.</p>
+                    </div>
 
-                <div className="notification-list">
-                    {notifications.map(notification => (
-                        <div key={notification.id} className={`notification-card ${notification.read ? 'read' : 'unread'}`}>
-
-                            <div className="notification-details">
-                                <div className="notification-card-header">
-                                    <h3 className="notification-card-title">{notification.title}</h3>
-                                    <span className="notification-time">{notification.time}</span>
-                                </div>
-                                <p className="notification-description">{notification.description}</p>
-                            </div>
-                            {!notification.read && <div className="unread-dot"></div>}
+                    <div className="matches-interactive-list">
+                        {/* Hover Image Display - Absolute Positioned */}
+                        <div className={`match-hover-image-container ${hoveredMatch ? 'visible' : ''}`}>
+                            {hoveredMatch && (
+                                <img
+                                    src={matchesData.find(m => m.id === hoveredMatch)?.image}
+                                    alt="Match"
+                                    className="match-hover-img"
+                                />
+                            )}
                         </div>
-                    ))}
+
+                        {matchesData.map((match) => (
+                            <div
+                                key={match.id}
+                                className="match-list-item"
+                                onMouseEnter={() => setHoveredMatch(match.id)}
+                                onMouseLeave={() => setHoveredMatch(null)}
+                            // onClick could navigate to valid individual profile if needed
+                            >
+                                <div className="match-info-group">
+                                    <span className="match-name">{match.name}</span>
+                                    <span className="match-role">/ {match.role}</span>
+                                </div>
+                                <div className="match-action-arrow">
+                                    <span className="about-text">VIEW PROFILE</span> ↗
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </main>
             <footer className="footer">
@@ -150,4 +156,4 @@ export const NotificationPage: React.FC<NotificationPageProps> = ({
             </footer>
         </div>
     );
-};
+}

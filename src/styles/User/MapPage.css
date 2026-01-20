@@ -795,3 +795,24 @@
     height: 100%;
     object-fit: cover;
 }
+
+/* --- Footer --- */
+.footer {
+    background-color: #111827;
+    color: #9ca3af;
+    padding: 1rem 2rem;
+    margin-top: auto;
+    width: 100%;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 0.9rem;
+    padding-top: 0;
+}
+
+.footer-bottom p {
+    margin: 0;
+}

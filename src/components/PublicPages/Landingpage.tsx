@@ -31,6 +31,7 @@ export function LandingPage({ }: LandingPageProps) {
           <span>RoomEase</span>
         </div>
 
+
       </nav>
 
       <main>
@@ -44,9 +45,9 @@ export function LandingPage({ }: LandingPageProps) {
             </p>
             <div className="hero-cta-group" data-aos="fade-up" data-aos-delay="200">
               <button
-                className="nav-btn nav-btn-signup"
+                className="btn btn-primary"
                 onClick={() => navigate('/login-selection')}
-                style={{ padding: '0.8rem 2rem', fontSize: '1.1rem' }}
+                style={{ fontSize: '1.1rem', padding: '0.8rem 2.5rem' }} // keeping slight inline override for hero size if needed, or remove padding to rely on class
               >
                 Get Started
               </button>
@@ -334,7 +335,7 @@ export function LandingPage({ }: LandingPageProps) {
           <div className="cta-banner" data-aos="zoom-in">
             <h2 className="cta-title">Ready to Find Your Roomie?</h2>
             <p className="cta-text">Join thousands of students who have found their perfect match with RoomEase.</p>
-            <button className="btn-white" onClick={() => navigate('/login-selection')}>
+            <button className="btn btn-primary" style={{ backgroundColor: 'white', color: '#14919B', border: 'none' }} onClick={() => navigate('/login-selection')}>
               Join RoomEase Today
             </button>
           </div>

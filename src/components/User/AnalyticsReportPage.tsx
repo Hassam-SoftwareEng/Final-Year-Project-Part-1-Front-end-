@@ -1,5 +1,5 @@
 import React from "react";
-import { Bell } from 'lucide-react';
+import { Bell, Home } from 'lucide-react';
 import "../../styles/User/AnalyticsReportPage.css";
 
 interface User {
@@ -11,10 +11,9 @@ interface AnalyticsReportPageProps {
     user: User;
     onLogout: () => void;
     onNavigateToDashboard: () => void;
-    onNavigateToMessages: () => void;
-    onNavigateToCreateProfile: () => void;
     onNavigateToSetting: () => void;
     onNavigateToRedFlagAlert: () => void;
+    onNavigateToMap: () => void;
     onNavigateToListing: () => void;
     onNavigateToNotification?: () => void;
 }
@@ -22,67 +21,85 @@ interface AnalyticsReportPageProps {
 export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
     onLogout,
     onNavigateToDashboard,
-    onNavigateToMessages,
-    onNavigateToCreateProfile,
     onNavigateToSetting,
     onNavigateToRedFlagAlert,
+    onNavigateToMap,
     onNavigateToListing,
     onNavigateToNotification
 }) => {
     return (
         <div className="analytics-container">
             {/* Navbar - Independent Styles */}
-            <nav className="analytics-navbar">
-                <div className="nav-left">
-                    <div className="logo-section">
-                        <span className="logo-text">RoomEase</span>
-                    </div>
-                </div>
+            {/* Navbar (Bootstrap Standardized) */}
+            <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top px-3">
+                <div className="container-fluid">
+                    {/* Logo Section */}
+                    <a className="navbar-brand d-flex align-items-center gap-2" href="#" onClick={(e) => { e.preventDefault(); onNavigateToDashboard(); }}>
+                        <Home className="text-primary" size={24} style={{ color: '#14919B' }} />
+                        <span className="fw-bold" style={{ color: '#14919B', fontSize: '1.25rem' }}>RoomEase</span>
+                    </a>
 
-                <div className="nav-center">
-                    <a href="#" className="nav-link" onClick={onNavigateToDashboard}>
-                        Home
-                    </a>
-                    <a
-                        href="#"
-                        className="nav-link"
-                        onClick={(e) => { e.preventDefault(); onNavigateToCreateProfile(); }}
-                    >
-                        Create Profile
-                    </a>
-                    <a href="#" className="nav-link">
-                        Match
-                    </a>
-                    <a href="#" className="nav-link">
-                        Map
-                    </a>
-                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToListing(); }}>
-                        Listing
-                    </a>
-                    <a href="#" className="nav-link" onClick={onNavigateToMessages}>
-                        Message
-                    </a>
-                    <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}>
-                        Red Flag Alert
-                    </a>
-                </div>
-
-                <div className="nav-right">
-                    <a href="#" className="nav-link" style={{ marginRight: '20px' }} onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>
-                        Setting
-                    </a>
-                    {onNavigateToNotification && (
-                        <button
-                            className="nav-link"
-                            style={{ marginRight: '20px', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-                            onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
-                        >
-                            <Bell size={20} />
-                        </button>
-                    )}
-                    <button className="logout-btn" onClick={onLogout}>
-                        Logout
+                    {/* Toggle Button for Mobile */}
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboardNavbar" aria-controls="dashboardNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
+
+                    {/* Collapsible Content */}
+                    <div className="collapse navbar-collapse" id="dashboardNavbar">
+                        <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
+                            <li className="nav-item">
+                                <a
+                                    className="nav-link fw-medium"
+                                    href="#"
+                                    onClick={(e) => { e.preventDefault(); onNavigateToDashboard(); }}
+                                >
+                                    Home
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a
+                                    className="nav-link fw-medium"
+                                    href="#"
+                                    onClick={(e) => { e.preventDefault(); onNavigateToMap(); }}
+                                >
+                                    Map
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a
+                                    className="nav-link fw-medium"
+                                    href="#"
+                                    onClick={(e) => { e.preventDefault(); onNavigateToListing(); }}
+                                >
+                                    Listing
+                                </a>
+                            </li>
+                            {onNavigateToRedFlagAlert && (
+                                <li className="nav-item">
+                                    <a className="nav-link fw-medium" href="#" onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}>
+                                        Red Flag Alert
+                                    </a>
+                                </li>
+                            )}
+                        </ul>
+
+                        <div className="d-flex align-items-center gap-3">
+                            {onNavigateToSetting && (
+                                <a className="nav-link text-secondary fw-medium" href="#" onClick={(e) => { e.preventDefault(); onNavigateToSetting(); }}>Setting</a>
+                            )}
+                            {onNavigateToNotification && (
+                                <button
+                                    className="btn btn-link text-secondary p-0 border-0"
+                                    onClick={(e) => { e.preventDefault(); onNavigateToNotification(); }}
+                                >
+                                    <Bell size={20} />
+                                </button>
+                            )}
+                            <button className="btn-standard" onClick={onLogout}>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </nav>
 
@@ -188,6 +205,11 @@ export const AnalyticsReportPage: React.FC<AnalyticsReportPageProps> = ({
                     </div>
                 </div>
             </main>
+            <footer className="footer">
+                <div className="footer-bottom">
+                    <p>&copy; {new Date().getFullYear()} RoomEase. All rights reserved.</p>
+                </div>
+            </footer>
         </div>
     );
 };

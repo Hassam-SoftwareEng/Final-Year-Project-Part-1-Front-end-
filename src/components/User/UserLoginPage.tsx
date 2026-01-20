@@ -80,7 +80,7 @@ export function UserLoginPage({
                             </a>
                         </div>
 
-                        <button type="submit" className="submit-btn">
+                        <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
                             Log In
                         </button>
 

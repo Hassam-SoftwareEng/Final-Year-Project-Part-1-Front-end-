@@ -28,6 +28,8 @@ import { MapPage } from "./components/User/MapPage";
 import { ListingPage } from "./components/User/ListingPage";
 import { NotificationPage } from "./components/User/NotificationPage";
 
+import NewMatchCrt from "./components/User/NewMatchCrt";
+
 // Types
 interface User {
   email: string;
@@ -267,6 +269,7 @@ export default function App() {
               onLogout={handleLogout}
               onNavigateToAnalytics={() => navigate('/analytics-report')}
               onNavigateToMatches={() => navigate('/matches')}
+              onNavigateToNewMatches={() => navigate('/new-matches')}
               onNavigateToMessages={() => navigate('/messages')}
               onNavigateToCreateProfile={() => navigate('/create-profile')}
               onNavigateToSetting={() => navigate('/setting')}
@@ -285,9 +288,8 @@ export default function App() {
               user={user!}
               onLogout={handleLogout}
               onNavigateToDashboard={() => navigate('/dashboard')}
-              onNavigateToMessages={() => navigate('/messages')}
-              onNavigateToCreateProfile={() => navigate('/create-profile')}
               onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToMap={() => navigate('/map')}
               onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
               onNavigateToListing={() => navigate('/listing')}
               onNavigateToNotification={() => navigate('/notification')}
@@ -324,6 +326,19 @@ export default function App() {
               onNavigateToMap={() => navigate('/map')}
               onNavigateToListing={() => navigate('/listing')}
               onNavigateToNotification={() => navigate('/notification')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/new-matches" element={
+          <ProtectedRoute>
+            <NewMatchCrt
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+              onNavigateToMap={() => navigate('/map')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
             />
           </ProtectedRoute>
         } />
@@ -372,6 +387,7 @@ export default function App() {
               onNavigateToAnalytics={() => navigate('/analytics-report')}
               onNavigateToCreateProfile={() => navigate('/create-profile')}
               onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToMap={() => navigate('/map')}
               onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
               onNavigateToListing={() => navigate('/listing')}
               onNavigateToNotification={() => navigate('/notification')}
@@ -391,6 +407,7 @@ export default function App() {
               onNavigateToSetting={() => navigate('/setting')}
               onNavigateToMap={() => navigate('/map')}
               onNavigateToListing={() => navigate('/listing')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
               onNavigateToNotification={() => navigate('/notification')}
             />
           </ProtectedRoute>
@@ -400,9 +417,6 @@ export default function App() {
             <MapPage
               onLogout={handleLogout}
               onNavigateToDashboard={() => navigate('/dashboard')}
-              onNavigateToMatches={() => navigate('/matches')}
-              onNavigateToMessages={() => navigate('/messages')}
-              onNavigateToCreateProfile={() => navigate('/create-profile')}
               onNavigateToSetting={() => navigate('/setting')}
               onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
               onNavigateToListing={() => navigate('/listing')}
@@ -415,9 +429,6 @@ export default function App() {
             <ListingPage
               onLogout={handleLogout}
               onNavigateToDashboard={() => navigate('/dashboard')}
-              onNavigateToMatches={() => navigate('/matches')}
-              onNavigateToMessages={() => navigate('/messages')}
-              onNavigateToCreateProfile={() => navigate('/create-profile')}
               onNavigateToSetting={() => navigate('/setting')}
               onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
               onNavigateToMap={() => navigate('/map')}
@@ -431,9 +442,6 @@ export default function App() {
             <NotificationPage
               onLogout={handleLogout}
               onNavigateToDashboard={() => navigate('/dashboard')}
-              onNavigateToMatches={() => navigate('/matches')}
-              onNavigateToMessages={() => navigate('/messages')}
-              onNavigateToCreateProfile={() => navigate('/create-profile')}
               onNavigateToSetting={() => navigate('/setting')}
               onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
               onNavigateToMap={() => navigate('/map')}

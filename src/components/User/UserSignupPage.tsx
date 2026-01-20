@@ -149,7 +149,7 @@ export function UserSignupPage({ onSignupSuccess }: UserSignupPageProps) {
                             </label>
                         </div>
 
-                        <button type="submit" className="submit-btn" disabled={isLoading}>
+                        <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={isLoading}>
                             {isLoading ? <Loader2 size={20} className="animate-spin" /> : 'Sign up'}
                         </button>
 
