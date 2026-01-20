@@ -27,10 +27,10 @@ export default function NewMatchCrt({
     const matchesData = [
         { id: '1', name: 'Ali Khan', role: 'Student', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=400&h=400' },
         { id: '2', name: 'Bilal Raza', role: 'Professional', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=400&h=400' },
-        { id: '3', name: 'Sarah Ahmed', role: 'Designer', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=400&h=400' },
+        { id: '3', name: 'Moiz', role: 'Designer', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=400&h=400' },
         { id: '4', name: 'Zara Shah', role: 'Researcher', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?fit=crop&w=400&h=400' },
         { id: '5', name: 'Omar Farooq', role: 'Developer', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?fit=crop&w=400&h=400' },
-        { id: '6', name: 'Hina Altaf', role: 'Artist', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=400&h=400' },
+        { id: '6', name: 'Hassam', role: 'Artist', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=400&h=400' },
     ];
 
     return (
