@@ -5,7 +5,7 @@ import DashboardPage from "./components/User/DashboardPage";
 import { AnalyticsReportPage } from "./components/User/AnalyticsReportPage";
 import { ResetPasswordPage } from "./components/PublicPages/ResetPasswordPage";
 import { LoginSelectionPage } from "./components/PublicPages/LoginSelectionPage";
-import { MatchesPages } from "./components/User/MatchesPages";
+// import { MatchesPages } from "./components/User/MatchesPages";
 import { MessagePage } from "./components/User/MessagePage";
 import { CreateProfilePage } from "./components/User/CreateProfilePage";
 import { Setting } from "./components/User/Setting";
@@ -296,7 +296,7 @@ export default function App() {
             />
           </ProtectedRoute>
         } />
-        <Route path="/matches" element={
+        {/* <Route path="/matches" element={
           <ProtectedRoute>
             <MatchesPages
               user={user!}
@@ -311,7 +311,7 @@ export default function App() {
               onNavigateToNotification={() => navigate('/notification')}
             />
           </ProtectedRoute>
-        } />
+        } /> */}
         <Route path="/messages" element={
           <ProtectedRoute>
             <MessagePage
