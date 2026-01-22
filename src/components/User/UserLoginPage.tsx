@@ -80,15 +80,36 @@ export function UserLoginPage({
                             </a>
                         </div>
 
-                        <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
-                            Log In
-                        </button>
+                        {/* Two Buttons in Same Row */}
+                        <div className="d-flex gap-3" style={{ width: '100%', gap: '1rem' }}>
+                            <button
+                                type="submit"
+                                className="btn-standard"
+                                style={{ flex: 1, justifyContent: 'center' }}
+                            >
+                                Login
+                            </button>
 
-                        <div className="footer-links">
+                            <button
+                                type="button"
+                                className="btn-standard"
+                                style={{ flex: 1, justifyContent: 'center' }}
+                                onClick={() => window.location.href = 'mailto:'}
+                            >
+                                Login with Email
+                            </button>
+                        </div>
+
+                        <div className="footer-links" style={{ marginTop: '1.5rem' }}>
                             <span>Are you new?</span>
-                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/user-signup', { replace: true }); }}>
+                            <button
+                                type="button"
+                                className="btn-standard"
+                                style={{ width: '100%', marginTop: '0.5rem', justifyContent: 'center' }}
+                                onClick={() => navigate('/user-signup', { replace: true })}
+                            >
                                 Create an Account
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>

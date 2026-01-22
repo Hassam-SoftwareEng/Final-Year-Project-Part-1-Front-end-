@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Eye, EyeOff, Check, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Check, Loader2, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/User/UserSignup.css';
 
@@ -64,6 +64,10 @@ export function UserSignupPage({ onSignupSuccess }: UserSignupPageProps) {
             )}
 
             <div className="box">
+                {/* Back Button */}
+                <button onClick={() => navigate('/user-login')} className="absolute-back-btn">
+                    <ArrowLeft size={24} color="#14919B" />
+                </button>
 
                 <div className="form">
                     <h2>Create User Account</h2>
@@ -149,7 +153,7 @@ export function UserSignupPage({ onSignupSuccess }: UserSignupPageProps) {
                             </label>
                         </div>
 
-                        <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={isLoading}>
+                        <button type="submit" className="btn-standard" style={{ width: '100%', marginTop: '1rem', justifyContent: 'center' }} disabled={isLoading}>
                             {isLoading ? <Loader2 size={20} className="animate-spin" /> : 'Sign up'}
                         </button>
 

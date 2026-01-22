@@ -482,11 +482,7 @@ export const MapPage: React.FC<MapPageProps> = ({
                     referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
             </div>
-            <footer className="footer">
-                <div className="footer-bottom">
-                    <p>&copy; {new Date().getFullYear()} RoomEase. All rights reserved.</p>
-                </div>
-            </footer>
+
         </div >
     );
 };

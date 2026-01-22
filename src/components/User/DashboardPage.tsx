@@ -280,14 +280,15 @@ export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, o
         </div>
 
         {/* Bottom: Saved Listings */}
-        <div className="dashboard-card">
-          <div className="card-header">
-            <h3 className="card-title flex items-center gap-2">
-              <Heart size={18} fill="#EF4444" color="#EF4444" /> Saved Listings
+        {/* Bottom: Saved Listings */}
+        <div className="mt-4">
+          <div className="d-flex justify-content-between align-items-center mb-3 px-1">
+            <h3 className="fw-bold m-0" style={{ fontSize: '24px', color: '#111827' }}>
+              Listings
             </h3>
             <button className="btn-standard" onClick={onNavigateToListing}>Browse More</button>
           </div>
-          <div className="saved-listings-container">
+          <div className="saved-listings-container" style={{ padding: '0' }}>
             <div className="listing-card-modern">
               <img src="/assets/images/premium_photo-1684175656320-5c3f701c082c (appartemnt).avif" className="listing-img" alt="Listing" />
               <div className="listing-details">

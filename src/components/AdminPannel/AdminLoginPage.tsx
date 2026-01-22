@@ -84,18 +84,24 @@ export function AdminLoginPage({ onLoginSuccess }: AdminLoginPageProps) {
                             </a>
                         </div>
 
-                        <button type="submit" className="submit-btn" style={{ marginTop: '20px' }}>
-                            Log In
+                        <button
+                            type="submit"
+                            className="btn-standard"
+                            style={{ width: '100%', justifyContent: 'center' }}
+                        >
+                            Login
                         </button>
 
-                        <div className="footer-links">
+                        <div className="footer-links" style={{ marginTop: '1.5rem' }}>
                             <span>Are you new?</span>
-                            <a href="#" onClick={(e) => {
-                                e.preventDefault();
-                                navigate('/admin-signup', { replace: true });
-                            }}>
+                            <button
+                                type="button"
+                                className="btn-standard"
+                                style={{ width: '100%', marginTop: '0.5rem', justifyContent: 'center' }}
+                                onClick={() => navigate('/admin-signup', { replace: true })}
+                            >
                                 Create an Account
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>

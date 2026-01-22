@@ -130,7 +130,7 @@ export const VerificationPage: React.FC<VerificationPageProps> = ({
                     <p className="verification-subtitle">Upload documents to verify your profile and build trust</p>
                 </header>
 
-                <section className="verification-card">
+                <section className="verification-section-plain">
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label className="form-label">Government Issued ID</label>
@@ -164,9 +164,9 @@ export const VerificationPage: React.FC<VerificationPageProps> = ({
                             </div>
                         </div>
 
-                        <div className="form-actions">
-                            <button type="button" className="cancel-btn" onClick={onNavigateToSetting}>Cancel</button>
-                            <button type="submit" className="submit-btn">Submit for Verification</button>
+                        <div className="form-actions" style={{ gap: '16px' }}>
+                            <button type="button" className="btn-standard" onClick={onNavigateToSetting}>Cancel</button>
+                            <button type="submit" className="btn-standard">Submit for Verification</button>
                         </div>
                     </form>
                 </section>

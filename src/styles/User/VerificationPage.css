@@ -3,6 +3,11 @@
 .verification-page-container {
     min-height: 100vh;
     background-color: #f5f5f7;
+    /* Background Image with Light Shadow Overlay */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/assets/images/VP%20bg.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     font-family: system-ui, -apple-system, sans-serif;
     display: flex;
     flex-direction: column;
@@ -67,10 +72,6 @@
     border: none !important;
 }
 
-.verification-navbar .nav-link:hover {
-    color: #008C9E;
-}
-
 .verification-navbar .logout-btn {
     padding: 8px 16px;
     background-color: #374151;
@@ -106,15 +107,16 @@
     color: #6B7280;
 }
 
-.verification-card {
-    background: white;
-    border-radius: 16px;
-    padding: 32px;
+.verification-section-plain {
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
     margin-bottom: 24px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: none !important;
+    border: none !important;
 }
 
-.verification-card form {
+.verification-section-plain form {
     width: 100%;
 }
 
@@ -173,38 +175,30 @@
     gap: 16px;
 }
 
-.cancel-btn {
-    padding: 10px 24px;
-    background-color: transparent;
-    color: #374151;
-    border: 1px solid #D1D5DB;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.submit-btn {
-    padding: 0 24px;
-    height: 50px;
-    background-color: #374151;
-    /* Match Login Selection Gray */
-    color: white;
-    border: none;
-    border-radius: 12px;
-    /* Match Login Selection radius */
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
+/* Standard Button Copy */
+.btn-standard {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    padding: 8px 24px;
+    background-color: transparent;
+    color: #111827;
+    border: 1px solid #111827;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    height: auto;
 }
 
-.submit-btn:hover {
-    background-color: #111827;
+.btn-standard:hover {
+    background-color: #F3F4F6;
+    color: #000000 !important;
+    border-color: #000000;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* --- Footer --- */

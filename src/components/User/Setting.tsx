@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Bell, User, Lock, BellRing, Trash2, Camera } from 'lucide-react';
+import { Home, Bell, User, Lock, Trash2, Camera, CheckCircle } from 'lucide-react';
 import '../../styles/User/SettingPage.css';
 
 interface User {
@@ -30,9 +30,10 @@ export const Setting: React.FC<SettingProps> = ({
     onNavigateToMap,
     onNavigateToRedFlagAlert,
     onNavigateToNotification,
+    onNavigateToVerification, // Added for verification tab
     // Unused props removed from destructuring to silence warnings
 }) => {
-    const [activeTab, setActiveTab] = useState<'general' | 'security' | 'notifications'>('general');
+    const [activeTab, setActiveTab] = useState<'general' | 'security' | 'verification'>('general');
 
     // General State
     const [fullName, setFullName] = useState(user.fullName);
@@ -131,48 +132,64 @@ export const Setting: React.FC<SettingProps> = ({
                 </div>
             </nav>
 
-            <div className="container py-5">
-                <h2 className="mb-4 fw-bold text-dark">Settings</h2>
-                <div className="row g-4">
-                    {/* Sidebar Tabs */}
-                    <div className="col-lg-3 col-md-4">
-                        <div className="card border-0 shadow-sm rounded-4 overflow-hidden">
-                            <div className="list-group list-group-flush">
+            <div className="container-fluid py-3 px-3">
+                <header className="dashboard-header">
+                    <div className="header-title-group">
+                        <h1>Settings</h1>
+                        <p className="header-subtitle">Manage your profile and account preferences.</p>
+                    </div>
+                </header>
+
+                <div className="">
+                    <div className="border-bottom mb-0">
+                        <ul className="nav nav-tabs border-bottom-0 gap-4">
+                            <li className="nav-item">
                                 <button
-                                    className={`list-group-item list-group-item-action p-3 d-flex align-items-center gap-3 ${activeTab === 'general' ? 'active-tab' : ''}`}
+                                    className={`nav-link border-0 bg-transparent py-3 px-1 ${activeTab === 'general' ? 'active-tab' : 'text-muted'}`}
                                     onClick={() => setActiveTab('general')}
                                 >
-                                    <User size={20} /> General
+                                    <div className="d-flex align-items-center gap-2">
+                                        <User size={18} /> General
+                                    </div>
                                 </button>
+                            </li>
+                            <li className="nav-item">
                                 <button
-                                    className={`list-group-item list-group-item-action p-3 d-flex align-items-center gap-3 ${activeTab === 'security' ? 'active-tab' : ''}`}
+                                    className={`nav-link border-0 bg-transparent py-3 px-1 ${activeTab === 'security' ? 'active-tab' : 'text-muted'}`}
                                     onClick={() => setActiveTab('security')}
                                 >
-                                    <Lock size={20} /> Security
+                                    <div className="d-flex align-items-center gap-2">
+                                        <Lock size={18} /> Security
+                                    </div>
                                 </button>
+                            </li>
+
+                            <li className="nav-item">
                                 <button
-                                    className={`list-group-item list-group-item-action p-3 d-flex align-items-center gap-3 ${activeTab === 'notifications' ? 'active-tab' : ''}`}
-                                    onClick={() => setActiveTab('notifications')}
+                                    className={`nav-link border-0 bg-transparent py-3 px-1 ${activeTab === 'verification' ? 'active-tab' : 'text-muted'}`}
+                                    onClick={() => setActiveTab('verification')}
                                 >
-                                    <BellRing size={20} /> Notifications
+                                    <div className="d-flex align-items-center gap-2">
+                                        <CheckCircle size={18} /> Verification
+                                    </div>
                                 </button>
-                            </div>
-                        </div>
+                            </li>
+
+                        </ul>
                     </div>
 
-                    {/* Content Area */}
-                    <div className="col-lg-9 col-md-8">
+                    <div className="pt-0">
                         {activeTab === 'general' && (
-                            <div className="card border-0 shadow-sm rounded-4">
-                                <div className="card-header bg-transparent border-0 p-4 pb-0 position-relative">
+                            <div className="animate-fade-in-up">
+                                <div className="py-4 pb-0 position-relative">
                                     <h4 className="fw-bold mb-0">Profile Details</h4>
-                                    <button type="button" className="btn btn-outline-danger position-absolute top-50 end-0 translate-middle-y me-4 rounded-5 px-3 py-1 d-flex align-items-center gap-2" onClick={() => alert('Delete account functionality coming soon')}>
+                                    <button type="button" className="btn btn-outline-danger btn-sm rounded-pill px-3 fw-medium position-absolute top-50 end-0 translate-middle-y me-4 hover-scale" onClick={() => alert('Delete account functionality coming soon')}>
                                         <Trash2 size={16} /> Delete Account
                                     </button>
                                 </div>
-                                <div className="card-body p-4">
+                                <div className="py-4">
                                     <div className="d-flex align-items-center gap-4 mb-4">
-                                        <div className="position-relative">
+                                        <div className="position-relative hover-scale">
                                             <img
                                                 src={`https://ui-avatars.com/api/?name=${fullName}&background=random`}
                                                 alt="Profile"
@@ -220,12 +237,12 @@ export const Setting: React.FC<SettingProps> = ({
                         )}
 
                         {activeTab === 'security' && (
-                            <div className="card border-0 shadow-sm rounded-4">
-                                <div className="card-header bg-transparent border-0 p-4 pb-0">
+                            <div className="animate-fade-in-up">
+                                <div className="py-4 pb-0">
                                     <h4 className="fw-bold mb-0">Security</h4>
                                     <p className="text-muted small">Manage your password and security preferences.</p>
                                 </div>
-                                <div className="card-body p-4">
+                                <div className="py-4">
                                     <form onSubmit={handleSave}>
                                         <div className="mb-3">
                                             <label className="form-label fw-medium">Current Password</label>
@@ -247,7 +264,7 @@ export const Setting: React.FC<SettingProps> = ({
                                             <label className="form-check-label fw-medium" htmlFor="2faSwitch">Two-Factor Authentication</label>
                                             <p className="text-muted small mb-0">Add an extra layer of security to your account.</p>
                                         </div>
-                                        <div className="d-flex justify-content-end mt-4">
+                                        <div className="d-flex justify-content-center mt-4">
                                             <button type="submit" className="btn-standard">
                                                 Update Security
                                             </button>
@@ -257,39 +274,34 @@ export const Setting: React.FC<SettingProps> = ({
                             </div>
                         )}
 
-                        {activeTab === 'notifications' && (
-                            <div className="card border-0 shadow-sm rounded-4">
-                                <div className="card-header bg-transparent border-0 p-4 pb-0">
-                                    <h4 className="fw-bold mb-0">Notifications</h4>
-                                    <p className="text-muted small">Control what emails and alerts you receive.</p>
+                        {activeTab === 'verification' && (
+                            <div className="animate-fade-in-up">
+                                <div className="py-4 pb-0">
+                                    <h4 className="fw-bold mb-0">Identity Verification</h4>
+                                    <p className="text-muted small">Verify your identity to build trust with other members.</p>
                                 </div>
-                                <div className="card-body p-4">
-                                    <div className="mb-4">
-                                        <h6 className="fw-bold">Email Notifications</h6>
-                                        <div className="form-check form-switch mb-3">
-                                            <input className="form-check-input" type="checkbox" id="newsSwitch" defaultChecked />
-                                            <label className="form-check-label" htmlFor="newsSwitch">Weekly Newsletter</label>
+                                <div className="py-4">
+                                    <div className="d-flex flex-column align-items-center justify-content-center text-center p-5 border rounded-4 bg-light">
+                                        <div className="bg-white p-3 rounded-circle shadow-sm mb-4">
+                                            <CheckCircle size={48} className="text-primary" style={{ color: '#14919B' }} />
                                         </div>
-                                        <div className="form-check form-switch mb-3">
-                                            <input className="form-check-input" type="checkbox" id="matchesSwitch" defaultChecked />
-                                            <label className="form-check-label" htmlFor="matchesSwitch">New Match Alerts</label>
-                                        </div>
-                                        <div className="form-check form-switch">
-                                            <input className="form-check-input" type="checkbox" id="msgsSwitch" defaultChecked />
-                                            <label className="form-check-label" htmlFor="msgsSwitch">Direct Messages</label>
-                                        </div>
-                                    </div>
-                                    <div className="d-flex justify-content-end mt-4">
-                                        <button className="btn-standard">
-                                            Save Preferences
+                                        <h5 className="fw-bold mb-2">Get Verified Badge</h5>
+                                        <p className="text-muted mb-4" style={{ maxWidth: '400px' }}>
+                                            Confirm your identity by uploading a government-issued ID. Verified users get 3x more responses.
+                                        </p>
+                                        <button className="btn-standard px-4 py-2" onClick={onNavigateToVerification}>
+                                            Start Verification
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         )}
+
+
                     </div>
                 </div>
             </div>
         </div>
+
     );
 };

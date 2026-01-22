@@ -84,18 +84,36 @@ export function PropertyOwnerLoginPage({ onLoginSuccess }: PropertyOwnerLoginPag
                             </a>
                         </div>
 
-                        <button type="submit" className="submit-btn" style={{ marginTop: '20px' }}>
-                            Log In
-                        </button>
+                        {/* Two Buttons in Same Row */}
+                        <div className="d-flex gap-3" style={{ width: '100%', gap: '1rem' }}>
+                            <button
+                                type="submit"
+                                className="btn-standard"
+                                style={{ flex: 1, justifyContent: 'center' }}
+                            >
+                                Login
+                            </button>
 
-                        <div className="footer-links">
+                            <button
+                                type="button"
+                                className="btn-standard"
+                                style={{ flex: 1, justifyContent: 'center' }}
+                                onClick={() => window.location.href = 'mailto:'}
+                            >
+                                Login with Email
+                            </button>
+                        </div>
+
+                        <div className="footer-links" style={{ marginTop: '1.5rem' }}>
                             <span>Are you new?</span>
-                            <a href="#" onClick={(e) => {
-                                e.preventDefault();
-                                navigate('/property-owner-signup', { replace: true });
-                            }}>
+                            <button
+                                type="button"
+                                className="btn-standard"
+                                style={{ width: '100%', marginTop: '0.5rem', justifyContent: 'center' }}
+                                onClick={() => navigate('/property-owner-signup', { replace: true })}
+                            >
                                 Create an Account
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>

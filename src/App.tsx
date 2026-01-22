@@ -27,6 +27,7 @@ import { PropertyOwnerForgotPasswordPage } from "./components/PropertyOwner/Prop
 import { MapPage } from "./components/User/MapPage";
 import { ListingPage } from "./components/User/ListingPage";
 import { NotificationPage } from "./components/User/NotificationPage";
+import ViewProfile from "./components/User/ViewProfile";
 
 import NewMatchCrt from "./components/User/NewMatchCrt";
 
@@ -332,6 +333,19 @@ export default function App() {
         <Route path="/new-matches" element={
           <ProtectedRoute>
             <NewMatchCrt
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/dashboard')}
+              onNavigateToListing={() => navigate('/listing')}
+              onNavigateToNotification={() => navigate('/notification')}
+              onNavigateToMap={() => navigate('/map')}
+              onNavigateToSetting={() => navigate('/setting')}
+              onNavigateToRedFlagAlert={() => navigate('/red-flag-alert')}
+            />
+          </ProtectedRoute>
+        } />
+        <Route path="/view-profile" element={
+          <ProtectedRoute>
+            <ViewProfile
               onLogout={handleLogout}
               onNavigateToDashboard={() => navigate('/dashboard')}
               onNavigateToListing={() => navigate('/listing')}

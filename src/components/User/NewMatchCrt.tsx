@@ -12,6 +12,8 @@ interface NewMatchCrtProps {
     onNavigateToRedFlagAlert: () => void;
 }
 
+import { useNavigate } from 'react-router-dom';
+
 export default function NewMatchCrt({
     onLogout,
     onNavigateToDashboard,
@@ -24,13 +26,15 @@ export default function NewMatchCrt({
 }: NewMatchCrtProps) {
     const [hoveredMatch, setHoveredMatch] = React.useState<string | null>(null);
 
+    const navigate = useNavigate();
+
     const matchesData = [
         { id: '1', name: 'Ali Khan', role: 'Student', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=400&h=400' },
         { id: '2', name: 'Bilal Raza', role: 'Professional', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=400&h=400' },
-        { id: '3', name: 'Moiz', role: 'Designer', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=400&h=400' },
-        { id: '4', name: 'Zara Shah', role: 'Researcher', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?fit=crop&w=400&h=400' },
+        { id: '3', name: 'Moiz', role: 'Designer', image: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?fit=crop&w=400&h=400' },
+        { id: '4', name: 'Usman Khan', role: 'Researcher', image: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?fit=crop&w=400&h=400' },
         { id: '5', name: 'Omar Farooq', role: 'Developer', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?fit=crop&w=400&h=400' },
-        { id: '6', name: 'Hassam', role: 'Artist', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=400&h=400' },
+        { id: '6', name: 'Hassam', role: 'Artist', image: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?fit=crop&w=400&h=400' },
     ];
 
     return (
@@ -118,24 +122,13 @@ export default function NewMatchCrt({
                     </div>
 
                     <div className="matches-interactive-list">
-                        {/* Hover Image Display - Absolute Positioned */}
-                        <div className={`match-hover-image-container ${hoveredMatch ? 'visible' : ''}`}>
-                            {hoveredMatch && (
-                                <img
-                                    src={matchesData.find(m => m.id === hoveredMatch)?.image}
-                                    alt="Match"
-                                    className="match-hover-img"
-                                />
-                            )}
-                        </div>
-
                         {matchesData.map((match) => (
                             <div
                                 key={match.id}
                                 className="match-list-item"
                                 onMouseEnter={() => setHoveredMatch(match.id)}
                                 onMouseLeave={() => setHoveredMatch(null)}
-                            // onClick could navigate to valid individual profile if needed
+                                onClick={() => navigate('/view-profile')}
                             >
                                 <div className="match-info-group">
                                     <span className="match-name">{match.name}</span>
@@ -143,6 +136,15 @@ export default function NewMatchCrt({
                                 </div>
                                 <div className="match-action-arrow">
                                     <span className="about-text">VIEW PROFILE</span> ↗
+                                </div>
+
+                                {/* Hover Image Display - Inside Item for Relative Positioning */}
+                                <div className={`match-hover-image-container ${hoveredMatch === match.id ? 'visible' : ''}`}>
+                                    <img
+                                        src={match.image}
+                                        alt="Match"
+                                        className="match-hover-img"
+                                    />
                                 </div>
                             </div>
                         ))}

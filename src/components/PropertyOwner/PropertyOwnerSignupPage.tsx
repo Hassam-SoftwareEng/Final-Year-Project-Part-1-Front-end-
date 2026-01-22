@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Eye, EyeOff, Check, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Check, Loader2, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/PropertyOwner/PropertyOwnerSignup.css';
 
@@ -65,6 +65,10 @@ export function PropertyOwnerSignupPage({ onSignupSuccess }: PropertyOwnerSignup
 
             <div className="box">
 
+                {/* Back Button */}
+                <button onClick={() => navigate('/property-owner-login')} className="absolute-back-btn">
+                    <ArrowLeft size={24} color="#14919B" />
+                </button>
                 <div className="form">
                     <h2>Create Property Owner Account</h2>
                     <p className="subtitle">Please fill in your details</p>
@@ -149,7 +153,7 @@ export function PropertyOwnerSignupPage({ onSignupSuccess }: PropertyOwnerSignup
                             </label>
                         </div>
 
-                        <button type="submit" className="submit-btn" disabled={isLoading}>
+                        <button type="submit" className="btn-standard" style={{ width: '100%', marginTop: '1rem', justifyContent: 'center' }} disabled={isLoading}>
                             {isLoading ? <Loader2 size={20} className="animate-spin" /> : 'Sign up'}
                         </button>
 
