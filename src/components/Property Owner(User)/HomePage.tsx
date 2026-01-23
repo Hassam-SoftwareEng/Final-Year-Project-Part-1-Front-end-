@@ -1,6 +1,6 @@
-import '../../styles/PropertyOwner/HomePage.css';
+import '../../styles/Property Owner(User)/HomePage.css';
 import React from 'react';
-import { CheckCircle, Star, Heart, TrendingUp, Home, User, ArrowRight, Bell } from 'lucide-react';
+import { CheckCircle, Star, Heart, TrendingUp, Home, User, ArrowRight, Bell, Plus } from 'lucide-react';
 
 interface HomePageProps {
     user?: {
@@ -21,6 +21,7 @@ interface HomePageProps {
     onNavigateToHome?: () => void; // Added for self-navigation consistency
     onNavigateToSettings?: () => void; // Added for wrapper consistency
     onNavigateToNotifications?: () => void; // Added for wrapper consistency
+    onNavigateToPostListing?: () => void;
 }
 
 const HomePage: React.FC<HomePageProps> = ({
@@ -38,7 +39,8 @@ const HomePage: React.FC<HomePageProps> = ({
     // Aliases for compatibility with different prop names if needed
     onNavigateToHome,
     onNavigateToSettings,
-    onNavigateToNotifications
+    onNavigateToNotifications,
+    onNavigateToPostListing
 }) => {
 
     // Use the specific handlers or fall back to generic ones if aliases are passed
@@ -135,9 +137,11 @@ const HomePage: React.FC<HomePageProps> = ({
                         <p className="header-subtitle">Here's what's happening with your room search today.</p>
                     </div>
 
-                    <button className="btn-prominent" onClick={onNavigateToCreateProfile}>
-                        Create Profile
-                    </button>
+                    <div className="header-stats">
+                        <button className="btn-standard" onClick={() => onNavigateToPostListing && onNavigateToPostListing()}>
+                            Become A Property Owner
+                        </button>
+                    </div>
                 </header>
 
                 {/* Key Stats Overview (Grid) */}
@@ -300,7 +304,7 @@ const HomePage: React.FC<HomePageProps> = ({
                 <div className="mt-4">
                     <div className="d-flex justify-content-between align-items-center mb-3 px-1">
                         <h3 className="fw-bold m-0" style={{ fontSize: '24px', color: '#111827' }}>
-                            Listings
+                            Your Listings
                         </h3>
                         <button className="btn-standard" onClick={onNavigateToListing}>Browse More</button>
                     </div>

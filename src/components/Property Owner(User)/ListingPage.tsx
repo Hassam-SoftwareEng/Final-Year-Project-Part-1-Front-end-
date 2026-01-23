@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Bell, Home } from 'lucide-react';
-import '../../styles/PropertyOwner/ListingPage.css';
+import '../../styles/Property Owner(User)/ListingPage.css';
 
 interface ListingPageProps {
     onLogout: () => void;

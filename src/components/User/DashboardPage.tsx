@@ -1,5 +1,5 @@
 import '../../styles/User/DashboardPage.css';
-import { CheckCircle, Star, Heart, TrendingUp, Home, User, ArrowRight, Bell } from 'lucide-react';
+import { CheckCircle, Star, TrendingUp, Home, User, ArrowRight, Bell } from 'lucide-react';
 
 
 
@@ -19,9 +19,10 @@ interface DashboardPageProps {
   onNavigateToMap: () => void;
   onNavigateToListing: () => void;
   onNavigateToNotification?: () => void;
+  onNavigateToPropertyOwnerDashboard?: () => void;
 }
 
-export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, onNavigateToNewMatches, onNavigateToListing, onNavigateToMessages, onNavigateToNotification, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert, onNavigateToMap }: DashboardPageProps) {
+export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, onNavigateToNewMatches, onNavigateToListing, onNavigateToMessages, onNavigateToNotification, onNavigateToCreateProfile, onNavigateToSetting, onNavigateToRedFlagAlert, onNavigateToMap, onNavigateToPropertyOwnerDashboard }: DashboardPageProps) {
   return (
     <div className="dashboard-container">
       {/* Top Navbar */}
@@ -119,9 +120,16 @@ export default function DashboardPage({ user, onLogout, onNavigateToAnalytics, o
             <p className="header-subtitle">Here's what's happening with your room search today.</p>
           </div>
 
-          <button className="btn-prominent" onClick={onNavigateToCreateProfile}>
-            Create Profile
-          </button>
+          <div className="d-flex gap-3">
+            {onNavigateToPropertyOwnerDashboard && (
+              <button className="btn-success btn-sm px-3 py-2 fw-bold" onClick={onNavigateToPropertyOwnerDashboard} style={{ borderRadius: '20px' }}>
+                Become Property Owner
+              </button>
+            )}
+            <button className="btn-prominent" onClick={onNavigateToCreateProfile}>
+              Create Profile
+            </button>
+          </div>
         </header>
 
         {/* Key Stats Overview (Grid) */}

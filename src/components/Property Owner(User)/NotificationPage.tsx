@@ -1,48 +1,56 @@
 import React, { useState } from 'react';
+import '../../styles/Property Owner(User)/NotificationPage.css';
 import { Bell, Home } from 'lucide-react';
-import '../../styles/PropertyOwner/RedFlagAlert.css';
 
-interface User {
-    email: string;
-    fullName: string;
-}
-
-interface RedFlagAlertProps {
-    user: User;
+interface NotificationPageProps {
     onLogout: () => void;
     onNavigateToDashboard: () => void;
-    onNavigateToMatches?: () => void; // Optional
-    onNavigateToMessages?: () => void; // Optional
-    onNavigateToAnalytics?: () => void; // Optional
-    onNavigateToCreateProfile?: () => void; // Optional
     onNavigateToSetting: () => void;
+    onNavigateToRedFlagAlert: () => void;
     onNavigateToMap: () => void;
     onNavigateToListing: () => void;
-    onNavigateToRedFlagAlert: () => void;
-    onNavigateToNotification?: () => void;
+    onNavigateToNotification: () => void;
     onNavigateToHome?: () => void;
 }
 
-export const RedFlagAlert: React.FC<RedFlagAlertProps> = ({
+export const NotificationPage: React.FC<NotificationPageProps> = ({
     onLogout,
     onNavigateToDashboard,
     onNavigateToSetting,
-    onNavigateToListing,
-    onNavigateToMap,
-    onNavigateToNotification,
     onNavigateToRedFlagAlert,
+    onNavigateToMap,
+    onNavigateToListing,
+    onNavigateToNotification,
     onNavigateToHome
 }) => {
     const handleHomeNavigation = onNavigateToHome || onNavigateToDashboard;
 
-    const [alerts] = useState([
-        { id: 1, title: 'Suspicious Activity Detected', reportedPerson: 'JohnDoe123', description: 'Requested money before meeting.', severity: 'High', date: '2025-01-01' },
-        { id: 2, title: 'Profile Verification Failed', reportedPerson: 'Alex', description: 'Person upload wrong file and empty.', severity: 'Medium', date: '2024-12-30' },
-        { id: 3, title: 'Document Missing', reportedPerson: 'Taylor', description: 'Person did not upload document.', severity: 'High', date: '2024-12-28' },
+    const [notifications] = useState([
+        {
+            id: 1,
+            title: "New Match Found!",
+            description: "You have a new match with Ali Khan based on your preferences.",
+            time: "2 mins ago",
+            read: false
+        },
+        {
+            id: 2,
+            title: "Message Received",
+            description: "Sarah sent you a message about the apartment listing.",
+            time: "1 hour ago",
+            read: true
+        },
+        {
+            id: 3,
+            title: "Profile Verified",
+            description: "Your profile has been successfully verified by the admin.",
+            time: "1 day ago",
+            read: true
+        }
     ]);
 
     return (
-        <div className="red-flag-container">
+        <div className="notification-page-container">
             {/* Navbar (Bootstrap Standardized) */}
             <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top px-3">
                 <div className="container-fluid">
@@ -89,7 +97,7 @@ export const RedFlagAlert: React.FC<RedFlagAlertProps> = ({
                             </li>
                             {onNavigateToRedFlagAlert && (
                                 <li className="nav-item">
-                                    <a className="nav-link fw-medium active" aria-current="page" href="#" onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}>
+                                    <a className="nav-link fw-medium" href="#" onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}>
                                         Red Flag Alert
                                     </a>
                                 </li>
@@ -117,40 +125,26 @@ export const RedFlagAlert: React.FC<RedFlagAlertProps> = ({
             </nav>
 
             {/* Main Content */}
-            <main className="red-flag-content">
-                <header className="red-flag-header">
-                    <h1 className="red-flag-title">Red Flag Alerts & Safety</h1>
-                    <p className="red-flag-subtitle">Stay informed about potential risks and safety updates.</p>
-                </header>
+            <main className="notification-content">
+                <div className="notification-header">
+                    <h1 className="notification-title">Notifications</h1>
+                </div>
 
-                <div className="alerts-list">
-                    {alerts.map(alert => (
-                        <div key={alert.id} className={`alert-card severity-${alert.severity.toLowerCase()}`}>
-                            <div className="alert-header">
-                                <h3 className="alert-title">{alert.title}</h3>
-                                <span className="alert-date">{alert.date}</span>
-                            </div>
+                <div className="notification-list">
+                    {notifications.map(notification => (
+                        <div key={notification.id} className={`notification-card ${notification.read ? 'read' : 'unread'}`}>
 
-                            <div className="alert-details">
-                                <div className="detail-row">
-                                    <span className="detail-label">Person:</span>
-                                    <span className="detail-value">{alert.reportedPerson}</span>
+                            <div className="notification-details">
+                                <div className="notification-card-header">
+                                    <h3 className="notification-card-title">{notification.title}</h3>
+                                    <span className="notification-time">{notification.time}</span>
                                 </div>
-                                <div className="detail-row">
-                                    <span className="detail-label">Description:</span>
-                                    <p className="detail-value description-text">{alert.description}</p>
-                                </div>
+                                <p className="notification-description">{notification.description}</p>
                             </div>
-
-                            <div className="alert-footer">
-                                <span className="alert-severity">{alert.severity} Priority</span>
-                                <button className="report-btn">Report</button>
-                            </div>
+                            {!notification.read && <div className="unread-dot"></div>}
                         </div>
                     ))}
                 </div>
-
-
             </main>
             <footer className="footer">
                 <div className="footer-bottom">

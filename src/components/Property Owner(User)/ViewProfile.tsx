@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bell, Home, ChevronLeft, ChevronRight } from 'lucide-react';
-import '../../styles/PropertyOwner/ViewProfile.css';
+import '../../styles/Property Owner(User)/ViewProfile.css';
 
 interface ViewProfileProps {
     onLogout: () => void;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Home, Bell, User, Lock, Trash2, Camera, CheckCircle } from 'lucide-react';
-import '../../styles/PropertyOwner/SettingPage.css';
+import '../../styles/Property Owner(User)/SettingPage.css';
 
 interface User {
     email: string;

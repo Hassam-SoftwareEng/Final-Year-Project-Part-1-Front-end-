@@ -348,6 +348,35 @@ body {
     transform: translateY(-1px);
 }
 
+/* --- Zameen.com Style Add Property Button --- */
+.btn-zameen {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background-color: #00A651;
+    /* Zameen Green */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    /* Slight radius, rectangular feel */
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 166, 81, 0.2);
+}
+
+.btn-zameen:hover {
+    background-color: #008c44;
+    /* Darker green on hover */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 166, 81, 0.3);
+}
+
 /* Table Styles */
 .table-responsive {
     width: 100%;

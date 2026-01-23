@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowLeft, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/PropertyOwner/PropertyOwnerForgotPassword.css';
+import '../../styles/Property Owner(User)/PropertyOwnerForgotPassword.css';
 
 interface Props {
     onSubmitEmail: (email: string) => void;

@@ -1,50 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Bell, Home } from 'lucide-react';
-import '../../styles/PropertyOwner/NewMatchCrt.css'; // Import the specific CSS
+import '../../styles/Property Owner(User)/RedFlagAlert.css';
 
-interface NewMatchCrtProps {
+interface User {
+    email: string;
+    fullName: string;
+}
+
+interface RedFlagAlertProps {
+    user: User;
     onLogout: () => void;
     onNavigateToDashboard: () => void;
-    onNavigateToListing: () => void;
-    onNavigateToNotification?: () => void;
-    onNavigateToMap: () => void;
+    onNavigateToMatches?: () => void; // Optional
+    onNavigateToMessages?: () => void; // Optional
+    onNavigateToAnalytics?: () => void; // Optional
+    onNavigateToCreateProfile?: () => void; // Optional
     onNavigateToSetting: () => void;
+    onNavigateToMap: () => void;
+    onNavigateToListing: () => void;
     onNavigateToRedFlagAlert: () => void;
+    onNavigateToNotification?: () => void;
     onNavigateToHome?: () => void;
 }
 
-import { useNavigate } from 'react-router-dom';
-
-export default function NewMatchCrt({
+export const RedFlagAlert: React.FC<RedFlagAlertProps> = ({
     onLogout,
     onNavigateToDashboard,
-    onNavigateToListing,
-
-    onNavigateToNotification,
-    onNavigateToMap,
     onNavigateToSetting,
+    onNavigateToListing,
+    onNavigateToMap,
+    onNavigateToNotification,
     onNavigateToRedFlagAlert,
     onNavigateToHome
-}: NewMatchCrtProps) {
-    const [hoveredMatch, setHoveredMatch] = React.useState<string | null>(null);
+}) => {
     const handleHomeNavigation = onNavigateToHome || onNavigateToDashboard;
 
-    const navigate = useNavigate();
-
-    const matchesData = [
-        { id: '1', name: 'Ali Khan', role: 'Student', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=400&h=400' },
-        { id: '2', name: 'Bilal Raza', role: 'Professional', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=400&h=400' },
-        { id: '3', name: 'Moiz', role: 'Designer', image: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?fit=crop&w=400&h=400' },
-        { id: '4', name: 'Usman Khan', role: 'Researcher', image: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?fit=crop&w=400&h=400' },
-        { id: '5', name: 'Omar Farooq', role: 'Developer', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?fit=crop&w=400&h=400' },
-        { id: '6', name: 'Hassam', role: 'Artist', image: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?fit=crop&w=400&h=400' },
-    ];
+    const [alerts] = useState([
+        { id: 1, title: 'Suspicious Activity Detected', reportedPerson: 'JohnDoe123', description: 'Requested money before meeting.', severity: 'High', date: '2025-01-01' },
+        { id: 2, title: 'Profile Verification Failed', reportedPerson: 'Alex', description: 'Person upload wrong file and empty.', severity: 'Medium', date: '2024-12-30' },
+        { id: 3, title: 'Document Missing', reportedPerson: 'Taylor', description: 'Person did not upload document.', severity: 'High', date: '2024-12-28' },
+    ]);
 
     return (
-        <div className="new-match-container">
-            {/* Top Navbar (Bootstrap) - Reused for consistency */}
-            {/* Top Navbar - Standardized */}
-            {/* Navbar */}
+        <div className="red-flag-container">
+            {/* Navbar (Bootstrap Standardized) */}
             <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top px-3">
                 <div className="container-fluid">
                     {/* Logo Section */}
@@ -90,7 +89,7 @@ export default function NewMatchCrt({
                             </li>
                             {onNavigateToRedFlagAlert && (
                                 <li className="nav-item">
-                                    <a className="nav-link fw-medium" href="#" onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}>
+                                    <a className="nav-link fw-medium active" aria-current="page" href="#" onClick={(e) => { e.preventDefault(); onNavigateToRedFlagAlert(); }}>
                                         Red Flag Alert
                                     </a>
                                 </li>
@@ -117,42 +116,41 @@ export default function NewMatchCrt({
                 </div>
             </nav>
 
-            <main className="new-match-content">
-                <div className="new-match-card">
-                    <div className="new-match-header">
-                        <h2 className="new-match-title">New Matches</h2>
-                        <p className="text-muted">Discover people who match your preferences.</p>
-                    </div>
+            {/* Main Content */}
+            <main className="red-flag-content">
+                <header className="red-flag-header">
+                    <h1 className="red-flag-title">Red Flag Alerts & Safety</h1>
+                    <p className="red-flag-subtitle">Stay informed about potential risks and safety updates.</p>
+                </header>
 
-                    <div className="matches-interactive-list">
-                        {matchesData.map((match) => (
-                            <div
-                                key={match.id}
-                                className="match-list-item"
-                                onMouseEnter={() => setHoveredMatch(match.id)}
-                                onMouseLeave={() => setHoveredMatch(null)}
-                                onClick={() => navigate('/property-owner-view-profile')}
-                            >
-                                <div className="match-info-group">
-                                    <span className="match-name">{match.name}</span>
-                                    <span className="match-role">/ {match.role}</span>
-                                </div>
-                                <div className="match-action-arrow">
-                                    <span className="about-text">VIEW PROFILE</span> ↗
-                                </div>
+                <div className="alerts-list">
+                    {alerts.map(alert => (
+                        <div key={alert.id} className={`alert-card severity-${alert.severity.toLowerCase()}`}>
+                            <div className="alert-header">
+                                <h3 className="alert-title">{alert.title}</h3>
+                                <span className="alert-date">{alert.date}</span>
+                            </div>
 
-                                {/* Hover Image Display - Inside Item for Relative Positioning */}
-                                <div className={`match-hover-image-container ${hoveredMatch === match.id ? 'visible' : ''}`}>
-                                    <img
-                                        src={match.image}
-                                        alt="Match"
-                                        className="match-hover-img"
-                                    />
+                            <div className="alert-details">
+                                <div className="detail-row">
+                                    <span className="detail-label">Person:</span>
+                                    <span className="detail-value">{alert.reportedPerson}</span>
+                                </div>
+                                <div className="detail-row">
+                                    <span className="detail-label">Description:</span>
+                                    <p className="detail-value description-text">{alert.description}</p>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+
+                            <div className="alert-footer">
+                                <span className="alert-severity">{alert.severity} Priority</span>
+                                <button className="report-btn">Report</button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
+
+
             </main>
             <footer className="footer">
                 <div className="footer-bottom">
@@ -161,4 +159,4 @@ export default function NewMatchCrt({
             </footer>
         </div>
     );
-}
+};

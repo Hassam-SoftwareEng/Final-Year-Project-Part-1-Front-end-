@@ -21,26 +21,31 @@ import { AdminForgotPasswordPage } from "./components/AdminPannel/AdminForgotPas
 import { UserLoginPage } from "./components/User/UserLoginPage";
 import { UserSignupPage } from "./components/User/UserSignupPage";
 import { UserForgotPasswordPage } from "./components/User/UserForgotPasswordPage";
-import { PropertyOwnerLoginPage } from "./components/PropertyOwner/PropertyOwnerLoginPage";
-import { PropertyOwnerSignupPage } from "./components/PropertyOwner/PropertyOwnerSignupPage";
-import { PropertyOwnerForgotPasswordPage } from "./components/PropertyOwner/PropertyOwnerForgotPasswordPage";
-import PropertyOwnerHomePage from "./components/PropertyOwner/HomePage";
+import { PropertyOwnerLoginPage } from "./components/Property Owner(User)/PropertyOwnerLoginPage";
+import { PropertyOwnerSignupPage } from "./components/Property Owner(User)/PropertyOwnerSignupPage";
+import { PropertyOwnerForgotPasswordPage } from "./components/Property Owner(User)/PropertyOwnerForgotPasswordPage";
+import PropertyOwnerHomePage from "./components/Property Owner(User)/HomePage";
+
+// ... existing imports ...
+
+
 import { MapPage } from "./components/User/MapPage";
 import { ListingPage } from "./components/User/ListingPage";
 import { NotificationPage } from "./components/User/NotificationPage";
 import ViewProfile from "./components/User/ViewProfile";
 
 // Property Owner Imports
-import { AnalyticsReportPage as PropertyOwnerAnalyticsReportPage } from "./components/PropertyOwner/AnalyticsReportPage";
-import { MessagePage as PropertyOwnerMessagePage } from "./components/PropertyOwner/MessagePage";
-import { CreateProfilePage as PropertyOwnerCreateProfilePage } from "./components/PropertyOwner/CreateProfilePage";
-import { Setting as PropertyOwnerSetting } from "./components/PropertyOwner/Setting";
-import { RedFlagAlert as PropertyOwnerRedFlagAlert } from "./components/PropertyOwner/RedFlagAlert";
-import { MapPage as PropertyOwnerMapPage } from "./components/PropertyOwner/MapPage";
-import { ListingPage as PropertyOwnerListingPage } from "./components/PropertyOwner/ListingPage";
-import { NotificationPage as PropertyOwnerNotificationPage } from "./components/PropertyOwner/NotificationPage";
-import PropertyOwnerViewProfile from "./components/PropertyOwner/ViewProfile";
-import PropertyOwnerNewMatchCrt from "./components/PropertyOwner/NewMatchCrt";
+import { AnalyticsReportPage as PropertyOwnerAnalyticsReportPage } from "./components/Property Owner(User)/AnalyticsReportPage";
+import { MessagePage as PropertyOwnerMessagePage } from "./components/Property Owner(User)/MessagePage";
+import { CreateProfilePage as PropertyOwnerCreateProfilePage } from "./components/Property Owner(User)/CreateProfilePage";
+import { Setting as PropertyOwnerSetting } from "./components/Property Owner(User)/Setting";
+import { RedFlagAlert as PropertyOwnerRedFlagAlert } from "./components/Property Owner(User)/RedFlagAlert";
+import { MapPage as PropertyOwnerMapPage } from "./components/Property Owner(User)/MapPage";
+import { ListingPage as PropertyOwnerListingPage } from "./components/Property Owner(User)/ListingPage";
+import { NotificationPage as PropertyOwnerNotificationPage } from "./components/Property Owner(User)/NotificationPage";
+import PropertyOwnerViewProfile from "./components/Property Owner(User)/ViewProfile";
+import PropertyOwnerNewMatchCrt from "./components/Property Owner(User)/NewMatchCrt";
+import { PostListingPage as PropertyOwnerPostListingPage } from "./components/Property Owner/PostListingPage";
 
 import NewMatchCrt from "./components/User/NewMatchCrt";
 
@@ -280,14 +285,12 @@ export default function App() {
               user={user!}
               onLogout={handleLogout}
               onNavigateToHome={() => navigate('/property-owner-dashboard')}
-              onNavigateToSettings={() => navigate('/property-owner-setting')}
-              onNavigateToNotifications={() => navigate('/property-owner-notification')}
+              onNavigateToPostListing={() => navigate('/property-owner-post-listing')}
+              onNavigateToMessages={() => navigate('/property-owner-messages')}
+              onNavigateToNotification={() => navigate('/property-owner-notification')}
+              onNavigateToSetting={() => navigate('/property-owner-setting')}
               onNavigateToAnalytics={() => navigate('/property-owner-analytics')}
               onNavigateToNewMatches={() => navigate('/property-owner-new-matches')}
-              onNavigateToMessages={() => navigate('/property-owner-messages')}
-              onNavigateToCreateProfile={() => navigate('/property-owner-create-profile')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
               onNavigateToListing={() => navigate('/property-owner-listing')}
             />
           </ProtectedRoute>
@@ -441,6 +444,19 @@ export default function App() {
             />
           </ProtectedRoute>
         } />
+        <Route path="/property-owner-post-listing" element={
+          <ProtectedRoute>
+            <PropertyOwnerPostListingPage
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
+              onNavigateToListing={() => navigate('/property-owner-listing')}
+              onNavigateToNotification={() => navigate('/property-owner-notification')}
+              onNavigateToMap={() => navigate('/property-owner-map')}
+              onNavigateToSetting={() => navigate('/property-owner-setting')}
+              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
+            />
+          </ProtectedRoute>
+        } />
 
         {/* Protected Dashboard Routes */}
         <Route path="/dashboard" element={
@@ -458,6 +474,7 @@ export default function App() {
               onNavigateToMap={() => navigate('/map')}
               onNavigateToListing={() => navigate('/listing')}
               onNavigateToNotification={() => navigate('/notification')}
+              onNavigateToPropertyOwnerDashboard={() => navigate('/property-owner-dashboard')}
             />
           </ProtectedRoute>
         } />

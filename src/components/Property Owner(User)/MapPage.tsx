@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Navigation, Plus, Minus, MapPin, Share2, Edit2, Map as MapIcon, Star, Globe, Phone, Smartphone, Tag, RotateCcw, X, ChevronRight, Bell, Home } from 'lucide-react';
-import '../../styles/PropertyOwner/MapPage.css';
+import '../../styles/Property Owner(User)/MapPage.css';
 
 interface MapPageProps {
     onLogout: () => void;

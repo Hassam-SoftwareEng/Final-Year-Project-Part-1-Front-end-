@@ -1,6 +1,6 @@
 import React from "react";
 import { Bell, Home } from 'lucide-react';
-import "../../styles/PropertyOwner/AnalyticsReportPage.css";
+import "../../styles/Property Owner(User)/AnalyticsReportPage.css";
 
 interface User {
     fullName: string;

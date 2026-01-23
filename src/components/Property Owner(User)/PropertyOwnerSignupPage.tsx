@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Eye, EyeOff, Check, Loader2, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/PropertyOwner/PropertyOwnerSignup.css';
+import '../../styles/Property Owner(User)/PropertyOwnerSignup.css';
 
 interface PropertyOwnerSignupPageProps {
     onSignupSuccess?: (signupData: { email: string; fullName: string; password: string }) => void;
