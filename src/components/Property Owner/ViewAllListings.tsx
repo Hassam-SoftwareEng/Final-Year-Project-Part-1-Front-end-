@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Home, Bell, Search, MapPin } from 'lucide-react';
+import { Home, Bell } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/Property Owner/ViewAllListings.css';
 
@@ -12,15 +12,7 @@ interface ViewAllListingsProps {
 
 export const ViewAllListings: React.FC<ViewAllListingsProps> = () => {
     const navigate = useNavigate();
-    const [location, setLocation] = useState('');
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
     const [type, setType] = useState('All'); // 'All', 'Sale', 'Rent'
-
-    const handleSearch = () => {
-        console.log('Searching with:', { location, minPrice, maxPrice, type });
-        // Implement filtering logic here
-    };
 
     return (
         <div className="dashboard-container">
@@ -62,24 +54,9 @@ export const ViewAllListings: React.FC<ViewAllListingsProps> = () => {
 
                 {/* Filter Section */}
                 <div className="card border-0 shadow-sm p-4 mb-4 rounded-3 bg-white">
-                    <div className="row g-3 align-items-end">
+                    <div className="d-flex align-items-center">
                         <div className="col-md-3">
-                            <label className="form-label text-secondary small fw-medium mb-1">Location</label>
-                            <div className="input-group">
-                                <span className="input-group-text bg-light border-end-0 text-muted">
-                                    <MapPin size={18} />
-                                </span>
-                                <input
-                                    type="text"
-                                    className="form-control bg-light border-start-0 ps-0"
-                                    placeholder="Enter location"
-                                    value={location}
-                                    onChange={(e) => setLocation(e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        <div className="col-md-2">
-                            <label className="form-label text-secondary small fw-medium mb-1">Type</label>
+                            <label className="form-label text-secondary small fw-medium mb-1">Filter by Type</label>
                             <select
                                 className="form-select bg-light"
                                 value={type}
@@ -89,32 +66,6 @@ export const ViewAllListings: React.FC<ViewAllListingsProps> = () => {
                                 <option value="Sale">For Sale</option>
                                 <option value="Rent">For Rent</option>
                             </select>
-                        </div>
-                        <div className="col-md-2">
-                            <label className="form-label text-secondary small fw-medium mb-1">Min Price</label>
-                            <input
-                                type="number"
-                                className="form-control bg-light"
-                                placeholder="Min"
-                                value={minPrice}
-                                onChange={(e) => setMinPrice(e.target.value)}
-                            />
-                        </div>
-                        <div className="col-md-2">
-                            <label className="form-label text-secondary small fw-medium mb-1">Max Price</label>
-                            <input
-                                type="number"
-                                className="form-control bg-light"
-                                placeholder="Max"
-                                value={maxPrice}
-                                onChange={(e) => setMaxPrice(e.target.value)}
-                            />
-                        </div>
-                        <div className="col-md-3">
-                            <button className="btn btn-prominent w-100 d-flex align-items-center justify-content-center gap-2" onClick={handleSearch}>
-                                <Search size={18} />
-                                Filter
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -132,7 +83,7 @@ export const ViewAllListings: React.FC<ViewAllListingsProps> = () => {
                                     </div>
                                     <div className="listing-price">PKR 4.5 Crore</div>
                                     <div className="d-flex gap-2 mt-2">
-                                        <button className="btn-standard flex-grow-1" onClick={() => navigate('/property-owner-view-sale-listing?id=sale-1')}>Edit</button>
+                                        <button className="btn-standard flex-grow-1" onClick={() => navigate('/property-owner-detail-listing?id=sale-1')}>View</button>
                                         <button className="btn-standard flex-grow-1" style={{ borderColor: '#dc3545', color: '#dc3545' }} onClick={() => alert('Delete Clicked')}>Delete</button>
                                     </div>
                                 </div>
@@ -146,7 +97,7 @@ export const ViewAllListings: React.FC<ViewAllListingsProps> = () => {
                                     </div>
                                     <div className="listing-price">PKR 12 Crore</div>
                                     <div className="d-flex gap-2 mt-2">
-                                        <button className="btn-standard flex-grow-1" onClick={() => navigate('/property-owner-view-sale-listing?id=sale-2')}>Edit</button>
+                                        <button className="btn-standard flex-grow-1" onClick={() => navigate('/property-owner-detail-listing?id=sale-1')}>View</button>
                                         <button className="btn-standard flex-grow-1" style={{ borderColor: '#dc3545', color: '#dc3545' }} onClick={() => alert('Delete Clicked')}>Delete</button>
                                     </div>
                                 </div>
@@ -166,7 +117,7 @@ export const ViewAllListings: React.FC<ViewAllListingsProps> = () => {
                                     </div>
                                     <div className="listing-price">PKR 30,000/mo</div>
                                     <div className="d-flex gap-2 mt-2">
-                                        <button className="btn-standard flex-grow-1" onClick={() => navigate('/property-owner-view-rent-listing?id=rent-2')}>Edit</button>
+                                        <button className="btn-standard flex-grow-1" onClick={() => navigate('/property-owner-detail-listing?id=sale-1')}>View</button>
                                         <button className="btn-standard flex-grow-1" style={{ borderColor: '#dc3545', color: '#dc3545' }} onClick={() => alert('Delete Clicked')}>Delete</button>
                                     </div>
                                 </div>
@@ -180,7 +131,7 @@ export const ViewAllListings: React.FC<ViewAllListingsProps> = () => {
                                     </div>
                                     <div className="listing-price">PKR 15,000/mo</div>
                                     <div className="d-flex gap-2 mt-2">
-                                        <button className="btn-standard flex-grow-1" onClick={() => navigate('/property-owner-view-rent-listing?id=rent-1')}>Edit</button>
+                                        <button className="btn-standard flex-grow-1" onClick={() => navigate('/property-owner-detail-listing?id=sale-2')}>View</button>
                                         <button className="btn-standard flex-grow-1" style={{ borderColor: '#dc3545', color: '#dc3545' }} onClick={() => alert('Delete Clicked')}>Delete</button>
                                     </div>
                                 </div>

@@ -1,0 +1,7 @@
+/* DetailListingPage.css */
+
+.detail-listing-container {
+    background-color: #f9fafb;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}

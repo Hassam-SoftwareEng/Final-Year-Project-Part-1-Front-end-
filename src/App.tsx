@@ -36,9 +36,10 @@ import { PropertyOwnerSignupPage } from "./components/Property Owner/SignupPage"
 import { SettingPage as PropertyOwnerSettingPage } from "./components/Property Owner/SettingPage";
 import { ForSale as PropertyOwnerForSalePage } from "./components/Property Owner/ForSale";
 import { ForRent as PropertyOwnerForRentPage } from "./components/Property Owner/ForRent";
-import PropertyOwnerForSaleViewListing from "./components/Property Owner/ForSaleViewListing";
 import PropertyOwnerForRentViewListing from "./components/Property Owner/ForRentViewListing";
 import PropertyOwnerViewAllListings from "./components/Property Owner/ViewAllListings";
+import PropertyOwnerDetailListingPage from "./components/Property Owner/DetailListingPage";
+
 
 
 // ... existing imports ...
@@ -330,11 +331,6 @@ export default function App() {
 
 
 
-        <Route path="/property-owner-view-sale-listing" element={
-          <ProtectedRoute>
-            <PropertyOwnerForSaleViewListing />
-          </ProtectedRoute>
-        } />
         <Route path="/property-owner-view-rent-listing" element={
           <ProtectedRoute>
             <PropertyOwnerForRentViewListing />
@@ -345,6 +341,13 @@ export default function App() {
             <PropertyOwnerViewAllListings />
           </ProtectedRoute>
         } />
+
+        <Route path="/property-owner-detail-listing" element={
+          <ProtectedRoute>
+            <PropertyOwnerDetailListingPage />
+          </ProtectedRoute>
+        } />
+
 
         <Route path="/property-owner-post-listing" element={
           <ProtectedRoute>

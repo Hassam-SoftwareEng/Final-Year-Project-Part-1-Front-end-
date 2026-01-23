@@ -88,9 +88,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                     <div className="row g-0">
                         {/* Active Stats - Left Side */}
                         <div
-                            className="col-md-3 border-end d-flex align-items-center justify-content-center hover-bg-light rounded cursor-pointer"
-                            onClick={() => onNavigateToListing && onNavigateToListing('active')}
-                            style={{ cursor: 'pointer', transition: 'background-color 0.2s' }}
+                            className="col-md-3 border-end d-flex align-items-center justify-content-center rounded"
                         >
                             <div className="d-flex align-items-center gap-3">
                                 <div className="p-3 rounded-circle bg-success bg-opacity-10 d-flex align-items-center justify-content-center" style={{ width: '64px', height: '64px' }}>
@@ -185,10 +183,6 @@ const Dashboard: React.FC<DashboardProps> = ({
                                         <span className="badge bg-success">For Sale</span>
                                     </div>
                                     <div className="listing-price">PKR 4.5 Crore</div>
-                                    <div className="d-flex gap-2 mt-2">
-                                        <button className="btn-standard flex-grow-1" onClick={() => alert('Edit Clicked')}>Edit</button>
-                                        <button className="btn-standard flex-grow-1" style={{ borderColor: '#dc3545', color: '#dc3545' }} onClick={() => alert('Delete Clicked')}>Delete</button>
-                                    </div>
                                 </div>
                             </div>
                             <div className="listing-card-modern">
@@ -199,10 +193,6 @@ const Dashboard: React.FC<DashboardProps> = ({
                                         <span className="badge bg-primary">For Rent</span>
                                     </div>
                                     <div className="listing-price">PKR 30,000/mo</div>
-                                    <div className="d-flex gap-2 mt-2">
-                                        <button className="btn-standard flex-grow-1" onClick={() => alert('Edit Clicked')}>Edit</button>
-                                        <button className="btn-standard flex-grow-1" style={{ borderColor: '#dc3545', color: '#dc3545' }} onClick={() => alert('Delete Clicked')}>Delete</button>
-                                    </div>
                                 </div>
                             </div>
                             <div className="listing-card-modern">
@@ -213,10 +203,6 @@ const Dashboard: React.FC<DashboardProps> = ({
                                         <span className="badge bg-primary">For Rent</span>
                                     </div>
                                     <div className="listing-price">PKR 15,000/mo</div>
-                                    <div className="d-flex gap-2 mt-2">
-                                        <button className="btn-standard flex-grow-1" onClick={() => alert('Edit Clicked')}>Edit</button>
-                                        <button className="btn-standard flex-grow-1" style={{ borderColor: '#dc3545', color: '#dc3545' }} onClick={() => alert('Delete Clicked')}>Delete</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
