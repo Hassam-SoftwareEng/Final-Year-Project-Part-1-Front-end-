@@ -12,7 +12,7 @@ export function PropertyOwnerLoginPage({ onLoginSuccess }: PropertyOwnerLoginPag
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState('');
+    const [error] = useState('');
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();

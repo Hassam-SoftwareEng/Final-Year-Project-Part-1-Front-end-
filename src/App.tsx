@@ -33,6 +33,14 @@ import { PostListingPage as PropertyOwnerPostListingPage } from "./components/Pr
 import { PropertyOwnerLoginPage } from "./components/Property Owner/LoginPage";
 import { PropertyOwnerSignupPage } from "./components/Property Owner/SignupPage";
 
+import { SettingPage as PropertyOwnerSettingPage } from "./components/Property Owner/SettingPage";
+import { ForSale as PropertyOwnerForSalePage } from "./components/Property Owner/ForSale";
+import { ForRent as PropertyOwnerForRentPage } from "./components/Property Owner/ForRent";
+import PropertyOwnerForSaleViewListing from "./components/Property Owner/ForSaleViewListing";
+import PropertyOwnerForRentViewListing from "./components/Property Owner/ForRentViewListing";
+import PropertyOwnerViewAllListings from "./components/Property Owner/ViewAllListings";
+
+
 // ... existing imports ...
 
 
@@ -283,20 +291,35 @@ export default function App() {
               user={user!}
               onLogout={handleLogout}
               onNavigateToPostListing={() => navigate('/property-owner-post-listing')}
-              onNavigateToListing={() => navigate('/property-owner-post-listing')}
+
+              onNavigateToListing={(filter: string | undefined) => {
+                if (filter === 'sale') navigate('/property-owner-for-sale');
+                else if (filter === 'rent') navigate('/property-owner-for-rent');
+                else navigate('/property-owner-for-sale');
+              }}
               onNavigateToNotification={() => alert('Notifications Coming Soon')}
-              onNavigateToSetting={() => alert('Settings Coming Soon')}
-              onNavigateToUserDashboard={() => navigate('/dashboard')}
+              onNavigateToSetting={() => navigate('/property-owner-setting')}
             />
           </ProtectedRoute>
         } />
 
-        {/* Property Owner Pages - TODO: Create these in Property Owner folder */}
+        {/* Property Owner Pages */}
+        <Route path="/property-owner-setting" element={
+          <ProtectedRoute>
+            <PropertyOwnerSettingPage
+              user={user!}
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
+              onNavigateToNotification={() => alert('Notifications Coming Soon')}
+            />
+          </ProtectedRoute>
+        } />
+
+        {/* Other Property Owner Pages - TODO: Create these in Property Owner folder */}
         {/* Routes temporarily disabled - components deleted
         <Route path="/property-owner-analytics" element={...} />
         <Route path="/property-owner-messages" element={...} />
         <Route path="/property-owner-create-profile" element={...} />
-        <Route path="/property-owner-setting" element={...} />
         <Route path="/property-owner-red-flag-alert" element={...} />
         <Route path="/property-owner-map" element={...} />
         <Route path="/property-owner-listing" element={...} />
@@ -305,16 +328,56 @@ export default function App() {
         <Route path="/property-owner-new-matches" element={...} />
         */}
 
+
+
+        <Route path="/property-owner-view-sale-listing" element={
+          <ProtectedRoute>
+            <PropertyOwnerForSaleViewListing />
+          </ProtectedRoute>
+        } />
+        <Route path="/property-owner-view-rent-listing" element={
+          <ProtectedRoute>
+            <PropertyOwnerForRentViewListing />
+          </ProtectedRoute>
+        } />
+        <Route path="/property-owner-view-all-listings" element={
+          <ProtectedRoute>
+            <PropertyOwnerViewAllListings />
+          </ProtectedRoute>
+        } />
+
         <Route path="/property-owner-post-listing" element={
           <ProtectedRoute>
             <PropertyOwnerPostListingPage
               onLogout={handleLogout}
               onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToListing={() => navigate('/property-owner-post-listing')}
+              onNavigateToListing={() => navigate('/property-owner-for-sale')}
               onNavigateToNotification={() => alert('Notifications Coming Soon')}
               onNavigateToMap={() => alert('Map Coming Soon')}
-              onNavigateToSetting={() => alert('Settings Coming Soon')}
+              onNavigateToSetting={() => navigate('/property-owner-setting')}
               onNavigateToRedFlagAlert={() => alert('Red Flag Coming Soon')}
+            />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/property-owner-for-sale" element={
+          <ProtectedRoute>
+            <PropertyOwnerForSalePage
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
+              onNavigateToNotification={() => alert('Notifications Coming Soon')}
+              onNavigateToSetting={() => navigate('/property-owner-setting')}
+            />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/property-owner-for-rent" element={
+          <ProtectedRoute>
+            <PropertyOwnerForRentPage
+              onLogout={handleLogout}
+              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
+              onNavigateToNotification={() => alert('Notifications Coming Soon')}
+              onNavigateToSetting={() => navigate('/property-owner-setting')}
             />
           </ProtectedRoute>
         } />
