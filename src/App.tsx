@@ -21,10 +21,17 @@ import { AdminForgotPasswordPage } from "./components/AdminPannel/AdminForgotPas
 import { UserLoginPage } from "./components/User/UserLoginPage";
 import { UserSignupPage } from "./components/User/UserSignupPage";
 import { UserForgotPasswordPage } from "./components/User/UserForgotPasswordPage";
-import { PropertyOwnerLoginPage } from "./components/Property Owner(User)/PropertyOwnerLoginPage";
-import { PropertyOwnerSignupPage } from "./components/Property Owner(User)/PropertyOwnerSignupPage";
-import { PropertyOwnerForgotPasswordPage } from "./components/Property Owner(User)/PropertyOwnerForgotPasswordPage";
-import PropertyOwnerHomePage from "./components/Property Owner(User)/HomePage";
+// Property Owner(User) folder was deleted - imports commented out
+// import { PropertyOwnerLoginPage } from "./components/Property Owner(User)/PropertyOwnerLoginPage";
+// import { PropertyOwnerSignupPage } from "./components/Property Owner(User)/PropertyOwnerSignupPage";
+// import { PropertyOwnerForgotPasswordPage } from "./components/Property Owner(User)/PropertyOwnerForgotPasswordPage";
+// import PropertyOwnerHomePage from "./components/Property Owner(User)/HomePage";
+
+// New Property Owner imports
+import PropertyOwnerDashboard from "./components/Property Owner/Dashboard";
+import { PostListingPage as PropertyOwnerPostListingPage } from "./components/Property Owner/PostListingPage";
+import { PropertyOwnerLoginPage } from "./components/Property Owner/LoginPage";
+import { PropertyOwnerSignupPage } from "./components/Property Owner/SignupPage";
 
 // ... existing imports ...
 
@@ -34,18 +41,17 @@ import { ListingPage } from "./components/User/ListingPage";
 import { NotificationPage } from "./components/User/NotificationPage";
 import ViewProfile from "./components/User/ViewProfile";
 
-// Property Owner Imports
-import { AnalyticsReportPage as PropertyOwnerAnalyticsReportPage } from "./components/Property Owner(User)/AnalyticsReportPage";
-import { MessagePage as PropertyOwnerMessagePage } from "./components/Property Owner(User)/MessagePage";
-import { CreateProfilePage as PropertyOwnerCreateProfilePage } from "./components/Property Owner(User)/CreateProfilePage";
-import { Setting as PropertyOwnerSetting } from "./components/Property Owner(User)/Setting";
-import { RedFlagAlert as PropertyOwnerRedFlagAlert } from "./components/Property Owner(User)/RedFlagAlert";
-import { MapPage as PropertyOwnerMapPage } from "./components/Property Owner(User)/MapPage";
-import { ListingPage as PropertyOwnerListingPage } from "./components/Property Owner(User)/ListingPage";
-import { NotificationPage as PropertyOwnerNotificationPage } from "./components/Property Owner(User)/NotificationPage";
-import PropertyOwnerViewProfile from "./components/Property Owner(User)/ViewProfile";
-import PropertyOwnerNewMatchCrt from "./components/Property Owner(User)/NewMatchCrt";
-import { PostListingPage as PropertyOwnerPostListingPage } from "./components/Property Owner/PostListingPage";
+// Property Owner(User) imports - folder deleted, commented out
+// import { AnalyticsReportPage as PropertyOwnerAnalyticsReportPage } from "./components/Property Owner(User)/AnalyticsReportPage";
+// import { MessagePage as PropertyOwnerMessagePage } from "./components/Property Owner(User)/MessagePage";
+// import { CreateProfilePage as PropertyOwnerCreateProfilePage } from "./components/Property Owner(User)/CreateProfilePage";
+// import { Setting as PropertyOwnerSetting } from "./components/Property Owner(User)/Setting";
+// import { RedFlagAlert as PropertyOwnerRedFlagAlert } from "./components/Property Owner(User)/RedFlagAlert";
+// import { MapPage as PropertyOwnerMapPage } from "./components/Property Owner(User)/MapPage";
+// import { ListingPage as PropertyOwnerListingPage } from "./components/Property Owner(User)/ListingPage";
+// import { NotificationPage as PropertyOwnerNotificationPage } from "./components/Property Owner(User)/NotificationPage";
+// import PropertyOwnerViewProfile from "./components/Property Owner(User)/ViewProfile";
+// import PropertyOwnerNewMatchCrt from "./components/Property Owner(User)/NewMatchCrt";
 
 import NewMatchCrt from "./components/User/NewMatchCrt";
 
@@ -185,17 +191,9 @@ export default function App() {
   /* =========================
      PROPERTY OWNER AUTH HANDLERS
   ========================== */
-  const handleOwnerLogin = (email: string, password: string) => {
-    const account = accounts.find(
-      (acc) => acc.email === email && acc.password === password
-    );
-
-    if (!account) {
-      alert("Invalid email or password");
-      return;
-    }
-
-    setUser({ email: account.email, fullName: account.fullName });
+  const handleOwnerLogin = (email: string, _password: string) => {
+    // Prototype: Skip validation, directly login
+    setUser({ email: email || 'owner@example.com', fullName: 'Property Owner' });
     handleNavigation("/property-owner-dashboard");
   };
 
@@ -271,189 +269,52 @@ export default function App() {
         } />
         <Route path="/property-owner-signup" element={
           <PropertyOwnerSignupPage
-            onSignupSuccess={handleOwnerSignup}
+            onSignupSuccess={(data) => handleOwnerSignup(data)}
           />
         } />
-        <Route path="/property-owner-forgot-password" element={
-          <PropertyOwnerForgotPasswordPage
-            onSubmitEmail={(email) => console.log("Owner forgot password", email)}
-          />
-        } />
+        {/* TODO: Create Forgot Password page
+        <Route path="/property-owner-forgot-password" element={...} />
+        */}
+
+        {/* Property Owner Dashboard - Using new Dashboard component */}
         <Route path="/property-owner-dashboard" element={
           <ProtectedRoute>
-            <PropertyOwnerHomePage
+            <PropertyOwnerDashboard
               user={user!}
               onLogout={handleLogout}
-              onNavigateToHome={() => navigate('/property-owner-dashboard')}
               onNavigateToPostListing={() => navigate('/property-owner-post-listing')}
-              onNavigateToMessages={() => navigate('/property-owner-messages')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToAnalytics={() => navigate('/property-owner-analytics')}
-              onNavigateToNewMatches={() => navigate('/property-owner-new-matches')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
+              onNavigateToListing={() => navigate('/property-owner-post-listing')}
+              onNavigateToNotification={() => alert('Notifications Coming Soon')}
+              onNavigateToSetting={() => alert('Settings Coming Soon')}
+              onNavigateToUserDashboard={() => navigate('/dashboard')}
             />
           </ProtectedRoute>
         } />
 
-        {/* Property Owner Pages */}
-        <Route path="/property-owner-analytics" element={
-          <ProtectedRoute>
-            <PropertyOwnerAnalyticsReportPage
-              user={user!}
-              onLogout={handleLogout}
-              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-            />
-          </ProtectedRoute>
-        } />
-        <Route path="/property-owner-messages" element={
-          <ProtectedRoute>
-            <PropertyOwnerMessagePage
-              user={user!}
-              onLogout={handleLogout}
-              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToMatches={() => alert("Matches Coming Soon")}
-              onNavigateToAnalytics={() => navigate('/property-owner-analytics')}
-              onNavigateToCreateProfile={() => navigate('/property-owner-create-profile')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-            />
-          </ProtectedRoute>
-        } />
-        <Route path="/property-owner-create-profile" element={
-          <ProtectedRoute>
-            <PropertyOwnerCreateProfilePage
-              user={user!}
-              onLogout={handleLogout}
-              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToMatches={() => alert("Matches Coming Soon")}
-              onNavigateToMessages={() => navigate('/property-owner-messages')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-            />
-          </ProtectedRoute>
-        } />
-        <Route path="/property-owner-setting" element={
-          <ProtectedRoute>
-            <PropertyOwnerSetting
-              user={user!}
-              onLogout={handleLogout}
-              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToMatches={() => alert("Matches Coming Soon")}
-              onNavigateToMessages={() => navigate('/property-owner-messages')}
-              onNavigateToAnalytics={() => navigate('/property-owner-analytics')}
-              onNavigateToCreateProfile={() => navigate('/property-owner-create-profile')}
-              onNavigateToVerification={() => alert("Verification Coming Soon")}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-            />
-          </ProtectedRoute>
-        } />
-        <Route path="/property-owner-red-flag-alert" element={
-          <ProtectedRoute>
-            <PropertyOwnerRedFlagAlert
-              user={user!}
-              onLogout={handleLogout}
-              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToMatches={() => alert("Matches Coming Soon")}
-              onNavigateToMessages={() => navigate('/property-owner-messages')}
-              onNavigateToAnalytics={() => navigate('/property-owner-analytics')}
-              onNavigateToCreateProfile={() => navigate('/property-owner-create-profile')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-            />
-          </ProtectedRoute>
-        } />
-        <Route path="/property-owner-map" element={
-          <ProtectedRoute>
-            <PropertyOwnerMapPage
-              onLogout={handleLogout}
-              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-            />
-          </ProtectedRoute>
-        } />
-        <Route path="/property-owner-listing" element={
-          <ProtectedRoute>
-            <PropertyOwnerListingPage
-              onLogout={handleLogout}
-              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-            />
-          </ProtectedRoute>
-        } />
-        <Route path="/property-owner-notification" element={
-          <ProtectedRoute>
-            <PropertyOwnerNotificationPage
-              onLogout={handleLogout}
-              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-            />
-          </ProtectedRoute>
-        } />
-        <Route path="/property-owner-view-profile" element={
-          <ProtectedRoute>
-            <PropertyOwnerViewProfile
-              onLogout={handleLogout}
-              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-            />
-          </ProtectedRoute>
-        } />
-        <Route path="/property-owner-new-matches" element={
-          <ProtectedRoute>
-            <PropertyOwnerNewMatchCrt
-              onLogout={handleLogout}
-              onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
-            />
-          </ProtectedRoute>
-        } />
+        {/* Property Owner Pages - TODO: Create these in Property Owner folder */}
+        {/* Routes temporarily disabled - components deleted
+        <Route path="/property-owner-analytics" element={...} />
+        <Route path="/property-owner-messages" element={...} />
+        <Route path="/property-owner-create-profile" element={...} />
+        <Route path="/property-owner-setting" element={...} />
+        <Route path="/property-owner-red-flag-alert" element={...} />
+        <Route path="/property-owner-map" element={...} />
+        <Route path="/property-owner-listing" element={...} />
+        <Route path="/property-owner-notification" element={...} />
+        <Route path="/property-owner-view-profile" element={...} />
+        <Route path="/property-owner-new-matches" element={...} />
+        */}
+
         <Route path="/property-owner-post-listing" element={
           <ProtectedRoute>
             <PropertyOwnerPostListingPage
               onLogout={handleLogout}
               onNavigateToDashboard={() => navigate('/property-owner-dashboard')}
-              onNavigateToListing={() => navigate('/property-owner-listing')}
-              onNavigateToNotification={() => navigate('/property-owner-notification')}
-              onNavigateToMap={() => navigate('/property-owner-map')}
-              onNavigateToSetting={() => navigate('/property-owner-setting')}
-              onNavigateToRedFlagAlert={() => navigate('/property-owner-red-flag-alert')}
+              onNavigateToListing={() => navigate('/property-owner-post-listing')}
+              onNavigateToNotification={() => alert('Notifications Coming Soon')}
+              onNavigateToMap={() => alert('Map Coming Soon')}
+              onNavigateToSetting={() => alert('Settings Coming Soon')}
+              onNavigateToRedFlagAlert={() => alert('Red Flag Coming Soon')}
             />
           </ProtectedRoute>
         } />

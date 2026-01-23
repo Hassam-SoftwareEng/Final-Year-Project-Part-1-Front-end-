@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/Property Owner(User)/PropertyOwnerLogin.css';
+import '../../styles/Property Owner/LoginPage.css';
 
 interface PropertyOwnerLoginPageProps {
     onLoginSuccess?: (email: string, password: string) => void;
@@ -16,14 +16,12 @@ export function PropertyOwnerLoginPage({ onLoginSuccess }: PropertyOwnerLoginPag
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setError('');
-
-        if (!email || !password) {
-            setError('Please fill in all fields');
-            return;
+        // Prototype: Skip validation, directly login
+        if (onLoginSuccess) {
+            onLoginSuccess(email || 'owner@example.com', password || 'password');
+        } else {
+            navigate('/property-owner-dashboard');
         }
-
-        onLoginSuccess?.(email, password);
     };
 
     return (
@@ -38,35 +36,6 @@ export function PropertyOwnerLoginPage({ onLoginSuccess }: PropertyOwnerLoginPag
                 </button>
                 <div className="form">
                     <h2>Property Owner Login</h2>
-
-                    {/* Role Selection Buttons */}
-                    <div className="d-flex justify-content-center gap-2 mb-4" style={{ width: '100%' }}>
-                        <button
-                            type="button"
-                            className="btn-standard"
-                            style={{
-                                flex: 1,
-                                backgroundColor: 'transparent',
-                                color: '#14919B',
-                                border: '1px solid #14919B',
-                                opacity: 0.7
-                            }}
-                            onClick={() => navigate('/user-login')}
-                        >
-                            User
-                        </button>
-                        <button
-                            type="button"
-                            className="btn-standard"
-                            style={{
-                                flex: 1,
-                                backgroundColor: '#14919B',
-                                color: 'white'
-                            }}
-                        >
-                            Property Owner
-                        </button>
-                    </div>
                     <p className="subtitle">Please enter your details</p>
 
                     <form onSubmit={handleSubmit}>
